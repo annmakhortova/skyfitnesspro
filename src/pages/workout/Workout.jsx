@@ -44,7 +44,7 @@ export const Workout = () => {
             {course.directions.map((el) => {
               return (
                 <p className={style.basicText}>
-                  &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;{el}
+                  &nbsp; &nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;{el}
                 </p>
               );
             })}
