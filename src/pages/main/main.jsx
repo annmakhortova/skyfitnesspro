@@ -12,7 +12,6 @@ import style from './Mainpage.module.scss';
 export function Main() {
   return (
     <div className={style.container}>
-      <a name="top"></a>
       <header>
         <div className={style.top}>
           <LogoWhiteSVG className={style.logo_white} />
