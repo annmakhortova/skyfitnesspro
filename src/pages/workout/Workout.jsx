@@ -5,6 +5,7 @@ import style from "./Workout.module.scss";
 import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
 import phone from "./phone.png";
+import { WorkoutCardImg } from "./WorkoutCardImg/WorkoutCardImg";
 
 export const Workout = () => {
   const params = useParams();
@@ -17,6 +18,8 @@ export const Workout = () => {
       <main>
         <section className={style.workoutCard}>
           <h1 className={style.workoutCard_title}>{course.nameRU}</h1>
+          <WorkoutCardImg worcout={course.nameEN}/>
+          {/* <img src={Yoga} alt="" className={style.workoutCard_img}></img> */}
         </section>
         <section className={style.fitting}>
           <h2 className={style.section_title}>Подойдет для вас, если:</h2>

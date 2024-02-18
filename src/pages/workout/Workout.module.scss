@@ -26,10 +26,13 @@
 
 .workout {
   &Card {
+    position: relative;
     height: 310px;
-    background-color: #fafafa;
+    background-color: #FAFAFA;
     border-radius: 30px;
     &_title {
+      position: absolute;
+      z-index: 1;
       font-family: StratosSkyeng;
       font-size: 64px;
       line-height: 72px;
@@ -37,6 +40,12 @@
       padding-top: 30px;
       padding-left: 30px;
       font-weight: 400;
+    }
+    &_img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
     }
   }
 
