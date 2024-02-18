@@ -1,6 +1,6 @@
 .container {
-  padding-left: 140px;
-  padding-right: 140px;
+  padding-left: calc(50% - 580px);
+  padding-right: calc(50% - 580px);
   background: rgb(39, 26, 88);
 }
 
@@ -26,18 +26,19 @@
   border-radius: 46px;
   background: rgb(20, 13, 64);
   color: rgb(255, 255, 255);
-  font-family: Montserrat;
+  font-family: StratosSkyeng;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0%;
   text-align: center;
+  border: none;
 }
 
 .subtitle {
   opacity: 0.5;
   color: rgb(255, 255, 255);
-  font-family: Montserrat;
+  font-family: StratosSkyeng;
   font-size: 20px;
   font-weight: 400;
   line-height: 115%;
@@ -53,7 +54,7 @@
 
 .title_text {
   color: rgb(244, 244, 255);
-  font-family: Montserrat;
+  font-family: StratosSkyeng;
   font-size: 60px;
   font-weight: 400;
   line-height: 91.5%;
@@ -62,14 +63,20 @@
   margin-bottom: 17px;
 }
 
+.title_img {
+  margin-right: -64px;
+}
+
 .course_cards {
   display: flex;
   flex-wrap: wrap;
+  gap: 37px;
+  margin-bottom: 34px;
 }
 
-.course_img {
-  padding: 25px;
-}
+// .course_img {
+//   padding: 25px;
+// }
 
 .footer {
   display: flex;
@@ -89,7 +96,7 @@
   background: rgb(199, 233, 87);
 
   color: rgb(0, 0, 0);
-  font-family: Montserrat;
+  font-family: StratosSkyeng;
   font-size: 24px;
   font-weight: 400;
   line-height: 32px;
