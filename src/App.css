@@ -6,3 +6,20 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.Wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  padding-left: calc(50% - 820px);
+  padding-right: calc(50% - 820px);
+}
+
+.Container {
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+
+}
