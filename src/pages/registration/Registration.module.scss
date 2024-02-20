@@ -9,6 +9,8 @@
     left: -1923px;
     border-radius: 12px;
     background: #FFFFFF;
+    padding-left: calc(50% - 580px);
+  padding-right: calc(50% - 580px);
 }
 
 .inputs {
@@ -35,7 +37,8 @@
     //border: none !important;
     margin-bottom: 12px;
     margin-top: 12px;
-    border-bottom: 1px solid #D0CECE;
+    //border-bottom: 1px solid #D0CECE;
+    color: #D0CECE;
 }
 
 .input input {
@@ -48,7 +51,7 @@
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #D0CECE;
-    border-bottom: 1px solid #D0CECE;
+    border-bottom: 1px solid #D0CECE !important;
     padding: 8px 1px;
 }
 

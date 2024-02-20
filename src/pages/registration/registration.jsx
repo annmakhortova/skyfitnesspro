@@ -13,13 +13,13 @@ const LoginSignup = () => {
     
             <div className={style.inputs}>
                 <div className={style.input}>
-                    <input type="Логин" placeholder="Логин"/>
+                    <input type="text" placeholder="Логин"/>
                 </div>
                 <div className={style.input}>
-                    <input type="Пароль"placeholder="Пароль"/>
+                    <input type="password"placeholder="Пароль"/>
                 </div>
                 <div className={style.input}>
-                    <input type="Повторите пароль" placeholder="Повторите пароль"/>
+                    <input type="password" placeholder="Повторите пароль"/>
                 </div>
             </div>
     
