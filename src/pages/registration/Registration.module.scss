@@ -51,8 +51,16 @@
     line-height: 24px;
     letter-spacing: -0.05px;
     color: #D0CECE;
-    border-bottom: 1px solid #D0CECE !important;
+    //border-bottom: 1px solid #D0CECE !important;
     padding: 8px 1px;
+    &::placeholder {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        color: #d0cece;
+        border-bottom: 1px solid #D0CECE
+      }
 }
 
 .registerButton {
