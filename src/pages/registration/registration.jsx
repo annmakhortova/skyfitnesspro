@@ -2,8 +2,10 @@ import React from "react";
 import { Button } from "../../UI/Button/Button";
 import { Logo } from "../../UI/Logo/Logo";
 import style from "./Registration.module.scss";
+import { useParams } from "react-router-dom";
 
-const LoginSignup = () => {
+export const LoginSignup = () => {
+    const params = useParams();
 
     return (
         <div className={style.container}>
@@ -34,5 +36,5 @@ const LoginSignup = () => {
 }
 
 
-export default LoginSignup
+//export default LoginSignup
 
