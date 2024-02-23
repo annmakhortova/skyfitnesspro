@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { workouts } from "./WorkoutsMocData";
 import { courses } from "../workout/MocData";
 import style from "./SelectWorkout.module.scss";
-import made from "./made.png"
+// import made from "./made.png";
+import { getAllCourses } from "../api";
 export const SelectWorkout = () => {
+
   const currentCourse = "Бодифлекс";
   const currentWorkoutsId = courses.find(
     (course) => course.nameRU === currentCourse
