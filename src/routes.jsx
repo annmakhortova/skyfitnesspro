@@ -1,5 +1,6 @@
-import {Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Workout } from "./pages/workout/Workout";
+import { Training } from "./pages/training/Training";
 import { Main } from "./pages/main/main";
 
 import { LoginSignup } from "./pages/registration/registration";
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/" element={<Main />} />
         <Route path="/workout/:id" element={<Workout />} />
+        <Route path="/training" element={<Training />} />
         <Route path="/selectworkout" element={<SelectWorkout />} />
       </Routes>
   );
