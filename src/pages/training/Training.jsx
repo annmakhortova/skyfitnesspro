@@ -1,6 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { courses } from "./MocData";
+// import { useParams } from "react-router-dom";
+// import { courses } from "./MocData";
 import style from "./Training.module.scss";
 import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
