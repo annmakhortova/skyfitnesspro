@@ -10,22 +10,25 @@ import style from  "./Profilepage.module.scss";
 
  export const Profile = () => {
   return (
-    <>
+  <>
     <div className={style.container}>
       <header>
-       <Logo className={style.logo} />
+       <div className={style.header}>
+         <Logo className={style.logo} />
+      
+         <div className={style.header_profile}>
+         <svg className={style.header_svg}>
+         <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
+          </svg>
+          <select className={style.header_select} name="select">
+           <option value={"value1"}>Сергей</option>
+           <option value={"value2"}>Алексей</option>
+           <option value={"value3"}>Айрат</option>
+           </select>
+         </div>
+        </div>
       </header>
-      <div className={style.header_profile}>
-        <svg>
-        <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
-        </svg>
-        <select className={style.heder_select} name="select">
-          <option value={"value1"}>Сергей</option>
-          <option value={"value2"}>Алексей</option>
-          <option value={"value3"}>Айрат</option>
-        </select>
-      </div>
-    </div><div className={style.profile}>
+      <div className={style.profile}>
         <div className={style.heading}>
           <h1>Мой профиль</h1>
           <p>Логин: sergey.petrov96</p>
@@ -52,6 +55,7 @@ import style from  "./Profilepage.module.scss";
           </div>
         </div>
       </div>
+    </div>   
   </>
   );
 };

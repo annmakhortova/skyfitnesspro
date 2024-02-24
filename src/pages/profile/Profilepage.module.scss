@@ -11,8 +11,8 @@
 
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-top: 30px;
 }
 
 .header_svg {
@@ -52,7 +52,6 @@ h1 {
 
 p {
   color: #000;
-  //font-variant-numeric: lining-nums proportional-nums;
   font-family: StratosSkyeng;
   font-size: 24px;
   font-style: normal;
