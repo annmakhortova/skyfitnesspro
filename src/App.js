@@ -1,14 +1,11 @@
 import "./App.css";
-
-import { Profile } from "./components/Profile/Profile";
+import { AppRoutes } from "./routes";
 
 function App() {
   return (
-    <div className="Wrapper">
-      <div className="Container">
-        <Profile />
-      </div>
-    </div>
+    <>
+      <AppRoutes />
+    </>
   );
 }
 
