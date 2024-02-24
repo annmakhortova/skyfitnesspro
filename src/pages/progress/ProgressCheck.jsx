@@ -1,6 +1,6 @@
 import React from 'react';
-//import { Hand } from './Hand.png'
 import styles from "./Progrss.module.scss"
+import Hand from './Hand.png'
 
  export const ProgressCheck = () => {
    return (
@@ -10,7 +10,7 @@ import styles from "./Progrss.module.scss"
            Ваш прогресс засчитан!
          </div>
          <div className={styles.imgBox}>
-           <img src="./Hand.png" alt='Hand' />
+           <img src={Hand} alt='Hand' />
          </div>
        </div>
      </div>
