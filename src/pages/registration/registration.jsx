@@ -2,10 +2,10 @@ import React from "react";
 import { Button } from "../../UI/Button/Button";
 import { Logo } from "../../UI/Logo/Logo";
 import style from "./Registration.module.scss";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 export const LoginSignup = () => {
-    const params = useParams();
+    // const params = useParams();
 
     return (
         <div className={style.container}>
