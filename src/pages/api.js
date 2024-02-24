@@ -1,7 +1,7 @@
 const BASE_URL = 'https://fitness-pro-9efbb-default-rtdb.europe-west1.firebasedatabase.app';
 
 export async function getAllCourses() {
-  const response = await fetch(BASE_URL + '/cousres.json', {
+  const response = await fetch(BASE_URL + '/courses.json', {
     method: 'GET',
   });
   if (!response.ok) {
