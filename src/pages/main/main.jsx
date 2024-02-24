@@ -14,13 +14,16 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/userSlice';
 
 export function Main() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <div className={style.container}>
       <header>
         <div className={style.top}>
           <LogoWhiteSVG className={style.logo_white} />
-          <button className={style.login_button}>Войти</button>
+          {/* <button className={style.login_button}>Войти</button> */}
+          <Link to={`/login`} className={style.login_button}>
+            Войти
+          </Link>
         </div>
 
         <div className={style.title}>
@@ -55,9 +58,14 @@ export function Main() {
           Наверх ↑
         </a>
         {/* тест редакса. Работает) */}
-        <button onClick={() => {dispatch(setUser('Test'))}}>setUser</button>
+        <button
+          onClick={() => {
+            dispatch(setUser('Test'));
+          }}
+        >
+          setUser
+        </button>
       </footer>
     </div>
   );
 }
-
