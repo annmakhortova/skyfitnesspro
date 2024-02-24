@@ -1,13 +1,19 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import style from './Workout.module.scss';
 import { Logo } from '../../UI/Logo/Logo';
 import { Button } from '../../UI/Button/Button';
 import phone from './phone.png';
 import { WorkoutCardImg } from './WorkoutCardImg/WorkoutCardImg';
+
 import { getAllCourses } from '../api';
 
 export const Workout = () => {
+  const userName = useSelector((state) => state.userApp.userName);
+  console.log(userName);
+
   const params = useParams();
   const [course, setCourse] = useState();
   useEffect(() => {
@@ -21,6 +27,7 @@ export const Workout = () => {
   }, [params.id]);
 
   return (
+
     <>
       {course && (
         <div className={style.container}>
@@ -71,5 +78,6 @@ export const Workout = () => {
         </div>
       )}
     </>
+
   );
 };
