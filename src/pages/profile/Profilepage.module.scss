@@ -1,0 +1,144 @@
+.container {
+  padding-left: calc(50% - 580px);
+  padding-right: calc(50% - 580px);
+}
+
+.logo {
+  margin-top: 30px;
+  margin-bottom: 75px;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_svg {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+
+}
+
+.heder_select {
+  color: #000;
+  text-align: right;
+  border: 0px;
+  outline: 0px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -0.1px;
+}
+
+.header_profile {
+  display: flex;
+  column-gap: 9px;
+}
+
+h1 {
+  color: #000;
+  //font-variant-numeric: lining-nums proportional-nums;
+  font-family: StratosSkyeng;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 56px;
+  margin-top: 75px;
+}
+
+p {
+  color: #000;
+  font-family: StratosSkyeng;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  margin-top: 40px;
+
+}
+
+.profile_button {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+  margin-top: 40px;
+}
+
+.button {
+  width: 275px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 46px;
+  background: var(--Palette-Purple-90, #580EA2);
+  color: #FFF;
+  font-family: StratosSkyeng;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+  border: none;
+}
+
+.course_box {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 40px;
+  margin-top: 60px;
+}
+
+.course_item {
+  width: 360px;
+  height: 480px;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* border-radius: 30px;
+  background: rgba(205, 205, 205, 0.10);
+  backdrop-filter: blur(14.51865291595459px); */
+}
+
+
+
+.course_svg {
+  width: 360px;
+  height: 580px;
+  border-radius: 30px;
+  backdrop-filter: blur(15px);
+
+  /* border-radius: 29.998px;
+  background: #FFF;
+  box-shadow: -10px 10px 15.999px 0px rgba(0, 0, 0, 0.10), 10px -10px 16px 0px rgba(0, 0, 0, 0.10); */
+}
+
+.button_link {
+  width: 136px;
+  height: 43px;
+  position: absolute;
+  left: 40px;
+  bottom: 47px;
+  border-radius: 80px;
+  background: #C7E957;
+  color: #000;
+  text-align: center;
+  font-family: StratosSkyeng;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 115%;
+  letter-spacing: -0.05px;
+  border: none;
+}
+
+.course_item_img {
+  position: relative;
+  width: 330px;
+  height: 435px;
+  box-shadow: -10px 10px 15.999px 0px rgba(0, 0, 0, 0.1), 10px -10px 16px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 29.998px;
+}
