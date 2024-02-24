@@ -21,7 +21,7 @@ import style from  "./Profilepage.module.scss";
          <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
           </svg>
           <select className={style.header_select} name="select">
-           <option value={"value1"}>Сергей</option>
+           <option value={"value1"}>Игорь</option>
            <option value={"value2"}>Алексей</option>
            <option value={"value3"}>Айрат</option>
            </select>
