@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useSelector } from 'react';
 import { useParams } from 'react-router-dom';
 
 import style from './Workout.module.scss';
