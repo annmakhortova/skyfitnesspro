@@ -9,7 +9,8 @@ import { Button } from '../../UI/Button/Button';
 import phone from './phone.png';
 import { WorkoutCardImg } from './WorkoutCardImg/WorkoutCardImg';
 
-import { getAllCourses } from '../api';
+import { getAllCourses, getAllWorkouts } from '../api';
+// import { workouts } from '../selectWorkout/WorkoutsMocData';
 
 export const Workout = () => {
   // const userName = useSelector((state) => state.userApp.userName);
@@ -20,12 +21,14 @@ export const Workout = () => {
   useEffect(() => {
     getAllCourses()
       .then((courses) => {
-        console.log(courses);
+        console.log('Курсы:', courses);
         setCourse(Object.values(courses).find((course) => course.nameEN === params.id));
       })
       .catch(() => {})
       .finally(() => {});
   }, [params.id]);
+
+  getAllWorkouts().then((workouts) => console.log('Упражнения:', workouts));
 
   return (
 
