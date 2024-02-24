@@ -10,7 +10,11 @@ import Step from './png/step.png';
 import Body from './png/body.png';
 import style from './Mainpage.module.scss';
 
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../store/userSlice';
+
 export function Main() {
+  const dispatch = useDispatch()
   return (
     <div className={style.container}>
       <header>
@@ -50,6 +54,7 @@ export function Main() {
         <a href='#top' className={style.button_up}>
           Наверх ↑
         </a>
+        <button onClick={() => {dispatch(setUser('Test'))}}>setUser</button>
       </footer>
     </div>
   );
