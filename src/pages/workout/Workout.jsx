@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState, useSelector } from 'react';
+import React, { useEffect, useState } from 'react';
+// import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import style from './Workout.module.scss';
@@ -11,8 +12,8 @@ import { WorkoutCardImg } from './WorkoutCardImg/WorkoutCardImg';
 import { getAllCourses } from '../api';
 
 export const Workout = () => {
-  const userName = useSelector((state) => state.userApp.userName);
-  console.log(userName);
+  // const userName = useSelector((state) => state.userApp.userName);
+  // console.log(userName);
 
   const params = useParams();
   const [course, setCourse] = useState();

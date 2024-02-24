@@ -30,16 +30,16 @@ import style from  "./Profilepage.module.scss";
       </header>
       <div className={style.profile}>
         <div className={style.heading}>
-          <h1>Мой профиль</h1>
-          <p>Логин: sergey.petrov96</p>
-          <p>Пароль: 4fkhdj880d</p>
+          <h1 className={style.h1}>Мой профиль</h1>
+          <p className={style.p}>Логин: sergey.petrov96</p>
+          <p className={style.p}>Пароль: 4fkhdj880d</p>
         </div>
         <div className={style.profile_button}>
           <Button children = {"Редактировать логин"} />
           <Button children = {"Редактировать пароль"} />
         </div>
       </div><div className={style.course}>
-        <h1>Мои курсы</h1>
+        <h1 className={style.h1}>Мои курсы</h1>
         <div className={style.course_box}>
           <div className={style.course_item}>
           <img className={style.course_item_img} src={Yoga} alt="Yoga" />
