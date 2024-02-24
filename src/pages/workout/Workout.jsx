@@ -18,7 +18,7 @@ export const Workout = () => {
       })
       .catch(() => {})
       .finally(() => {});
-  }, []);
+  }, [params.id]);
 
   return (
     <>
