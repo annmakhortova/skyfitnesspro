@@ -2,10 +2,16 @@ import React from "react";
 import { Button } from "../../UI/Button/Button";
 import { Logo } from "../../UI/Logo/Logo";
 import style from "./Login.module.scss";
+import { useNavigate } from "react-router-dom"; 
 // import { useParams } from "react-router-dom";
 
 export const Login = () => {
     // const params = useParams();
+    const navigate = useNavigate();
+
+    const handleRegisterClick = () => {
+        navigate('/signup');
+    }
 
     return (
         <div className={style.container}>
@@ -24,7 +30,7 @@ export const Login = () => {
     
             <div className={style.buttonsContainer}>
              <Button children={"Войти"} />
-             <button className={style.registerButton}>Зарегистрироваться</button>
+             <button className={style.registerButton} onClick={handleRegisterClick}>Зарегистрироваться</button>
             </div>
     
         </div>
