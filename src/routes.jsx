@@ -11,6 +11,7 @@ import { SelectWorkout } from "./pages/selectWorkout/SelectWorkout";
 export const AppRoutes = () => {
   return (
       <Routes>
+        <Route path="/login" element={<LoginSignup />} />
         <Route path="/" element={<Main />} />
         <Route path="/workout/:id" element={<Workout />} />
 
