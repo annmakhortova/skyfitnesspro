@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Button } from "../../UI/Button/Button";
 import { Logo } from "../../UI/Logo/Logo";
 import style from "./Registration.module.scss";
-// import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'; // For navigation after successful registration
+import { auth } from '../../firebase'; // Adjust the import path as necessary
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export const LoginSignup = () => {
-    // const params = useParams();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate(); // Hook for redirecting after successful registration
+
+    // Function to handle user registration
+    const handleRegistration = async (e) => {
+        e.preventDefault(); // Prevent default form submission
+        if(password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            console.log(userCredential);
+            // Redirect to login page or dashboard after successful registration
+            navigate('/login'); // Adjust the path as per your routing setup
+        } catch (error) {
+            console.error(error.message);
+            alert("Error during registration: " + error.message);
+        }
+    };
 
     return (
         <div className={style.container}>
@@ -15,25 +38,20 @@ export const LoginSignup = () => {
     
             <div className={style.inputs}>
                 <div className={style.input}>
-                    <input type="text" placeholder="Логин"/>
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className={style.input}>
-                    <input type="password"placeholder="Пароль"/>
+                    <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <div className={style.input}>
-                    <input type="password" placeholder="Повторите пароль"/>
+                    <input type="password" placeholder="Повторите пароль" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
                 </div>
             </div>
     
             <div className={style.buttonsContainer}>
-             <button className={style.registerButton}>Зарегистрироваться</button>
+             <button className={style.registerButton} onClick={handleRegistration}>Зарегистрироваться</button>
             </div>
     
         </div>
-    )
-    
-}
-
-
-//export default LoginSignup
-
+    );
+};
