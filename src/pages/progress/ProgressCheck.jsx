@@ -10,7 +10,7 @@ import Hand from './Hand.png'
            Ваш прогресс засчитан!
          </div>
          <div className={styles.imgBox}>
-           <img src={Hand} alt='Hand' />
+           <img className={styles.Hand} src={Hand} alt='Hand' />
          </div>
        </div>
      </div>
