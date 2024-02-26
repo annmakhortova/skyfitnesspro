@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Button } from "../../UI/Button/Button";
 import { Logo } from "../../UI/Logo/Logo";
 import style from "./Registration.module.scss";
-import { useNavigate } from 'react-router-dom'; // For navigation after successful registration
-import { auth } from '../../firebase'; // Adjust the import path as necessary
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export const LoginSignup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const navigate = useNavigate(); // Hook for redirecting after successful registration
+    const navigate = useNavigate(); 
 
     // Function to handle user registration
     const handleRegistration = async (e) => {
@@ -23,7 +23,7 @@ export const LoginSignup = () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             console.log(userCredential);
             // Redirect to login page or dashboard after successful registration
-            navigate('/login'); // Adjust the path as per your routing setup
+            navigate('/login');
         } catch (error) {
             console.error(error.message);
             alert("Error during registration: " + error.message);
