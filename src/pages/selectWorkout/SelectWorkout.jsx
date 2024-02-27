@@ -5,7 +5,7 @@ import { getAllCourses, getAllWorkouts } from "../api";
 export const SelectWorkout = () => {
   const params = "StepAirobic";
   const [course, setCourse] = useState();
-  const [allWorkouts, setAllWotkouts] = useState();
+  const [allWorkouts, setAllWorkouts] = useState();
   const [currentWorkoutsArr, setCurrentWorkoutsArr] = useState([]);
 
   useEffect(() => {
@@ -23,14 +23,15 @@ export const SelectWorkout = () => {
 
   useEffect(() => {
     getAllWorkouts().then((workoutss) => {
-      setAllWotkouts(Object.values(workoutss));
+      console.log('Workouts', workoutss);
+      setAllWorkouts(Object.values(workoutss));
     });
   }, []);
 
   useEffect(() => {
     if (course) {
-      setCurrentWorkoutsArr(allWorkouts.filter((e) =>
-      course.workouts.includes(e._id))
+      setCurrentWorkoutsArr(allWorkouts.filter((el) =>
+      course.workouts.includes(el._id))
       );
     }
   }, [allWorkouts, course]);
@@ -42,7 +43,7 @@ export const SelectWorkout = () => {
         <div className={style.workouts}>
           {currentWorkoutsArr.map((el) => {
             return (
-              <div className={style.workout}>
+              <div className={style.workout} key={el.name}>
                 <p className={style.workout_text}>{el.name}</p>
               </div>
             );
