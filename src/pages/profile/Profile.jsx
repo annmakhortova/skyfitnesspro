@@ -35,7 +35,7 @@ import style from  "./Profilepage.module.scss";
           <Button children = {"Редактировать пароль"} />
         </div>
       </div><div className={style.course}>
-        <h1>Мои курсы</h1>
+        <h1 className={style.h1}>Мои курсы</h1>
         <div className={style.course_box}>
           <div className={style.course_item}>
           <img className={style.course_item_img} src={Yoga} alt="Yoga" />
