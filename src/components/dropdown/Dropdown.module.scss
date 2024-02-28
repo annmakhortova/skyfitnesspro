@@ -31,12 +31,12 @@
     color: rgb(0, 0, 0);
     font-size: 24px;
     line-height: 32px;
-    margin-top: 20px;
+    margin: 10px;
     list-style-type: none;
     text-decoration: none;
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .submenu_item:hover {

@@ -40,7 +40,7 @@ export const Workout = () => {
               <div className={style.fitting_textBox}>
                 {course.fitting.map((el) => {
                   return (
-                    <div className={style.criterion}>
+                    <div className={style.criterion} key={course.fitting.indexOf(el) + 1}>
                       <div className={style.criterion_counter}>
                         <p className={style.criterion_counterText}>
                           {" "}
@@ -60,7 +60,7 @@ export const Workout = () => {
               <div className={style.directions_textBox}>
                 {course.directions.map((el) => {
                   return (
-                    <p className={style.basicText}>
+                    <p className={style.basicText} key={el}>
                       &nbsp; &nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;{el}
                     </p>
                   );

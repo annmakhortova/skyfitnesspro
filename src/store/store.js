@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
-import coursesReduser from './coursesSlice'
+import coursesReducer from './coursesSlice';
 
 export default configureStore({
   reducer: {
     userApp: userReducer,
-    coursesApp: coursesReduser,
-   
+    coursesApp: coursesReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([]),
 });
