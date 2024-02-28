@@ -4,7 +4,7 @@ import { Button } from "../../UI/Button/Button";
 import Yoga from './png/yoga.png';
 import Stratch from './png/stratch.png';
 import Body from './png/body.png';
-
+import { Dropdown } from '../../components/dropdown/Dropdown';
 import style from  "./Profilepage.module.scss";
 
 
@@ -20,19 +20,15 @@ import style from  "./Profilepage.module.scss";
          <svg className={style.header_svg}>
          <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
           </svg>
-          <select className={style.header_select} name="select">
-           <option value={"value1"}>Игорь</option>
-           <option value={"value2"}>Алексей</option>
-           <option value={"value3"}>Айрат</option>
-           </select>
+          < Dropdown className={style.header_select} name="/"/>
          </div>
         </div>
       </header>
       <div className={style.profile}>
         <div className={style.heading}>
-          <h1 className={style.h1}>Мой профиль</h1>
-          <p className={style.p}>Логин: sergey.petrov96</p>
-          <p className={style.p}>Пароль: 4fkhdj880d</p>
+          <h1 className={style.profile_heading}>Мой профиль</h1>
+          <p className={style.profile_text}>Логин: sergey.petrov96</p>
+          <p className={style.profile_text}>Пароль: 4fkhdj880d</p>
         </div>
         <div className={style.profile_button}>
           <Button children = {"Редактировать логин"} />

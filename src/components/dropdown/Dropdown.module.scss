@@ -1,0 +1,45 @@
+.container {
+  position: relative;
+   display: inline-block;
+ }
+
+.heder_item {
+  color: #000;
+  text-align: right;
+  border: none;
+  font-size: 24px;
+  line-height: 50px;
+  letter-spacing: -0.1px;
+  background: none;
+  }
+
+  
+  .dropdown {
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    background-color: none;
+    width: 150px;
+    box-shadow: -10px 10px 15.999px 0px rgba(0, 0, 0, 0.1), 10px -10px 16px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+   }
+  
+      
+   .submenu_item {
+    width: inherit;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: 20px;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+
+  .submenu_item:hover {
+    color: gainsboro;
+}
+
