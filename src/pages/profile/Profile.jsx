@@ -4,7 +4,7 @@ import { Button } from "../../UI/Button/Button";
 import Yoga from './png/yoga.png';
 import Stratch from './png/stratch.png';
 import Body from './png/body.png';
-import Dropdown from '../../components/dropdown/Dropdown';
+import { Dropdown } from '../../components/dropdown/Dropdown';
 import style from  "./Profilepage.module.scss";
 
 
@@ -20,7 +20,7 @@ import style from  "./Profilepage.module.scss";
          <svg className={style.header_svg}>
          <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
           </svg>
-          < Dropdown className={style.header_select} name="Dropdown"/>
+          < Dropdown className={style.header_select} name="/"/>
          </div>
         </div>
       </header>

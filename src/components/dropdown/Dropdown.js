@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import * as style from "./Dropdown.module.css";
+import style from './Dropdown.module.scss';
 
 export default function Dropdown() {
     const container = useRef();
@@ -25,14 +25,14 @@ export default function Dropdown() {
   <div className={style.container} ref={container}>
      <button type="button" className={style.heder_item}
      onClick={handleDropdownClick}
-    >Logo!
+    >Логин
     </button>
     {dropdownState.open && (
      <div className={style.dropdown}>
-      <ul>
-        <li>На главную</li>
-        <li>Профиль</li>
-        <li>Выйти</li>
+      <ul class={style.submenu}>
+        <li class={style.submenu_item}><a href="/">На главную</a></li>
+        <li class={style.submenu_item}><a href="/">Профиль</a></li>
+        <li class={style.submenu_item}><a href="/">Выйти</a></li>
        </ul>
      </div>
     )}
