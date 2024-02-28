@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoWhiteSVG } from './svg/logo_white.svg';
 
@@ -12,18 +12,34 @@ import style from './Mainpage.module.scss';
 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/userSlice';
+import { Login } from '../login/login';
 
 export function Main() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [popup, setPopup] = useState(false);
+
+  const handlePopup = (e) => {
+    e.stopPropagation()
+    setPopup(true);
+    console.log(popup, 'popup');
+  };
+
+  useEffect(() => {
+    console.log(popup);
+  }, [popup]);
+
   return (
-    <div className={style.container}>
+    <div className={style.container} onClick={() => setPopup(false)}>
       <header>
         <div className={style.top}>
           <LogoWhiteSVG className={style.logo_white} />
-          {/* <button className={style.login_button}>Войти</button> */}
-          <Link to={`/login`} className={style.login_button}>
+          <button className={style.login_button} onClick={handlePopup}>
             Войти
-          </Link>
+          </button>
+
+          {/* <Link to={`/login`} className={style.login_button}>
+            Войти
+          </Link> */}
         </div>
 
         <div className={style.title}>
@@ -58,14 +74,15 @@ export function Main() {
           Наверх ↑
         </a>
         {/* тест редакса. Работает) */}
-        <button
+        {/* <button
           onClick={() => {
             dispatch(setUser('Test'));
           }}
         >
           setUser
-        </button>
+        </button> */}
       </footer>
+      {popup && <Login handlePopup={handlePopup} />}
     </div>
   );
 }

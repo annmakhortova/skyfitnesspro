@@ -27,7 +27,7 @@ export function Dropdown() {
           <Link className={style.submenu_item} to='/profile'>
             Профиль
           </Link>
-          <Link className={style.submenu_item} to='/'>
+          <Link className={style.submenu_item} to='/login'>
             Выйти
           </Link>
         </div>

@@ -23,3 +23,15 @@ export async function getAllWorkouts() {
 
   return newData;
 }
+export async function setNewUser() {
+  const response = await fetch(BASE_URL + '/users.json', {
+    method: 'POST',
+    body: { id: '9WW54Vp9MbgoSoGoUifee2zzu8o2' },
+  });
+  if (!response.ok) {
+    throw new Error('Ошибка сервера');
+  }
+  const newData = await response.json();
+
+  return newData;
+}
