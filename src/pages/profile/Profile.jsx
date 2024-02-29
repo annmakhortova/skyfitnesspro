@@ -8,7 +8,6 @@ import { Dropdown } from "../../components/dropdown/Dropdown";
 import style from "./Profilepage.module.scss";
 import { getAuth } from "firebase/auth";
 import { useSelector } from "react-redux";
-import { getAllUsers } from "../api";
 
 
 export const Profile = () => {

@@ -5,7 +5,7 @@ import style from './Registration.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database'
+// import { getDatabase, ref, set } from 'firebase/database'
 
 export const LoginSignup = () => {
   const [email, setEmail] = useState('');
