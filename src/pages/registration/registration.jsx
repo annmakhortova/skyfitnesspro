@@ -5,13 +5,24 @@ import style from './Registration.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setNewUser } from '../api';
+// import { getDatabase, ref, set } from 'firebase/database'
 
 export const LoginSignup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+
+
+  //Образец функции POST запроса в базу
+  // function writeUserData() {
+  //   const db = getDatabase()
+  //   set(ref(db, 'users/' + 12), {
+  //     email: email,
+  //     id: 12,
+  //     courses:[0]
+  //   })
+  // }
 
   // Function to handle user registration
   const handleRegistration = async (e) => {
@@ -20,10 +31,10 @@ export const LoginSignup = () => {
       alert('Passwords do not match!');
       return;
     }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
-      setNewUser();
       // Redirect to login page or dashboard after successful registration
       navigate('/login');
     } catch (error) {

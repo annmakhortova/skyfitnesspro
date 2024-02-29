@@ -6,15 +6,23 @@ import { useNavigate } from 'react-router-dom';
 // import { useParams } from "react-router-dom";
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../../store/userSlice';
 
 export const Login = ({ handlePopup }) => {
-  // console.log(props);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    localStorage.setItem('userLogin', email)
+    localStorage.setItem('userPassword', password)
+    dispatch(setCurrentUser({
+      userEmail: email,
+      userPassword: password,
+    }))
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/profile');
@@ -27,19 +35,6 @@ export const Login = ({ handlePopup }) => {
   const handleRegisterClick = () => {
     navigate('/signup');
   };
-
-//   const hidePopup = () => {
-//     document.addEventListener('mouseup', function (e) {
-//       const popupElement = document.getElementById('popup_wrapper');
-//       console.log(popupElement);
-//       if (!popupElement.contains(e.target)) {
-//           handlePopup();
-//           this.removeEventListener()
-//       }
-//     });
-//   };
-
-//   hidePopup();
 
   return (
     <div className={style.popup_wrapper} id={'popup_wrapper'}>

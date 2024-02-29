@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoWhiteSVG } from './svg/logo_white.svg';
 
@@ -10,8 +10,6 @@ import Step from './png/step.png';
 import Body from './png/body.png';
 import style from './Mainpage.module.scss';
 
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../store/userSlice';
 import { Login } from '../login/login';
 
 export function Main() {
@@ -21,12 +19,7 @@ export function Main() {
   const handlePopup = (e) => {
     e.stopPropagation()
     setPopup(true);
-    console.log(popup, 'popup');
   };
-
-  useEffect(() => {
-    console.log(popup);
-  }, [popup]);
 
   return (
     <div className={style.container} onClick={() => setPopup(false)}>
@@ -36,12 +29,7 @@ export function Main() {
           <button className={style.login_button} onClick={handlePopup}>
             Войти
           </button>
-
-          {/* <Link to={`/login`} className={style.login_button}>
-            Войти
-          </Link> */}
         </div>
-
         <div className={style.title}>
           <div>
             <div className={style.subtitle}>Онлайн-тренировки для занятий дома</div>
