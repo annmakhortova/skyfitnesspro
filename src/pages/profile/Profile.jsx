@@ -1,14 +1,19 @@
-import React from 'react';
-import { Logo } from '../../UI/Logo/Logo';
-import { Button } from '../../UI/Button/Button';
-import Yoga from './png/yoga.png';
-import Stratch from './png/stratch.png';
-import Body from './png/body.png';
-import { Dropdown } from '../../components/dropdown/Dropdown';
-import style from './Profilepage.module.scss';
-import { getAuth } from 'firebase/auth';
+import React from "react";
+import { Logo } from "../../UI/Logo/Logo";
+import { Button } from "../../UI/Button/Button";
+import Yoga from "./png/yoga.png";
+import Stratch from "./png/stratch.png";
+import Body from "./png/body.png";
+import { Dropdown } from "../../components/dropdown/Dropdown";
+import style from "./Profilepage.module.scss";
+import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { getAllUsers } from "../api";
+
 
 export const Profile = () => {
+  const currentUserStore = useSelector((state) => state.userApp.currentUser);
+  console.log(currentUserStore);
   const auth = getAuth();
   const currentUser = auth.currentUser;
   console.log(currentUser);
@@ -20,12 +25,11 @@ export const Profile = () => {
         <header>
           <div className={style.header}>
             <Logo className={style.logo} />
-
             <div className={style.header_profile}>
               <svg className={style.header_svg}>
-                <use xlinkHref='img/icon/sprite.svg#icon-tect-logo'></use>
+                <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
               </svg>
-              <Dropdown className={style.header_select} name='/' />
+              <Dropdown className={style.header_select} name="/" />
             </div>
           </div>
         </header>
@@ -36,23 +40,27 @@ export const Profile = () => {
             <p className={style.profile_text}>Пароль: 4fkhdj880d</p>
           </div>
           <div className={style.profile_button}>
-            <Button children={'Редактировать логин'} />
-            <Button children={'Редактировать пароль'} />
+            <Button children={"Редактировать логин"} />
+            <Button children={"Редактировать пароль"} />
           </div>
         </div>
         <div className={style.course}>
           <h1 className={style.h1}>Мои курсы</h1>
           <div className={style.course_box}>
             <div className={style.course_item}>
-              <img className={style.course_item_img} src={Yoga} alt='Yoga' />
+              <img className={style.course_item_img} src={Yoga} alt="Yoga" />
               <button className={style.button_link}>Перейти</button>
             </div>
             <div className={style.course_item}>
-              <img className={style.course_item_img} src={Stratch} alt='Stratch' />
+              <img
+                className={style.course_item_img}
+                src={Stratch}
+                alt="Stratch"
+              />
               <button className={style.button_link}>Перейти</button>
             </div>
             <div className={style.course_item}>
-              <img className={style.course_item_img} src={Body} alt='Body' />
+              <img className={style.course_item_img} src={Body} alt="Body" />
               <button className={style.button_link}>Перейти</button>
             </div>
           </div>

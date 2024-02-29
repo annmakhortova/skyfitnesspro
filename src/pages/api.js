@@ -1,11 +1,12 @@
-const BASE_URL = 'https://fitness-pro-9efbb-default-rtdb.europe-west1.firebasedatabase.app';
+const BASE_URL =
+  "https://fitness-pro-9efbb-default-rtdb.europe-west1.firebasedatabase.app";
 
 export async function getAllCourses() {
-  const response = await fetch(BASE_URL + '/courses.json', {
-    method: 'GET',
+  const response = await fetch(BASE_URL + "/courses.json", {
+    method: "GET",
   });
   if (!response.ok) {
-    throw new Error('Ошибка сервера');
+    throw new Error("Ошибка сервера");
   }
   const newData = await response.json();
 
@@ -13,25 +14,26 @@ export async function getAllCourses() {
 }
 
 export async function getAllWorkouts() {
-  const response = await fetch(BASE_URL + '/workouts.json', {
-    method: 'GET',
+  const response = await fetch(BASE_URL + "/workouts.json", {
+    method: "GET",
   });
   if (!response.ok) {
-    throw new Error('Ошибка сервера');
+    throw new Error("Ошибка сервера");
   }
   const newData = await response.json();
 
   return newData;
 }
-export async function setNewUser() {
-  const response = await fetch(BASE_URL + '/users.json', {
-    method: 'POST',
-    body: { id: '9WW54Vp9MbgoSoGoUifee2zzu8o2' },
+
+export async function getAllUsers() {
+  const response = await fetch(BASE_URL + "/users.json", {
+    method: "GET",
   });
   if (!response.ok) {
-    throw new Error('Ошибка сервера');
+    throw new Error("Ошибка сервера");
   }
   const newData = await response.json();
 
   return newData;
 }
+

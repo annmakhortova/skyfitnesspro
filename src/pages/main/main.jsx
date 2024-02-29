@@ -21,12 +21,7 @@ export function Main() {
   const handlePopup = (e) => {
     e.stopPropagation()
     setPopup(true);
-    console.log(popup, 'popup');
   };
-
-  useEffect(() => {
-    console.log(popup);
-  }, [popup]);
 
   return (
     <div className={style.container} onClick={() => setPopup(false)}>
@@ -36,12 +31,7 @@ export function Main() {
           <button className={style.login_button} onClick={handlePopup}>
             Войти
           </button>
-
-          {/* <Link to={`/login`} className={style.login_button}>
-            Войти
-          </Link> */}
         </div>
-
         <div className={style.title}>
           <div>
             <div className={style.subtitle}>Онлайн-тренировки для занятий дома</div>
