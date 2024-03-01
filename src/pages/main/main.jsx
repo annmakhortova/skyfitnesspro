@@ -1,5 +1,5 @@
 import React, {  useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { ReactComponent as LogoWhiteSVG } from './svg/logo_white.svg';
 
 import SaleSticker from './png/SaleSticker.png';
@@ -29,9 +29,13 @@ export function Main() {
       <header>
         <div className={style.top}>
           <LogoWhiteSVG className={style.logo_white} />
-          <button className={style.login_button} onClick={handlePopup}>
+          {/* <button className={style.login_button} onClick={handlePopup}>
             Войти
-          </button>
+          </button> */}
+
+          <Link className={style.login_button} to={`/login`}>
+              Войти
+          </Link>
           <Link to={`/profile`}>
               Кабинет
           </Link>
@@ -77,7 +81,9 @@ export function Main() {
           setUser
         </button> */}
       </footer>
-      {popup && <Login handlePopup={handlePopup} />}
+      {/* {popup && <Login handlePopup={handlePopup} />} */}
+
+      <Outlet/>
     </div>
   );
 }
