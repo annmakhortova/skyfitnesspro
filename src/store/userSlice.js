@@ -4,15 +4,19 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     currentUser: null,
+    userId: null, // Added userId to the initialState
   },
   reducers: {
-    setCurrentUser(state, action) {
-      console.log(action.payload);
+    setCurrentUser: (state, action) => {
       state.currentUser = action.payload;
+    },
+    setUserId: (state, action) => {
+      state.userId = action.payload; // This will update the userId in the state
     },
   },
 });
 
-export const { setCurrentUser } = userSlice.actions;
+// Export both setCurrentUser and setUserId actions
+export const { setCurrentUser, setUserId } = userSlice.actions;
 
 export default userSlice.reducer;
