@@ -4,9 +4,13 @@ import style from './Registration.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 import { getDatabase, ref, set } from 'firebase/database';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserId } from '../../store/userSlice'; // Adjust if necessary
+
+import { Button } from '../../UI/Button/Button';
+
 
 export const LoginSignup = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +18,7 @@ export const LoginSignup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -52,32 +57,42 @@ export const LoginSignup = () => {
   }
 
   return (
-    <div className={style.container}>
-      <header>
-        <Logo className={style.logo} />
-      </header>
+    <div className={style.popup_wrapper}>
+      <div className={style.container}>
+        <header>
+          <Logo className={style.logo} />
+        </header>
 
-      <div className={style.inputs}>
-        <div className={style.input}>
-          <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className={style.inputs}>
+          <div className={style.input}>
+            <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className={style.input}>
+            <input
+              type='password'
+              placeholder='Пароль'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className={style.input}>
+            <input
+              type='password'
+              placeholder='Повторите пароль'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
         </div>
-        <div className={style.input}>
-          <input type='password' placeholder='Пароль' value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <div className={style.input}>
-          <input
-            type='password'
-            placeholder='Повторите пароль'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-      </div>
 
-      <div className={style.buttonsContainer}>
-        <button className={style.registerButton} onClick={handleRegistration}>
-          Зарегистрироваться
-        </button>
+        <div className={style.buttonsContainer}>
+          {/* <button className={style.registerButton} onClick={handleRegistration}>
+            Зарегистрироваться
+          </button> */}
+          
+          <Button onClick={handleRegistration} children={'Зарегистрироваться'} className={style.button_white} />
+
+        </div>
       </div>
     </div>
   );
