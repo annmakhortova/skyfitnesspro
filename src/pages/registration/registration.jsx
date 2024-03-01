@@ -32,7 +32,7 @@ export const LoginSignup = () => {
       // Dispatch Redux action to store the user's ID
       dispatch(setUserId(userId));
       
-      // Optionally, store the entire user object or just the email in your Redux store
+      // can store the entire user object or just the email in your Redux store
       dispatch(setCurrentUser({ userId, email }));
 
       navigate('/login'); // Redirect after successful registration
@@ -47,7 +47,7 @@ export const LoginSignup = () => {
     const db = getDatabase();
     set(ref(db, 'users/' + userId), {
       email: email,
-      courses: [0] // Example data, adjust according to your needs
+      courses: [0] // Example data
     });
   }
 

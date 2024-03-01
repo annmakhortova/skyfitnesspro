@@ -19,7 +19,7 @@ export const NewLogin = () => {
         console.log("Creating new login with:", login);
         // After login creation logic
 
-        navigate('/profile'); // Use navigate('/path') instead of history.push('/path')
+        navigate('/profile'); 
     };
 
     return (

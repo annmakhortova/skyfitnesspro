@@ -14,7 +14,7 @@ export const Profile = () => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
-  // It's a good practice to check if currentUser exists before accessing its properties
+  //  to check if currentUser exists before accessing its properties
   if (currentUser) {
     console.log(currentUser.email, currentUser.uid);
   } else {
