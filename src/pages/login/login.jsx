@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button } from '../../UI/Button/Button';
 import { Logo } from '../../UI/Logo/Logo';
 import style from './Login.module.scss';
-import styleButton from '../../UI/Button/Button.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -60,8 +59,17 @@ export const Login = ({ handlePopup }) => {
         </div>
 
         <div className={style.buttonsContainer}>
-          <Button onClick={handleLogin} children={'Войти'} className={styleButton.button_blue} />
-          <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={styleButton.button_white} />        
+
+//           <Button onClick={handleLogin} children={'Войти'} className={styleButton.button_blue} />
+//           <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={styleButton.button_white} />        
+
+          <Button onClick={handleLogin} children={'Войти'} className={'button_blue'} />
+          <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={'button_white'} />
+          {/* <button className={style.registerButton} onClick={handleRegisterClick}>
+            Зарегистрироваться
+          </button> */}
+        
+
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-// import style from "./Button.module.scss";
+import style from "./Button.module.scss";
 // стиль прокидывается пропсом от родителя (там же импортирован).
 
 /**
@@ -10,8 +10,9 @@
  */
 
 export const Button = ({ children, onClick, className }) => {
+
   return (
-    <button onClick={onClick} className={className}>
+    <button onClick={onClick} className={style[className]}>
       {children}
     </button>
   );

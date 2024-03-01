@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import style from "./SelectWorkout.module.scss";
 import { getAllCourses, getAllWorkouts } from "../api";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentWorkout } from "../../store/coursesSlice";
 
 export const SelectWorkout = () => {
   const params = "Yoga";
@@ -9,7 +11,12 @@ export const SelectWorkout = () => {
   const [currentWorkoutsArr, setCurrentWorkoutsArr] = useState([]);
 
 
+
   //Надо будет поменять запросы на получение из стейта
+
+  const dispatch = useDispatch();
+  
+
   useEffect(() => {
     getAllCourses()
       .then((courses) => {
@@ -37,6 +44,10 @@ export const SelectWorkout = () => {
     }
   }, [allWorkouts, course]);
 
+  const handleClick = (el) => {
+    dispatch(setCurrentWorkout(el));
+  };
+
   return (
     <div className={style.selectWorkout}>
       <div className={style.selectWorkout_box}>
@@ -44,7 +55,13 @@ export const SelectWorkout = () => {
         <div className={style.workouts}>
           {currentWorkoutsArr.map((el) => {
             return (
-              <div className={style.workout} key={el.name}>
+              <div
+                className={style.workout}
+                key={el.name}
+                onClick={() => {
+                  handleClick(el);
+                }}
+              >
                 <p className={style.workout_text}>{el.name}</p>
               </div>
             );

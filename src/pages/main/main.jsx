@@ -11,10 +11,13 @@ import Body from './png/body.png';
 import style from './Mainpage.module.scss';
 
 import { Login } from '../login/login';
+import { useSelector } from 'react-redux';
 
 export function Main() {
   // const dispatch = useDispatch();
   const [popup, setPopup] = useState(false);
+  const curUser = useSelector(state => state.userApp.currentUser)
+  console.log(curUser)
 
   const handlePopup = (e) => {
     e.stopPropagation()
@@ -29,6 +32,10 @@ export function Main() {
           <button className={style.login_button} onClick={handlePopup}>
             Войти
           </button>
+          <Link to={`/profile`}>
+              Кабинет
+          </Link>
+          
         </div>
         <div className={style.title}>
           <div>

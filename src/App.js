@@ -32,6 +32,9 @@ function App() {
   //Получаем все тренировки
   useEffect(() => {
     getAllWorkouts().then((workouts) => {
+
+      // console.log(Object.values(workouts));
+
       dispatch(setAllWorkouts(Object.values(workouts)));
     });
   });

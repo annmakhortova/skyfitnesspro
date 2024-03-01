@@ -5,6 +5,7 @@ const coursesSlice = createSlice({
   initialState: {
     allCourses: null,
     allWorkouts: null,
+
     usersCourses: null,
     //Это шаблон, он мне будет пока нужен, потом естественно уберу
     currentWorkout: {
@@ -23,6 +24,7 @@ const coursesSlice = createSlice({
           quantity: 20,
         },
       ],
+
       name: "Гибкость спины / Йога на каждый день / 5 день / Алексей Казубский",
       video: "https://www.youtube.com/embed/MIvcMapie_A",
     },
@@ -34,6 +36,7 @@ const coursesSlice = createSlice({
     setAllWorkouts(state, action) {
       state.allWorkouts = action.payload;
     },
+
     setUsersCourses(state, action) {
       state.usersCourses = action.payload;
     },
@@ -41,6 +44,16 @@ const coursesSlice = createSlice({
 });
 
 export const { setAllCourses, setAllWorkouts, setUsersCourses } =
+
+//     setCurrentWorkout(state, action) {
+//       console.log(action.payload);
+//       state.currentWorkout = action.payload;
+//     },
+//   },
+// });
+
+// export const { setAllCourses, setAllWorkouts, setCurrentWorkout } =
+
   coursesSlice.actions;
 
 export default coursesSlice.reducer;
