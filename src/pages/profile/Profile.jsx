@@ -9,14 +9,23 @@ import style from "./Profilepage.module.scss";
 import { getAuth } from "firebase/auth";
 import { useSelector } from "react-redux";
 
-
 export const Profile = () => {
   const currentUserStore = useSelector((state) => state.userApp.currentUser);
-  console.log(currentUserStore);
   const auth = getAuth();
   const currentUser = auth.currentUser;
+
   console.log(currentUser);
   // console.log(currentUser.email, currentUser.uid);
+
+
+  //  to check if currentUser exists before accessing its properties
+  if (currentUser) {
+    console.log(currentUser.email, currentUser.uid);
+  } else {
+    console.log("No user is currently signed in.");
+  }
+
+  
   return (
     <>
       <div className={style.container}>
@@ -34,12 +43,19 @@ export const Profile = () => {
         <div className={style.profile}>
           <div className={style.heading}>
             <h1 className={style.profile_heading}>Мой профиль</h1>
-            <p className={style.profile_text}>Логин: sergey.petrov96</p>
-            <p className={style.profile_text}>Пароль: 4fkhdj880d</p>
+            {/* Conditional rendering to safely access currentUser properties */}
+            {currentUser ? (
+              <>
+                <p className={style.profile_text}>Логин: {currentUser.email}</p>
+                {/* Remove or secure the display of sensitive information like passwords */}
+              </>
+            ) : (
+              <p className={style.profile_text}>Пожалуйста, войдите в систему.</p>
+            )}
           </div>
           <div className={style.profile_button}>
-            <Button children={"Редактировать логин"} />
-            <Button children={"Редактировать пароль"} />
+            <Button>Редактировать логин</Button>
+            <Button>Редактировать пароль</Button>
           </div>
         </div>
         <div className={style.course}>
@@ -50,11 +66,7 @@ export const Profile = () => {
               <button className={style.button_link}>Перейти</button>
             </div>
             <div className={style.course_item}>
-              <img
-                className={style.course_item_img}
-                src={Stratch}
-                alt="Stratch"
-              />
+              <img className={style.course_item_img} src={Stratch} alt="Stratch" />
               <button className={style.button_link}>Перейти</button>
             </div>
             <div className={style.course_item}>
