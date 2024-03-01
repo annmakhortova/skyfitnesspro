@@ -9,8 +9,14 @@ export const SelectWorkout = () => {
   const [course, setCourse] = useState();
   const [allWorkouts, setAllWorkouts] = useState();
   const [currentWorkoutsArr, setCurrentWorkoutsArr] = useState([]);
+
+
+
+  //Надо будет поменять запросы на получение из стейта
+
   const dispatch = useDispatch();
   
+
   useEffect(() => {
     getAllCourses()
       .then((courses) => {
