@@ -4,11 +4,10 @@ import { Logo } from '../../UI/Logo/Logo';
 import style from './Login.module.scss';
 import styleButton from '../../UI/Button/Button.module.scss';
 import { useNavigate } from 'react-router-dom';
-// import { useParams } from "react-router-dom";
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '../../store/userSlice';
+import { setCurrentUser, setUserId } from '../../store/userSlice';
 
 export const Login = ({ handlePopup }) => {
   const dispatch = useDispatch()
@@ -25,7 +24,9 @@ export const Login = ({ handlePopup }) => {
       userPassword: password,
     }))
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      dispatch(setUserId(userInfo.user.uid))
+      localStorage.setItem('userId', userInfo.user.uid)
       navigate('/profile');
     } catch (error) {
       console.error(error.message);
@@ -60,11 +61,7 @@ export const Login = ({ handlePopup }) => {
 
         <div className={style.buttonsContainer}>
           <Button onClick={handleLogin} children={'Войти'} className={styleButton.button_blue} />
-          <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={styleButton.button_white} />
-          {/* <button className={style.registerButton} onClick={handleRegisterClick}>
-            Зарегистрироваться
-          </button> */}
-        
+          <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={styleButton.button_white} />        
         </div>
       </div>
     </div>

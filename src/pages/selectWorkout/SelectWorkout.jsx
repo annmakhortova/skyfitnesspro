@@ -3,11 +3,13 @@ import style from "./SelectWorkout.module.scss";
 import { getAllCourses, getAllWorkouts } from "../api";
 
 export const SelectWorkout = () => {
-  const params = "StepAirobic";
+  const params = "Yoga";
   const [course, setCourse] = useState();
   const [allWorkouts, setAllWorkouts] = useState();
   const [currentWorkoutsArr, setCurrentWorkoutsArr] = useState([]);
 
+
+  //Надо будет поменять запросы на получение из стейта
   useEffect(() => {
     getAllCourses()
       .then((courses) => {
@@ -17,21 +19,20 @@ export const SelectWorkout = () => {
         );
       })
       .catch(() => {})
-      .finally(() => {
-      });
+      .finally(() => {});
   }, [params.id]);
 
   useEffect(() => {
     getAllWorkouts().then((workoutss) => {
-      console.log('Workouts', workoutss);
+      console.log("Workouts", workoutss);
       setAllWorkouts(Object.values(workoutss));
     });
   }, []);
 
   useEffect(() => {
     if (course) {
-      setCurrentWorkoutsArr(allWorkouts.filter((el) =>
-      course.workouts.includes(el._id))
+      setCurrentWorkoutsArr(
+        allWorkouts.filter((el) => course.workouts.includes(el._id))
       );
     }
   }, [allWorkouts, course]);
