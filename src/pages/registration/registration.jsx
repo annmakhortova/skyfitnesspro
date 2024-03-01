@@ -36,7 +36,7 @@ export const LoginSignup = () => {
 
       // Dispatch Redux action to store the user's ID
       dispatch(setUserId(userId));
-      
+      localStorage.setItem('userId', userId)
       // can store the entire user object or just the email in your Redux store
       dispatch(setCurrentUser({ userId, email }));
 
