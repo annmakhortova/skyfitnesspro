@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
 import Yoga from "./png/yoga.png";
@@ -14,6 +14,10 @@ export const Profile = () => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
+  console.log(currentUser);
+  // console.log(currentUser.email, currentUser.uid);
+
+
   //  to check if currentUser exists before accessing its properties
   if (currentUser) {
     console.log(currentUser.email, currentUser.uid);
@@ -21,6 +25,7 @@ export const Profile = () => {
     console.log("No user is currently signed in.");
   }
 
+  
   return (
     <>
       <div className={style.container}>

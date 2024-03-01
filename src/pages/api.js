@@ -37,3 +37,15 @@ export async function getAllUsers() {
   return newData;
 }
 
+export async function getCurrentUsers() {
+  const response = await fetch(BASE_URL + "/users/GyanmgaAa8btlzVBmnx2QeEq4pI3.json", {
+    method: "GET",
+  });
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+  const newData = await response.json();
+
+  return newData;
+}
+
