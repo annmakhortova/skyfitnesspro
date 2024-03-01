@@ -90,7 +90,7 @@ export const LoginSignup = () => {
             Зарегистрироваться
           </button> */}
           
-          <Button onClick={handleRegistration} children={'Зарегистрироваться'} className={style.button_white} />
+          <Button onClick={handleRegistration} children={'Зарегистрироваться'} className={'button_white'} />
 
         </div>
       </div>
