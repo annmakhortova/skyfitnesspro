@@ -4,6 +4,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     currentUser: null,
+    currentUserId: 'GyanmgaAa8btlzVBmnx2QeEq4pI3',
   },
   reducers: {
     setCurrentUser(state, action) {

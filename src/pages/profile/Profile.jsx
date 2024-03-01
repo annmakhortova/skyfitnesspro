@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
 import Yoga from "./png/yoga.png";
@@ -16,8 +16,7 @@ export const Profile = () => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
   console.log(currentUser);
-  console.log(currentUser.email, currentUser.uid);
-
+  // console.log(currentUser.email, currentUser.uid);
   return (
     <>
       <div className={style.container}>
