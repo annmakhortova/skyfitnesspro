@@ -1,12 +1,24 @@
 import React from "react";
-// import { useParams } from "react-router-dom";
-// import { courses } from "./MocData";
+import { useParams } from "react-router-dom";
 import style from "./Training.module.scss";
 import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
-import videoImgLogo from "./img/1.png";
+import { useSelector } from "react-redux";
+import ReactPlayer from "react-player/youtube";
 
 export const Training = () => {
+  const { id } = useParams(); // Получение значения параметра `id` из URL
+  const workouts = useSelector((state) => state.coursesApp.allWorkouts);
+  const workout = workouts?.filter((data) => data._id.includes(id));
+  const workoutName = workout ? workout[0].name : "название не получено";
+  const workoutVideo = workout ? workout[0].video : "видео не найдено";
+  const workoutExercises = workout
+    ? workout[0].exercises
+    : ["упражнения не найдены"];
+  workoutExercises.forEach((element) => {
+    console.log(element);
+  });
+
   return (
     <div className={style.container}>
       <header>
@@ -14,19 +26,20 @@ export const Training = () => {
       </header>
       <main>
         <h1 className={style.nameTraining}>Йога</h1>
-        <h2 className={style.dateLink}>
-          Красота и здоровье / Йога на каждый день / 2 день
-        </h2>
-        <img className={style.videoImgLogo} src={videoImgLogo} alt="" />
+        <h2 className={style.dateLink}>{workoutName}</h2>
+        <ReactPlayer url={workoutVideo} width="100%" height="720px" />
         <section className={style.resultSection}>
           <div className={style.exerciseSection}>
             <span className={style.exerciseTitle}>Упражнения</span>
             <ul className={style.exerciseList}>
-              <li>Наклон вперед (10 повторений)</li>
-              <li>Наклон назад (10 повторений)</li>
-              <li>Поднятие ног, согнутых в коленях (5 повторений)</li>
+              {workoutExercises.map((exercise) => (
+                <li>{exercise.name}</li>
+              ))}
             </ul>
-            <Button children={"Заполнить свой прогресс"} />
+            <Button
+              className={"button_blue"}
+              children={"Заполнить свой прогресс"}
+            />
           </div>
           <div className={style.progressSection}>
             <span className={style.nameSection}>
