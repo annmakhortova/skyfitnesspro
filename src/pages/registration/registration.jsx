@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserId } from '../../store/userSlice'; // Adjust if necessary
 
 import { Button } from '../../UI/Button/Button';
-
+import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 
 export const LoginSignup = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +18,6 @@ export const LoginSignup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -36,7 +35,7 @@ export const LoginSignup = () => {
 
       // Dispatch Redux action to store the user's ID
       dispatch(setUserId(userId));
-      localStorage.setItem('userId', userId)
+      localStorage.setItem('userId', userId);
       // can store the entire user object or just the email in your Redux store
       dispatch(setCurrentUser({ userId, email }));
 
@@ -52,20 +51,28 @@ export const LoginSignup = () => {
     const db = getDatabase();
     set(ref(db, 'users/' + userId), {
       email: email,
-      courses: [0] // Example data
+      courses: [0], // Example data
     });
   }
 
+  const hidePopup = (e, type) => {
+    if (hidePopupFlag(e, type)) navigate('/')
+  }
+
   return (
-    <div className={style.popup_wrapper}>
-      <div className={style.container}>
+    <div
+      className={style.popup_wrapper}
+      onMouseUp={(e) => hidePopup(e, 'mouse')}
+      onKeyDown={(e) => hidePopup(e, 'kbd')}
+    >
+      <div className={style.container} id='#popup'>
         <header>
           <Logo className={style.logo} />
         </header>
 
         <div className={style.inputs}>
           <div className={style.input}>
-            <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input autoFocus type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className={style.input}>
             <input
@@ -89,9 +96,8 @@ export const LoginSignup = () => {
           {/* <button className={style.registerButton} onClick={handleRegistration}>
             Зарегистрироваться
           </button> */}
-          
-          <Button onClick={handleRegistration} children={'Зарегистрироваться'} className={'button_white'} />
 
+          <Button onClick={handleRegistration} children={'Зарегистрироваться'} className={'button_white'} />
         </div>
       </div>
     </div>
