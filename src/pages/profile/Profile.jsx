@@ -7,10 +7,10 @@ import Body from './png/body.png';
 import { Dropdown } from '../../components/dropdown/Dropdown';
 import style from './Profilepage.module.scss';
 import { getAuth } from 'firebase/auth';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export const Profile = () => {
-  const currentUserStore = useSelector((state) => state.userApp.currentUser);
+  // const currentUserStore = useSelector((state) => state.userApp.currentUser);
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
