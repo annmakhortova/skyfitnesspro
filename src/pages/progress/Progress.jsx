@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { Button } from '../../UI/Button/Button';
 import styles from './Progress.module.scss';
@@ -6,17 +7,20 @@ import { getCurrentUsers } from '../api';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
 
+
 export const Progress = () => {
   const navigate = useNavigate();
 
   const currentWorkout = useSelector((state) => state.coursesApp.currentWorkout);
   const currentUser = useSelector((state) => state.coursesApp.currentUser);
 
+
   // useEffect(() => {
   //   getCurrentUsers().then((response) => {
   //     console.log(Object.values(response));
   //   });
   // });
+
 
   useEffect(() => {
     console.log(currentWorkout);

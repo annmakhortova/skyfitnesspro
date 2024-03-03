@@ -20,7 +20,9 @@ export const Training = () => {
     console.log(element);
   });
 
+
   const navigateToProgress = () => navigate('/progress');
+
 
   return (
     <div className={style.container}>

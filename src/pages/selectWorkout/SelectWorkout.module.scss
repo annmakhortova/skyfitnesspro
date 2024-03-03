@@ -49,42 +49,35 @@
   }
 }
 .workout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000000;
-  border-radius: 26px;
-  width: 278px;
-  min-height: 76px;
-  padding: 11px 27px 11px 27px;
-  padding-left: 27px;
-  padding-right: 27px;
-
-  &_text {
-    font-family: StratosSkyeng;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 23px;
-    text-align: center;
-    width: 250px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-  &Made {
+  &_false {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #06B16E;
+    border: 1px solid #000000;
     border-radius: 26px;
     width: 278px;
-    // min-height: 76px;
+    min-height: 76px;
+    padding: 11px 27px 11px 27px;
+    padding-left: 27px;
+    padding-right: 27px;
+    text-decoration: none; 
+  }
+  &_true {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #06b16e;
+    border-radius: 26px;
+    width: 278px;
+    min-height: 76px;
     padding: 11px 27px 11px 27px;
     padding-left: 27px;
     padding-right: 27px;
     position: relative;
-    &_text {
-      color: #06B16E;
+    text-decoration: none; 
+  }  
+  &Text {
+    &_false {
       font-family: StratosSkyeng;
       font-size: 20px;
       font-weight: 400;
@@ -94,11 +87,25 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      color: #000000;
     }
-    &_img {
-      position: absolute;
-      right: 9px;
-      top: 9px;
+    &_true{
+      color: #06b16e;
+      font-family: StratosSkyeng;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 23px;
+      text-align: center;
+      width: 250px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      
     }
+  }
+  &_img {
+    position: absolute;
+    right: 9px;
+    top: 9px;
   }
 }
