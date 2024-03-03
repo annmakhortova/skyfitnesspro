@@ -90,7 +90,8 @@
 
 .course_box {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   column-gap: 40px;
   margin-top: 60px;
 }

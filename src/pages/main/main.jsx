@@ -2,11 +2,11 @@ import { Link, Outlet } from 'react-router-dom';
 import { ReactComponent as LogoWhiteSVG } from './svg/logo_white.svg';
 
 import SaleSticker from './png/SaleSticker.png';
-import Yoga from './png/yoga.png';
-import Stratch from './png/stratch.png';
-import Dance from './png/dance.png';
-import Step from './png/step.png';
-import Body from './png/body.png';
+import Yoga from './png/Yoga.png';
+import Stratch from './png/Stretching.png';
+import Dance from './png/DanceFitness.png';
+import Step from './png/StepAirobic.png';
+import Body from './png/BodyFlex.png';
 import style from './Mainpage.module.scss';
 
 // import { useSelector } from 'react-redux';
