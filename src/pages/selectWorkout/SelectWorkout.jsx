@@ -1,51 +1,29 @@
 import React, { useEffect, useState } from "react";
 import style from "./SelectWorkout.module.scss";
-import { getAllCourses, getAllWorkouts } from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWorkout } from "../../store/coursesSlice";
+import { Link, useParams } from "react-router-dom";
+import made from "./made.png";
 
 export const SelectWorkout = () => {
-  const params = "Yoga";
-  const [course, setCourse] = useState();
-  const [allWorkouts, setAllWorkouts] = useState();
+  const params = useParams();
   const [currentWorkoutsArr, setCurrentWorkoutsArr] = useState([]);
+  const currentUser = useSelector((state) => state.userApp.fullCurrentUser);
 
-
-
-  //Надо будет поменять запросы на получение из стейта
+  useEffect(() => {
+    if (currentUser) {
+      console.log(currentUser);
+      const arr = Object.values(currentUser.courses).find(
+        (course) => course.name === params.id
+      ).workouts;
+      setCurrentWorkoutsArr(Object.values(arr));
+    }
+  }, [currentUser, params.id]);
 
   const dispatch = useDispatch();
-  
-
-  useEffect(() => {
-    getAllCourses()
-      .then((courses) => {
-        console.log("Курсы:", courses);
-        setCourse(
-          Object.values(courses).find((course) => course.nameEN === params)
-        );
-      })
-      .catch(() => {})
-      .finally(() => {});
-  }, [params.id]);
-
-  useEffect(() => {
-    getAllWorkouts().then((workoutss) => {
-      console.log("Workouts", workoutss);
-      setAllWorkouts(Object.values(workoutss));
-    });
-  }, []);
-
-  useEffect(() => {
-    if (course) {
-      setCurrentWorkoutsArr(
-        allWorkouts.filter((el) => course.workouts.includes(el._id))
-      );
-    }
-  }, [allWorkouts, course]);
 
   const handleClick = (el) => {
-    dispatch(setCurrentWorkout(el));
+    dispatch(setCurrentWorkout(el._id));
   };
 
   return (
@@ -53,24 +31,20 @@ export const SelectWorkout = () => {
       <div className={style.selectWorkout_box}>
         <h1 className={style.selectWorkout_title}>Выберите тренировку</h1>
         <div className={style.workouts}>
-          {currentWorkoutsArr.map((el) => {
+          {currentWorkoutsArr?.map((el) => {
             return (
-              <div
-                className={style.workout}
+              <Link
+              to={`/training/${params.id}/${el._id}`}
+                className={style[`workout_${el.done}`]}
                 key={el.name}
                 onClick={() => {
                   handleClick(el);
                 }}
               >
-                <p className={style.workout_text}>{el.name}</p>
-              </div>
+                <p className={style[`workoutText_${el.done}`]}>{el.name}</p>
+                {el.done && <img className={style.workoutMade_img} src={made} alt="made" />}
+              </Link>
             );
-            // return (
-            //   <div className={style.workoutMade}>
-            //     <p className={style.workoutMade_text}>{el.name}</p>
-            //     <img className={style.workoutMade_img} src={made} alt="made" />
-            //   </div>
-            // );
           })}
         </div>
       </div>
