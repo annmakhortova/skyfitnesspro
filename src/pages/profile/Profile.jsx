@@ -6,12 +6,15 @@ import { getCurrentUser } from "../api";
 import { setFullCurrentUser } from "../../store/userSlice";
 import { Header } from "../../components/header/Header";
 import { Link } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 export const Profile = () => {
   const dispatch = useDispatch();
   const currentId = localStorage.getItem("userId");
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const [userCourses, setUserCourses] = useState([]);
+  const auth = getAuth();
+  console.log(auth.currentUser)
 
   useEffect(() => {
     if (fullCurrentUser) {
