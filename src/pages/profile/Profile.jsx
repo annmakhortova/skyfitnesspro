@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
@@ -22,6 +23,7 @@ export const Profile = () => {
   console.log(fullCurrentUser);
   // console.log(currentUser.email, currentUser.uid);
 
+
   //  to check if currentUser exists before accessing its properties
   if (currentUser) {
     console.log(currentUser.email, currentUser.uid);
@@ -30,11 +32,13 @@ export const Profile = () => {
   }
 
   const handleChangeLogin = () => {
+
     console.log("handleChangeLogin");
   };
 
   const handleChangePassword = () => {
     console.log("handleChangePassword");
+
   };
 
   return (
@@ -47,7 +51,9 @@ export const Profile = () => {
               <svg className={style.header_svg}>
                 <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
               </svg>
-              <Dropdown className={style.header_select} name="/" />
+
+              <Dropdown className={style.header_select} title={currentUser.email} />
+
             </div>
           </div>
         </header>
@@ -84,22 +90,24 @@ export const Profile = () => {
         <div className={style.course}>
           <h1 className={style.h1}>Мои курсы</h1>
           <div className={style.course_box}>
+
             <div className={style.course_item}>
               <img className={style.course_item_img} src={Yoga} alt="Yoga" />
               <button className={style.button_link}>Перейти</button>
             </div>
-            <div className={style.course_item}>
-              <img
-                className={style.course_item_img}
-                src={Stratch}
-                alt="Stratch"
-              />
+
+
+            {/* <div className={style.course_item}>
+              <img className={style.course_item_img} src={Stratch} alt='Stratch' />
+
               <button className={style.button_link}>Перейти</button>
             </div>
+
             <div className={style.course_item}>
               <img className={style.course_item_img} src={Body} alt="Body" />
               <button className={style.button_link}>Перейти</button>
-            </div>
+            </div> */}
+
           </div>
         </div>
       </div>

@@ -50,7 +50,11 @@ function App() {
   useEffect(() => {
     if (currentId) {
       getCurrentUser(currentId).then((currentUser) => {
+
+        // dispatch(setFullCurrentUser(Object.values(currentUser)));
+
         dispatch(setFullCurrentUser(currentUser));
+
       });
     }
   });

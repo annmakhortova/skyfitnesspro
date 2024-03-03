@@ -38,7 +38,7 @@ export async function getCurrentUser(currentId) {
     throw new Error("Ошибка сервера");
   }
   const newData = await response.json();
-
+console.log(1, newData);
   return newData;
 }
 
