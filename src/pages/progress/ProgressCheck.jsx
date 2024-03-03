@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./Progrss.module.scss"
+import styles from "./Progress.module.scss"
 import Hand from './Hand.png'
 
  export const ProgressCheck = () => {

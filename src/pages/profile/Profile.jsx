@@ -15,9 +15,11 @@ export const Profile = () => {
 
   useEffect(() => {
     if (fullCurrentUser) {
+
       if (fullCurrentUser.courses) {
         setUserCourses(Object.keys(fullCurrentUser?.courses));
       }
+
     } else if (fullCurrentUser === null) {
       getCurrentUser(currentId).then((currentUser) => {
         dispatch(setFullCurrentUser(currentUser));
@@ -59,6 +61,7 @@ export const Profile = () => {
             )}
           </div>
           <div className={style.profile_button}>
+
             <Button
               onClick={handleChangeLogin}
               children={"Редактировать логин"}
@@ -69,23 +72,26 @@ export const Profile = () => {
               children={"Редактировать пароль"}
               className={"button_blue"}
             />
+
           </div>
         </div>
         <div className={style.course}>
           <h1 className={style.h1}>Мои курсы</h1>
           <div className={style.course_box}>
-            {userCourses?.map((course) => {
-              return (
-                <div className={style.course_item} key={course}>
-                  <img
-                    className={style.course_item_img}
-                    src={`./img/png/${course}.png`}
-                    alt={course}
-                  />
-                  <Link className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</Link>
-                </div>
-              );
-            })}
+
+            {userCourses ? (
+              userCourses?.map((course) => {
+                return (
+                  <div className={style.course_item} key={course}>
+                    <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
+                    <button className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</button>
+                  </div>
+                );
+              })
+            ) : (
+              <p>У вас пока нет купленных курсов</p>
+            )}
+
           </div>
         </div>
       </div>
