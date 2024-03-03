@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { getCurrentUsers } from "../api";
 
 export const Progress = () => {
-  const currentUserId = useSelector((state) => state.userApp.currentUserId);
   const currentWorkout = useSelector(
     (state) => state.coursesApp.currentWorkout
   );
@@ -18,10 +17,9 @@ export const Progress = () => {
   });
 
   useEffect(() => {
-    console.log(currentUserId);
     console.log(currentWorkout);
     console.log(currentUser);
-  }, [currentUserId, currentWorkout, currentUser]);
+  }, [currentWorkout, currentUser]);
 
   return (
     <div className={styles.page}>

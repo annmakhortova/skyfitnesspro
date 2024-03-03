@@ -7,6 +7,8 @@ import phone from "./phone.png";
 import { WorkoutCardImg } from "./WorkoutCardImg/WorkoutCardImg";
 import { getDatabase, ref, set } from "firebase/database";
 import { useSelector } from "react-redux";
+import { Dropdown } from "../../components/dropdown/Dropdown";
+import { Header } from "../../components/header/Header";
 
 export const Workout = () => {
   const currentId = localStorage.getItem("userId");
@@ -22,7 +24,7 @@ export const Workout = () => {
   //Проверяю наличие текущего курса среди курсов пользователя
   useEffect(() => {
     if (currentUser) {
-      const userCourses = Object.keys(currentUser[0]);
+      const userCourses = Object.keys(currentUser.courses);
       // console.log(userCourses);
       if (userCourses.includes(courseName)) {
         setCoursePurchased(true);
@@ -53,9 +55,11 @@ export const Workout = () => {
     <>
       {course && (
         <div className={style.container}>
-          <header>
+          <Header/>
+          {/* <header className={style.header}>
             <Logo className={style.logo} />
-          </header>
+            <Dropdown className={style.header_select} title={currentUser?.email} />
+          </header> */}
           <main>
             <section className={style.workoutCard}>
               <h1 className={style.workoutCard_title}>{course.nameRU}</h1>
@@ -107,7 +111,7 @@ export const Workout = () => {
               </p>
               {coursePurchased ? (
                 <Link to={`/profile`}>
-                  <Button children={"Перейти к курсу"} />
+                  <Button children={"Перейти к курсу"} className={"button_blue"} />
                 </Link>
               ) : (
                 <Button
@@ -115,6 +119,7 @@ export const Workout = () => {
                   onClick={() => {
                     signUpForTraining(courseName);
                   }}
+                  className={"button_blue"}
                 />
               )}
               <img src={phone} alt="" className={style.feedback_img} />
