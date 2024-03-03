@@ -80,11 +80,11 @@ export const Profile = () => {
           <div className={style.course_box}>
 
             {userCourses ? (
-              userCourses?.map((course) => {
+              userCourses.map((course) => {
                 return (
                   <div className={style.course_item} key={course}>
                     <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
-                    <button className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</button>
+                    <Link className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</Link>
                   </div>
                 );
               })
