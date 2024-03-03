@@ -16,14 +16,17 @@
   line-height: 50px;
   letter-spacing: -0.1px;
   background: none;
+  cursor: pointer;
+
 }
 
 .dropdown {
+  z-index: 1;
   position: absolute;
-  cursor: pointer;
+
   display: flex;
   flex-direction: column;
-  background-color: none;
+  background-color: #FFFFFF;
   width: 150px;
   box-shadow: -10px 10px 15.999px 0px rgba(0, 0, 0, 0.1),
     10px -10px 16px 0px rgba(0, 0, 0, 0.1);
@@ -31,7 +34,7 @@
 }
 
 .submenu_item {
-  width: inherit;
+  cursor: pointer;
   color: rgb(0, 0, 0);
   font-size: 24px;
   line-height: 32px;
@@ -41,14 +44,13 @@
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
-}
-
-.submenu_item:hover {
-  color: gainsboro;
+  &:hover{
+    font-weight: 600;
+  }
 }
 .dropdown_svg {
   width: 50px;
   height: 50px;
-  flex-shrink: 0;
-  fill: #000;
+  border-radius: 25px;
+  background-color: #d9d9d9;
 }

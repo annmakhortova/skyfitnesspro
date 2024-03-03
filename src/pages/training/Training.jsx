@@ -5,6 +5,7 @@ import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
 import { useSelector } from "react-redux";
 import ReactPlayer from "react-player/youtube";
+import { Header } from "../../components/header/Header";
 
 export const Training = () => {
   const { id } = useParams(); // Получение значения параметра `id` из URL
@@ -21,9 +22,7 @@ export const Training = () => {
 
   return (
     <div className={style.container}>
-      <header>
-        <Logo className={style.logo} />
-      </header>
+      <Header/>
       <main>
         <h1 className={style.nameTraining}>Йога</h1>
         <h2 className={style.dateLink}>{workoutName}</h2>

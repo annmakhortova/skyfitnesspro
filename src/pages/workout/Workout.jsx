@@ -111,7 +111,7 @@ export const Workout = () => {
               </p>
               {coursePurchased ? (
                 <Link to={`/profile`}>
-                  <Button children={"Перейти к курсу"} />
+                  <Button children={"Перейти к курсу"} className={"button_blue"} />
                 </Link>
               ) : (
                 <Button
@@ -119,6 +119,7 @@ export const Workout = () => {
                   onClick={() => {
                     signUpForTraining(courseName);
                   }}
+                  className={"button_blue"}
                 />
               )}
               <img src={phone} alt="" className={style.feedback_img} />
