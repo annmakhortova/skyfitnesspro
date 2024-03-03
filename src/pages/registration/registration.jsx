@@ -51,7 +51,7 @@ export const LoginSignup = () => {
     const db = getDatabase();
     set(ref(db, 'users/' + userId), {
       email: email,
-      courses: [0], // Example data
+      courses: [], // Example data //Убрал ненужный ноль в массиве.
     });
   }
 

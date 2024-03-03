@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import style from './Dropdown.module.scss';
 import { Link } from 'react-router-dom';
 
-export function Dropdown() {
+export function Dropdown({title}) {
   // const container = useRef();
   const [dropdownState, setDropdownState] = useState(false);
 
@@ -16,8 +16,9 @@ export function Dropdown() {
 
   return (
     <div className={style.container}>
-      <button type='button' className={style.heder_item} onClick={handleDropdownClick}>
-        Логин
+      <button type='button' className={style.header_item} onClick={handleDropdownClick}>
+        {title}
+        <img src="arrow_down.png" alt="arrow_down" />
       </button>
       {dropdownState && (
         <div className={style.dropdown}>

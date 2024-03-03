@@ -7,15 +7,15 @@ import Body from './png/body.png';
 import { Dropdown } from '../../components/dropdown/Dropdown';
 import style from './Profilepage.module.scss';
 import { getAuth } from 'firebase/auth';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const Profile = () => {
-  // const currentUserStore = useSelector((state) => state.userApp.currentUser);
+  const currentUserStore = useSelector((state) => state.userApp.fullCurrentUser);
+  console.log(currentUserStore);
+
   const auth = getAuth();
   const currentUser = auth.currentUser;
-
   console.log(currentUser);
-  // console.log(currentUser.email, currentUser.uid);
 
   //  to check if currentUser exists before accessing its properties
   if (currentUser) {
@@ -26,11 +26,11 @@ export const Profile = () => {
 
   const handleChangeLogin = () => {
     console.log('handleChangeLogin');
-  }
+  };
 
   const handleChangePassword = () => {
     console.log('handleChangePassword');
-  }
+  };
 
   return (
     <>
@@ -42,7 +42,7 @@ export const Profile = () => {
               <svg className={style.header_svg}>
                 <use xlinkHref='img/icon/sprite.svg#icon-tect-logo'></use>
               </svg>
-              <Dropdown className={style.header_select} name='/' />
+              <Dropdown className={style.header_select} title={currentUser.email} />
             </div>
           </div>
         </header>
@@ -69,18 +69,22 @@ export const Profile = () => {
         <div className={style.course}>
           <h1 className={style.h1}>Мои курсы</h1>
           <div className={style.course_box}>
+
             <div className={style.course_item}>
               <img className={style.course_item_img} src={Yoga} alt='Yoga' />
               <button className={style.button_link}>Перейти</button>
             </div>
-            <div className={style.course_item}>
+
+            {/* <div className={style.course_item}>
               <img className={style.course_item_img} src={Stratch} alt='Stratch' />
               <button className={style.button_link}>Перейти</button>
             </div>
+
             <div className={style.course_item}>
               <img className={style.course_item_img} src={Body} alt='Body' />
               <button className={style.button_link}>Перейти</button>
-            </div>
+            </div> */}
+
           </div>
         </div>
       </div>

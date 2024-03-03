@@ -9,21 +9,21 @@ import Step from './png/step.png';
 import Body from './png/body.png';
 import style from './Mainpage.module.scss';
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export function Main() {
   // const curUser = useSelector((state) => state.userApp.currentUser);
   // console.log(curUser);
 
-  const userId = localStorage.getItem('userId');
-  console.log(userId);
+  const currentId = localStorage.getItem('userId');
+  console.log(currentId);
 
   return (
     <div className={style.container}>
       <header>
         <div className={style.top}>
           <LogoWhiteSVG className={style.logo_white} />
-          {userId ? (
+          {currentId ? (
             <Link className={style.login_button} to={`/profile`}>Личный кабинет</Link>
           ) : (
             <Link className={style.login_button} to={`/login`}>
