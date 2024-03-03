@@ -1,31 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { ReactComponent as LogoWhiteSVG } from './svg/logo_white.svg';
 
 import SaleSticker from './png/SaleSticker.png';
-import Yoga from './png/yoga.png';
-import Stratch from './png/stratch.png';
-import Dance from './png/dance.png';
-import Step from './png/step.png';
-import Body from './png/body.png';
+import Yoga from './png/Yoga.png';
+import Stratch from './png/Stretching.png';
+import Dance from './png/DanceFitness.png';
+import Step from './png/StepAirobic.png';
+import Body from './png/BodyFlex.png';
 import style from './Mainpage.module.scss';
 
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../store/userSlice';
+// import { useSelector } from 'react-redux';
 
 export function Main() {
-  const dispatch = useDispatch();
+  // const curUser = useSelector((state) => state.userApp.currentUser);
+  // console.log(curUser);
+
+  const currentId = localStorage.getItem('userId');
+  console.log(currentId);
+
   return (
     <div className={style.container}>
       <header>
         <div className={style.top}>
           <LogoWhiteSVG className={style.logo_white} />
-          {/* <button className={style.login_button}>Войти</button> */}
-          <Link to={`/login`} className={style.login_button}>
-            Войти
-          </Link>
+          {currentId ? (
+            <Link className={style.login_button} to={`/profile`}>Личный кабинет</Link>
+          ) : (
+            <Link className={style.login_button} to={`/login`}>
+              Войти
+            </Link>
+          )}
         </div>
-
         <div className={style.title}>
           <div>
             <div className={style.subtitle}>Онлайн-тренировки для занятий дома</div>
@@ -58,14 +63,16 @@ export function Main() {
           Наверх ↑
         </a>
         {/* тест редакса. Работает) */}
-        <button
+        {/* <button
           onClick={() => {
             dispatch(setUser('Test'));
           }}
         >
           setUser
-        </button>
+        </button> */}
       </footer>
+
+      <Outlet />
     </div>
   );
 }

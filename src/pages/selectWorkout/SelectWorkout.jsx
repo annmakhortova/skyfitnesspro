@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import style from "./SelectWorkout.module.scss";
 import { getAllCourses, getAllWorkouts } from "../api";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentWorkout } from "../../store/coursesSlice";
 
 export const SelectWorkout = () => {
-  const params = "StepAirobic";
+  const params = "Yoga";
   const [course, setCourse] = useState();
   const [allWorkouts, setAllWorkouts] = useState();
   const [currentWorkoutsArr, setCurrentWorkoutsArr] = useState([]);
+
+
+
+  //Надо будет поменять запросы на получение из стейта
+
+  const dispatch = useDispatch();
+  
 
   useEffect(() => {
     getAllCourses()
@@ -17,24 +26,27 @@ export const SelectWorkout = () => {
         );
       })
       .catch(() => {})
-      .finally(() => {
-      });
+      .finally(() => {});
   }, [params.id]);
 
   useEffect(() => {
     getAllWorkouts().then((workoutss) => {
-      console.log('Workouts', workoutss);
+      console.log("Workouts", workoutss);
       setAllWorkouts(Object.values(workoutss));
     });
   }, []);
 
   useEffect(() => {
     if (course) {
-      setCurrentWorkoutsArr(allWorkouts.filter((el) =>
-      course.workouts.includes(el._id))
+      setCurrentWorkoutsArr(
+        allWorkouts.filter((el) => course.workouts.includes(el._id))
       );
     }
   }, [allWorkouts, course]);
+
+  const handleClick = (el) => {
+    dispatch(setCurrentWorkout(el));
+  };
 
   return (
     <div className={style.selectWorkout}>
@@ -43,7 +55,13 @@ export const SelectWorkout = () => {
         <div className={style.workouts}>
           {currentWorkoutsArr.map((el) => {
             return (
-              <div className={style.workout} key={el.name}>
+              <div
+                className={style.workout}
+                key={el.name}
+                onClick={() => {
+                  handleClick(el);
+                }}
+              >
                 <p className={style.workout_text}>{el.name}</p>
               </div>
             );

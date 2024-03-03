@@ -1,57 +1,84 @@
-
-import React, { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
-import style from './Workout.module.scss';
-import { Logo } from '../../UI/Logo/Logo';
-import { Button } from '../../UI/Button/Button';
-import phone from './phone.png';
-import { WorkoutCardImg } from './WorkoutCardImg/WorkoutCardImg';
-
-import { getAllCourses, getAllWorkouts } from '../api';
-// import { workouts } from '../selectWorkout/WorkoutsMocData';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import style from "./Workout.module.scss";
+import { Logo } from "../../UI/Logo/Logo";
+import { Button } from "../../UI/Button/Button";
+import phone from "./phone.png";
+import { WorkoutCardImg } from "./WorkoutCardImg/WorkoutCardImg";
+import { getDatabase, ref, set } from "firebase/database";
+import { useSelector } from "react-redux";
+import { Dropdown } from "../../components/dropdown/Dropdown";
+import { Header } from "../../components/header/Header";
 
 export const Workout = () => {
-  // const userName = useSelector((state) => state.userApp.userName);
-  // console.log(userName);
-
+  const currentId = localStorage.getItem("userId");
   const params = useParams();
   const [course, setCourse] = useState();
-  useEffect(() => {
-    getAllCourses()
-      .then((courses) => {
-        console.log('Курсы:', courses);
-        setCourse(Object.values(courses).find((course) => course.nameEN === params.id));
-      })
-      .catch(() => {})
-      .finally(() => {});
-  }, [params.id]);
+  const [courseTemplate, setСourseTemplate] = useState(); //Шаблон текущего курса
+  const [coursePurchased, setCoursePurchased] = useState(false); //Флаг куплен ли текущий курс
+  const courses = useSelector((state) => state.coursesApp.allCourses); //Все курсы
+  const courseTemplates = useSelector((state) => state.coursesApp.usersCourses); //Шаблоны всех курсов
+  const currentUser = useSelector((state) => state.userApp.fullCurrentUser);  //Текущий пользователь с базы
+  const courseName = params.id;
 
-  getAllWorkouts().then((workouts) => console.log('Упражнения:', workouts));
+  //Проверяю наличие текущего курса среди курсов пользователя
+  useEffect(() => {
+    if (currentUser) {
+      const userCourses = Object.keys(currentUser.courses);
+      // console.log(userCourses);
+      if (userCourses.includes(courseName)) {
+        setCoursePurchased(true);
+      }
+    }
+  }, [currentUser, courseName]);
+
+  useEffect(() => {
+    if (courses) {
+      setCourse(courses?.find((course) => course.nameEN === params.id)); //Находит текущий курс в базе курсов
+      setСourseTemplate(
+        courseTemplates?.find((template) => template.name === params.id) //Находит заготовку к текущему курсу в базе курсов
+      );
+    }
+  }, [courses, params.id, courseTemplates]);
+
+  const signUpForTraining = (courseName) => {
+    //Отправляет шаблон купленного курса в пользователя
+    setCoursePurchased(true);
+    const db = getDatabase();
+    set(ref(db, `users/${currentId}/courses/` + courseName), {
+      name: courseTemplate.name,
+      workouts: courseTemplate.workouts,
+    });
+  };
 
   return (
-
     <>
       {course && (
         <div className={style.container}>
-          <header>
+          <Header/>
+          {/* <header className={style.header}>
             <Logo className={style.logo} />
-          </header>
+            <Dropdown className={style.header_select} title={currentUser?.email} />
+          </header> */}
           <main>
             <section className={style.workoutCard}>
               <h1 className={style.workoutCard_title}>{course.nameRU}</h1>
               <WorkoutCardImg worcout={course.nameEN} />
-              {/* <img src={Yoga} alt="" className={style.workoutCard_img}></img> */}
             </section>
             <section className={style.fitting}>
               <h2 className={style.section_title}>Подойдет для вас, если:</h2>
               <div className={style.fitting_textBox}>
                 {course.fitting.map((el) => {
                   return (
-                    <div className={style.criterion}>
+                    <div
+                      className={style.criterion}
+                      key={course.fitting.indexOf(el) + 1}
+                    >
                       <div className={style.criterion_counter}>
-                        <p className={style.criterion_counterText}> {course.fitting.indexOf(el) + 1}</p>
+                        <p className={style.criterion_counterText}>
+                          {" "}
+                          {course.fitting.indexOf(el) + 1}
+                        </p>
                       </div>
                       <div className={style.criterion_text}>
                         <p className={style.basicText}>{el}</p>
@@ -65,23 +92,41 @@ export const Workout = () => {
               <h2 className={style.section_title}>Направления:</h2>
               <div className={style.directions_textBox}>
                 {course.directions.map((el) => {
-                  return <p className={style.basicText}>&nbsp; &nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;{el}</p>;
+                  return (
+                    <p className={style.basicText} key={el}>
+                      &nbsp; &nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;{el}
+                    </p>
+                  );
                 })}
               </div>
             </section>
-            <p className={style.workoutDescription}>&nbsp;&nbsp;&nbsp;{course.description}</p>
+            <p className={style.workoutDescription}>
+              &nbsp;&nbsp;&nbsp;{course.description}
+            </p>
             <section className={style.feedback}>
               <p className={style.feedback_text}>
-                Оставьте заявку на пробное занятие, мы свяжемся <br /> с вами, поможем с выбором направления и тренера,
-                с которым тренировки принесут здоровье и радость!
+                Оставьте заявку на пробное занятие, мы свяжемся <br /> с вами,
+                поможем с выбором направления и тренера, с которым тренировки
+                принесут здоровье и радость!
               </p>
-              <Button children={'Записаться на тренировку'} />
-              <img src={phone} alt='' className={style.feedback_img} />
+              {coursePurchased ? (
+                <Link to={`/profile`}>
+                  <Button children={"Перейти к курсу"} className={"button_blue"} />
+                </Link>
+              ) : (
+                <Button
+                  children={"Записаться на тренировку"}
+                  onClick={() => {
+                    signUpForTraining(courseName);
+                  }}
+                  className={"button_blue"}
+                />
+              )}
+              <img src={phone} alt="" className={style.feedback_img} />
             </section>
           </main>
         </div>
       )}
     </>
-
   );
 };
