@@ -30,7 +30,7 @@ export async function getAllWorkouts() {
 
 //Запрос на текущего пользователя
 export async function getCurrentUser(currentId) {
-  console.log(currentId)
+  // console.log(currentId)
   const response = await fetch(BASE_URL + `/users/${currentId}.json`, {
     method: "GET",
   });
@@ -38,7 +38,7 @@ export async function getCurrentUser(currentId) {
     throw new Error("Ошибка сервера");
   }
   const newData = await response.json();
-console.log(1, newData);
+// console.log(1, newData);
   return newData;
 }
 
