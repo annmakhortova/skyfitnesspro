@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./Dropdown.module.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAuth,  ActionCodeOperation } from 'firebase/auth';
+//import { getAuth,  ActionCodeOperation } from 'firebase/auth';
 
 
 export function Dropdown() {
@@ -10,11 +10,11 @@ export function Dropdown() {
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const handleDropdownClick = () => setDropdownState(!dropdownState);
 
-  const auth = getAuth();
-  ActionCodeOperation (auth).then(() => {
-  }).catch((error) => {
+ // const auth = getAuth();
+ // ActionCodeOperation (auth).then(() => {
+ // }).catch((error) => {
   
-});
+//});
 
   return (
     <div className={style.dropdown_box}>
@@ -35,8 +35,8 @@ export function Dropdown() {
             <Link className={style.submenu_item} to="/profile">
               Профиль
             </Link>
-            <Link className={style.submenu_item} to="/login"
-             onClick={auth}>Выйти
+            <Link className={style.submenu_item} to="/login">
+              Выйти
             </Link>
           </div>
         )}
