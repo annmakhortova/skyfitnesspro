@@ -21,7 +21,7 @@ export const Profile = () => {
   const currentUser = auth.currentUser;
   // console.log(fullCurrentUser);
   useEffect(() => {
-    if (fullCurrentUser ) {
+    if (fullCurrentUser) {
       const userCourses = Object.keys(fullCurrentUser?.courses);
       // console.log(userCourses);
     } else if (fullCurrentUser === null) {
@@ -31,15 +31,6 @@ export const Profile = () => {
       });
     }
   }, [fullCurrentUser]);
-  // console.log(fullCurrentUser);
-  // console.log(currentUser.email, currentUser.uid);
-
-  //  to check if currentUser exists before accessing its properties
-  // if (currentUser) {
-  //   console.log(currentUser.email, currentUser.uid);
-  // } else {
-  //   console.log("No user is currently signed in.");
-  // }
 
   const handleChangeLogin = () => {
     console.log("handleChangeLogin");
@@ -53,20 +44,7 @@ export const Profile = () => {
     <>
       <div className={style.container}>
         <header>
-          {/* <div className={style.header}> */}
-            <Header/>
-            {/* <Logo className={style.logo} />
-            {/* <div className={style.header_profile}> */}
-              {/* <svg className={style.header_svg}>
-                <use xlinkHref="img/icon/sprite.svg#icon-tect-logo"></use>
-              </svg> */}
-
-              {/* <Dropdown
-                className={style.header_select}
-                title={fullCurrentUser?.email}
-              /> */} 
-            {/* </div> */}
-          {/* </div> */}
+          <Header />
         </header>
         <div className={style.profile}>
           <div className={style.heading}>
@@ -86,8 +64,6 @@ export const Profile = () => {
             )}
           </div>
           <div className={style.profile_button}>
-            {/* <Button>Редактировать логин</Button>
-            <Button>Редактировать пароль</Button> */}
             <Button
               onClick={handleChangeLogin}
               children={"Редактировать логин"}
