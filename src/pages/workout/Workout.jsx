@@ -22,7 +22,7 @@ export const Workout = () => {
   //Проверяю наличие текущего курса среди курсов пользователя
   useEffect(() => {
     if (currentUser) {
-      const userCourses = Object.keys(currentUser[0]);
+      const userCourses = Object.keys(currentUser.courses);
       // console.log(userCourses);
       if (userCourses.includes(courseName)) {
         setCoursePurchased(true);
