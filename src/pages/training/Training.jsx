@@ -8,20 +8,23 @@ import ReactPlayer from "react-player/youtube";
 import { Header } from "../../components/header/Header";
 
 export const Training = () => {
-  const { id } = useParams(); // Получение значения параметра `id` из URL
+  const params = useParams(); // Получение значения параметров `id` `courseId` из URL
   const workouts = useSelector((state) => state.coursesApp.allWorkouts);
-  const workout = workouts?.filter((data) => data._id.includes(id));
+  const workout = workouts?.filter((data) => data._id.includes(params.id));
   const workoutName = workout ? workout[0].name : "название не получено";
   const workoutVideo = workout ? workout[0].video : "видео не найдено";
   const workoutExercises = workout
     ? workout[0].exercises
     : ["упражнения не найдены"];
+  const courses = useSelector((state) => state.coursesApp.allCourses);
+  const course = courses?.filter((data) => data._id.includes(params.courseId));
+  const courseName = course ? course[0].nameRU : "название не получено";
 
   return (
     <div className={style.container}>
-      <Header/>
+      <Header />
       <main>
-        <h1 className={style.nameTraining}>Йога</h1>
+        <h1 className={style.nameTraining}>{courseName}</h1>
         <h2 className={style.dateLink}>{workoutName}</h2>
         <ReactPlayer url={workoutVideo} width="100%" height="720px" />
         <section className={style.resultSection}>
