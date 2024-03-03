@@ -19,10 +19,9 @@ export const Training = () => {
   workoutExercises?.forEach((element) => {
     console.log(element);
   });
-
   return (
     <div className={style.container}>
-      <Header/>
+      <Header />
       <main>
         <h1 className={style.nameTraining}>Йога</h1>
         <h2 className={style.dateLink}>{workoutName}</h2>

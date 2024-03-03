@@ -2,19 +2,12 @@ import React, { useEffect } from "react";
 import { Button } from "../../UI/Button/Button";
 import styles from "./Progrss.module.scss";
 import { useSelector } from "react-redux";
-import { getCurrentUsers } from "../api";
 
 export const Progress = () => {
   const currentWorkout = useSelector(
     (state) => state.coursesApp.currentWorkout
   );
   const currentUser = useSelector((state) => state.coursesApp.currentUser);
-
-  useEffect(() => {
-    getCurrentUsers().then((response) => {
-      console.log(Object.values(response));
-    });
-  });
 
   useEffect(() => {
     console.log(currentWorkout);

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import style from "./Workout.module.scss";
-import { Logo } from "../../UI/Logo/Logo";
 import { Button } from "../../UI/Button/Button";
 import phone from "./phone.png";
 import { WorkoutCardImg } from "./WorkoutCardImg/WorkoutCardImg";
 import { getDatabase, ref, set } from "firebase/database";
 import { useSelector } from "react-redux";
-import { Dropdown } from "../../components/dropdown/Dropdown";
 import { Header } from "../../components/header/Header";
 
 export const Workout = () => {
@@ -18,16 +16,18 @@ export const Workout = () => {
   const [coursePurchased, setCoursePurchased] = useState(false); //Флаг куплен ли текущий курс
   const courses = useSelector((state) => state.coursesApp.allCourses); //Все курсы
   const courseTemplates = useSelector((state) => state.coursesApp.usersCourses); //Шаблоны всех курсов
-  const currentUser = useSelector((state) => state.userApp.fullCurrentUser);  //Текущий пользователь с базы
+  const currentUser = useSelector((state) => state.userApp.fullCurrentUser); //Текущий пользователь с базы
   const courseName = params.id;
 
   //Проверяю наличие текущего курса среди курсов пользователя
   useEffect(() => {
     if (currentUser) {
-      const userCourses = Object.keys(currentUser.courses);
-      // console.log(userCourses);
-      if (userCourses.includes(courseName)) {
-        setCoursePurchased(true);
+      if (currentUser.courses) {
+        const userCourses = Object.keys(currentUser.courses);
+        // console.log(userCourses);
+        if (userCourses.includes(courseName)) {
+          setCoursePurchased(true);
+        }
       }
     }
   }, [currentUser, courseName]);
@@ -55,7 +55,7 @@ export const Workout = () => {
     <>
       {course && (
         <div className={style.container}>
-          <Header/>
+          <Header />
           {/* <header className={style.header}>
             <Logo className={style.logo} />
             <Dropdown className={style.header_select} title={currentUser?.email} />
@@ -111,7 +111,10 @@ export const Workout = () => {
               </p>
               {coursePurchased ? (
                 <Link to={`/profile`}>
-                  <Button children={"Перейти к курсу"} className={"button_blue"} />
+                  <Button
+                    children={"Перейти к курсу"}
+                    className={"button_blue"}
+                  />
                 </Link>
               ) : (
                 <Button
