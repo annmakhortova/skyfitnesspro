@@ -15,7 +15,7 @@ export const Training = () => {
   const workoutExercises = workout
     ? workout[0].exercises
     : ["упражнения не найдены"];
-  workoutExercises.forEach((element) => {
+  workoutExercises?.forEach((element) => {
     console.log(element);
   });
 
@@ -32,7 +32,7 @@ export const Training = () => {
           <div className={style.exerciseSection}>
             <span className={style.exerciseTitle}>Упражнения</span>
             <ul className={style.exerciseList}>
-              {workoutExercises.map((exercise) => (
+              {workoutExercises?.map((exercise) => (
                 <li>{exercise.name}</li>
               ))}
             </ul>
