@@ -24,7 +24,6 @@ export const Profile = () => {
 
   useEffect(() => {
     if (fullCurrentUser) {
-
       setUserCourses(Object.keys(fullCurrentUser?.courses));
 
       // console.log(userCourses);
@@ -50,9 +49,7 @@ export const Profile = () => {
     <>
       <div className={style.container}>
         <header>
-
           <Header />
-
         </header>
         <div className={style.profile}>
           <div className={style.heading}>
@@ -68,31 +65,25 @@ export const Profile = () => {
             )}
           </div>
           <div className={style.profile_button}>
-
-            <Button
-              onClick={handleChangeLogin}
-              children={"Редактировать логин"}
-              className={"button_blue"}
-            />
-            <Button
-              onClick={handleChangePassword}
-              children={"Редактировать пароль"}
-              className={"button_blue"}
-            />
-
+            <Button onClick={handleChangeLogin} children={'Редактировать логин'} className={'button_blue'} />
+            <Button onClick={handleChangePassword} children={'Редактировать пароль'} className={'button_blue'} />
           </div>
         </div>
         <div className={style.course}>
           <h1 className={style.h1}>Мои курсы</h1>
           <div className={style.course_box}>
-            {userCourses?.map((course) => {
-              return (
-                <div className={style.course_item} key={course}>
-                  <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
-                  <button className={style.button_link}>Перейти</button>
-                </div>
-              );
-            })}
+            {userCourses ? (
+              userCourses?.map((course) => {
+                return (
+                  <div className={style.course_item} key={course}>
+                    <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
+                    <button className={style.button_link}>Перейти</button>
+                  </div>
+                );
+              })
+            ) : (
+              <p>У вас пока нет купленных курсов</p>
+            )}
           </div>
         </div>
       </div>
