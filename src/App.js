@@ -32,7 +32,6 @@ function App() {
   //Получаем все тренировки
   useEffect(() => {
     getAllWorkouts().then((workouts) => {
-
       // console.log(Object.values(workouts));
 
       dispatch(setAllWorkouts(Object.values(workouts)));
@@ -50,11 +49,9 @@ function App() {
   useEffect(() => {
     if (currentId) {
       getCurrentUser(currentId).then((currentUser) => {
-
         // dispatch(setFullCurrentUser(Object.values(currentUser)));
 
         dispatch(setFullCurrentUser(currentUser));
-
       });
     }
   });

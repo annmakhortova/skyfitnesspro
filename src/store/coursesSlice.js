@@ -34,6 +34,7 @@ const coursesSlice = createSlice({
       state.allCourses = action.payload;
     },
     setAllWorkouts(state, action) {
+      // console.log(action.payload)
       state.allWorkouts = action.payload;
     },
 
