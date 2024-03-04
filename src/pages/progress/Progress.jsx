@@ -1,5 +1,4 @@
-
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../UI/Button/Button';
 import styles from './Progress.module.scss';
 import { useSelector } from 'react-redux';
@@ -14,18 +13,18 @@ export const Progress = () => {
   const currentWorkout = useSelector((state) => state.coursesApp.currentWorkout);
   const currentUser = useSelector((state) => state.coursesApp.currentUser);
 
+  const [inputValues, setInputValues] = useState({});
 
-  // useEffect(() => {
-  //   getCurrentUsers().then((response) => {
-  //     console.log(Object.values(response));
-  //   });
-  // });
-
+  const handleInputChange = (e, elKey) => {
+    const newValue = { ...inputValues, [elKey]: e.target.value };
+    setInputValues(newValue);
+  };
 
   useEffect(() => {
     console.log(currentWorkout);
     console.log(currentUser);
-  }, [currentWorkout, currentUser]);
+    console.log(inputValues);
+  }, [currentWorkout, currentUser, inputValues]);
 
   const hidePopup = (e, type) => {
     if (hidePopupFlag(e, type)) navigate('/training/3yvozj')
@@ -49,6 +48,7 @@ export const Progress = () => {
                   type='number'
                   name='quantity'
                   placeholder='Введите значение'
+                  onChange={(e) => handleInputChange(e, el.name)}
                 ></input>
               </div>
             </div>
