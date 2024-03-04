@@ -1,23 +1,14 @@
-import { useEffect } from "react";
-import "./App.css";
-import { AppRoutes } from "./routes";
-import {
-  getAllCourses,
-  getAllWorkouts,
-  getCurrentUser,
-  getUsersCourses,
-} from "./pages/api";
-import { useDispatch } from "react-redux";
-import {
-  setAllCourses,
-  setAllWorkouts,
-  setUsersCourses,
-} from "./store/coursesSlice";
-import { setFullCurrentUser } from "./store/userSlice";
+import { useEffect } from 'react';
+import './App.css';
+import { AppRoutes } from './routes';
+import { getAllCourses, getAllWorkouts, getCurrentUser, getUsersCourses } from './pages/api';
+import { useDispatch } from 'react-redux';
+import { setAllCourses, setAllWorkouts, setUsersCourses } from './store/coursesSlice';
+import { setFullCurrentUser } from './store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
-  const currentId = localStorage.getItem("userId");
+  const currentId = localStorage.getItem('userId');
 
   ///Получаем все курсы
   useEffect(() => {
