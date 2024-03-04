@@ -23,7 +23,7 @@ export const AppRoutes = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/newLogin" element={<NewLogin />} />
       <Route path="/newPassword" element={<NewPassword />} />
-      <Route path="/training/:id/:id" element={<Training />} />
+      <Route path=":courseId/training/:id" element={<Training />} />
       <Route path="/selectworkout/:id" element={<SelectWorkout />} />
       <Route path="/Progress" element={<Progress />} />
       <Route path="/ProgressCheck" element={<ProgressCheck />} />
