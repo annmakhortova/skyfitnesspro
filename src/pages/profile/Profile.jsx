@@ -6,12 +6,15 @@ import { getCurrentUser } from "../api";
 import { setFullCurrentUser } from "../../store/userSlice";
 import { Header } from "../../components/header/Header";
 import { Link } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 export const Profile = () => {
   const dispatch = useDispatch();
   const currentId = localStorage.getItem("userId");
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const [userCourses, setUserCourses] = useState([]);
+  const auth = getAuth();
+  console.log(auth.currentUser)
 
   useEffect(() => {
     if (fullCurrentUser) {
@@ -80,11 +83,11 @@ export const Profile = () => {
           <div className={style.course_box}>
 
             {userCourses ? (
-              userCourses?.map((course) => {
+              userCourses.map((course) => {
                 return (
                   <div className={style.course_item} key={course}>
                     <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
-                    <button className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</button>
+                    <Link className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</Link>
                   </div>
                 );
               })
