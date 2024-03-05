@@ -2,16 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../../UI/Button/Button';
 import styles from './Progress.module.scss';
 import { useSelector } from 'react-redux';
-import { getCurrentUsers } from '../api';
+// import { getCurrentUsers } from '../api';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
-
 
 export const Progress = () => {
   const navigate = useNavigate();
 
+  const workouts = useSelector((state) => state.coursesApp.allWorkouts);
   const currentWorkout = useSelector((state) => state.coursesApp.currentWorkout);
-  const currentUser = useSelector((state) => state.coursesApp.currentUser);
+  const workout = workouts?.filter((data) => data._id.includes(currentWorkout));
+
+  // console.log(workouts);
+  // console.log(currentWorkout);
+  // console.log(workout);
+  // console.log(workout[0].exercises);
+  // console.log(currentWorkout.exercises);
+
+  // const currentUser = useSelector((state) => state.coursesApp.currentUser);
 
   const [inputValues, setInputValues] = useState({});
 
@@ -20,15 +28,22 @@ export const Progress = () => {
     setInputValues(newValue);
   };
 
-  useEffect(() => {
-    console.log(currentWorkout);
-    console.log(currentUser);
-    console.log(inputValues);
-  }, [currentWorkout, currentUser, inputValues]);
+  // useEffect(() => {
+  //   console.log(currentWorkout);
+  //   // console.log(currentUser);
+  //   // console.log(inputValues);
+  // }, [currentWorkout, inputValues]);
 
   const hidePopup = (e, type) => {
-    if (hidePopupFlag(e, type)) navigate('/training/3yvozj')
-  }
+    if (hidePopupFlag(e, type)) navigate(-1);
+  };
+
+  const onFocusFirstInput = () => {
+    const firstInputEl = document.getElementsByTagName('input');
+    firstInputEl[0].focus();
+  };
+
+  useEffect(() => onFocusFirstInput(), []);
 
   return (
     <div
@@ -38,10 +53,12 @@ export const Progress = () => {
     >
       <div className={styles.progressForm} id='#popup'>
         <div className={styles.headerForm}>Мой прогресс</div>
-        {currentWorkout.exercises.map((el, index) => {
+        {workout[0].exercises.map((el, index) => {
           return (
             <div key={index}>
-              <div className={styles.textForm}>Сколько раз вы сделали <br/>"{el.name}"?</div>
+              <div className={styles.textForm}>
+                Сколько раз вы сделали: <br />"{el.name}"?
+              </div>
               <div className={styles.inputBox}>
                 <input
                   className={styles.inputForm}
@@ -55,7 +72,6 @@ export const Progress = () => {
           );
         })}
         <div className={styles.buttonBox}>
-
           <Button className={'button_blue'} children={'Отправить'} />
         </div>
       </div>
