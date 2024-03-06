@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import style from './Training.module.scss';
 import { Button } from '../../UI/Button/Button';
@@ -6,8 +6,11 @@ import { useSelector } from 'react-redux';
 import ReactPlayer from 'react-player/youtube';
 import { Header } from '../../components/header/Header';
 
+import { getDatabase, ref, child, push, update } from "firebase/database";
+
 export const Training = () => {
   const navigate = useNavigate();
+  const currentId = localStorage.getItem("userId");
   const params = useParams(); // Получение значения параметров `id` `courseId` из URL
   // console.log(params);
   const workouts = useSelector((state) => state.coursesApp.allWorkouts);
@@ -20,9 +23,13 @@ export const Training = () => {
   // console.log(!!workoutExercises);
 
   const courses = useSelector((state) => state.coursesApp.allCourses);
-  // console.log(courses);
+  const currentWorkoutt = useSelector((state) => state.coursesApp.currentWorkout)
+  // console.log(currentWorkoutt)
+  const [currentWorkout, setCurrentWorkout] = useState(currentWorkoutt)
+  console.log(currentWorkout);
   const course = courses?.filter((data) => data.nameEN.includes(params.courseId));
   const courseName = course ? course[0].nameRU : 'название не получено';
+  const courseNameEN = course[0]?.nameEN;
   // console.log(course);
 
   const navigateToProgress = () => {
@@ -30,9 +37,20 @@ export const Training = () => {
     // console.log(workoutExercises);
   };
 
-  const completeWorkout = () => {
-    console.log('completeWorkout');
-  };
+  const completeWorkout = (currentWorkout) => {
+    const a = {...currentWorkout}
+    a.done = true
+    setCurrentWorkout(a)
+    submitСhanges(a)
+  }
+
+
+function submitСhanges(a) {
+  const db = getDatabase();
+  const updates = {};
+  updates[`users/${currentId}/courses/${courseNameEN}/workouts/${a._id}`] = a;
+  return update(ref(db), updates);
+}
 
   return (
     <div className={style.container}>
@@ -40,7 +58,7 @@ export const Training = () => {
       <main>
         <h1 className={style.nameTraining}>{courseName}</h1>
         <h2 className={style.dateLink}>{workoutName}</h2>
-        <ReactPlayer url={workoutVideo} width='100%' height='720px' />
+        {/* <ReactPlayer url={workoutVideo} width='100%' height='720px' /> */}
 
         <section className={style.resultSection}>
           {workoutExercises ? (
@@ -90,7 +108,7 @@ export const Training = () => {
               </div>
             </>
           ) : (
-            <Button onClick={completeWorkout} className={'button_blue'} children={'Закончить тренировку'} />
+            <Button onClick={()=>{completeWorkout(currentWorkout)}} className={'button_blue'} children={'Закончить тренировку'} />
           )}
         </section>
       </main>

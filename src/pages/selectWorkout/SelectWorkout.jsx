@@ -23,7 +23,7 @@ export const SelectWorkout = () => {
   const dispatch = useDispatch();
 
   const handleClick = (el) => {
-    dispatch(setCurrentWorkout(el._id));
+    dispatch(setCurrentWorkout(el));
   };
 
   return (
