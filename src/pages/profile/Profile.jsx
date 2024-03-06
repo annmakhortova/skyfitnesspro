@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../api";
 import { setFullCurrentUser } from "../../store/userSlice";
 import { Header } from "../../components/header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate here
 import { getAuth } from "firebase/auth";
 
 export const Profile = () => {
@@ -14,15 +14,13 @@ export const Profile = () => {
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const [userCourses, setUserCourses] = useState([]);
   const auth = getAuth();
-  console.log(auth.currentUser)
+  const navigate = useNavigate(); // useNavigate called at the top level
 
   useEffect(() => {
     if (fullCurrentUser) {
-
       if (fullCurrentUser.courses) {
         setUserCourses(Object.keys(fullCurrentUser?.courses));
       }
-
     } else if (fullCurrentUser === null) {
       getCurrentUser(currentId).then((currentUser) => {
         dispatch(setFullCurrentUser(currentUser));
@@ -30,15 +28,14 @@ export const Profile = () => {
     }
   }, [fullCurrentUser, currentId, dispatch]);
 
+  // These functions are defined in the body of the component but outside the useEffect hook.
   const handleChangeLogin = () => {
-    console.log("handleChangeLogin");
+    navigate('/newLogin'); // Example route, replace with your actual path
   };
 
   const handleChangePassword = () => {
-    console.log("handleChangePassword");
+    navigate('/newPassword'); // Example route, replace with your actual path
   };
-
-  console.log(userCourses);
 
   return (
     <>
@@ -49,13 +46,11 @@ export const Profile = () => {
         <div className={style.profile}>
           <div className={style.heading}>
             <h1 className={style.profile_heading}>Мой профиль</h1>
-            {/* Conditional rendering to safely access currentUser properties */}
             {fullCurrentUser ? (
               <>
                 <p className={style.profile_text}>
                   Логин: {fullCurrentUser.email}
                 </p>
-                {/* Remove or secure the display of sensitive information like passwords */}
               </>
             ) : (
               <p className={style.profile_text}>
@@ -64,7 +59,6 @@ export const Profile = () => {
             )}
           </div>
           <div className={style.profile_button}>
-
             <Button
               onClick={handleChangeLogin}
               children={"Редактировать логин"}
@@ -75,26 +69,21 @@ export const Profile = () => {
               children={"Редактировать пароль"}
               className={"button_blue"}
             />
-
           </div>
         </div>
         <div className={style.course}>
           <h1 className={style.h1}>Мои курсы</h1>
           <div className={style.course_box}>
-
-            {userCourses ? (
-              userCourses.map((course) => {
-                return (
-                  <div className={style.course_item} key={course}>
-                    <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
-                    <Link className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</Link>
-                  </div>
-                );
-              })
+            {userCourses.length > 0 ? (
+              userCourses.map((course) => (
+                <div className={style.course_item} key={course}>
+                  <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
+                  <Link className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</Link>
+                </div>
+              ))
             ) : (
               <p>У вас пока нет купленных курсов</p>
             )}
-
           </div>
         </div>
       </div>
