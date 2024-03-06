@@ -6,6 +6,6 @@ export const Header = () => {
     <header className={style.header}>
       <Logo className={style.logo} />
       <Dropdown className={style.header_select} />
-    </header>
+      </header>
   );
 };
