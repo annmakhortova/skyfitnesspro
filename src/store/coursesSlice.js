@@ -9,6 +9,7 @@ const coursesSlice = createSlice({
     usersCourses: null,
     //Это шаблон, он мне будет пока нужен, потом естественно уберу
     currentWorkout: null,
+    currentCourse: null,
     // {
     //   _id: 'mrhuag',
     //   exercises: [
@@ -47,10 +48,15 @@ const coursesSlice = createSlice({
       state.currentWorkout = action.payload;
       // console.log(state.currentWorkout);
     },
+    setCurrentCourse(state, action) {
+      // console.log(action.payload);
+      state.currentCourse = action.payload;
+      // console.log(state.currentWorkout);
+    },
   },
 });
 
-export const { setAllCourses, setAllWorkouts, setUsersCourses, setCurrentWorkout } = coursesSlice.actions;
+export const { setAllCourses, setAllWorkouts, setUsersCourses, setCurrentWorkout, setCurrentCourse } = coursesSlice.actions;
 
 // setCurrentWorkout(state, action) {
 //   console.log(action.payload);

@@ -1,56 +1,83 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import style from './Training.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { useSelector } from 'react-redux';
 import ReactPlayer from 'react-player/youtube';
 import { Header } from '../../components/header/Header';
 
-import { getDatabase, ref, child, push, update } from "firebase/database";
+import { getDatabase, ref, child, push, update } from 'firebase/database';
+import { UpdateUserDetails } from '../../components/userRequest';
 
 export const Training = () => {
+  UpdateUserDetails();
+
   const navigate = useNavigate();
-  const currentId = localStorage.getItem("userId");
+  const currentId = localStorage.getItem('userId'); // id пользователя
   const params = useParams(); // Получение значения параметров `id` `courseId` из URL
-  // console.log(params);
-  const workouts = useSelector((state) => state.coursesApp.allWorkouts);
-  // console.log(workouts);
-  const workout = workouts?.filter((data) => data._id.includes(params.id));
+  const workouts = useSelector((state) => state.coursesApp.allWorkouts); //все тренировки
+  const workout = workouts?.filter((data) => data._id.includes(params.id)); // текущая тренировка
+  const workoutName = workout ? workout[0].name : 'название не получено'; // название текущей тренировки
+  const workoutVideo = workout ? workout[0].video : 'видео не найдено'; //видео текущей тренировки
+  const workoutExercises =
+    workout && workout[0].exercises ? workout[0].exercises : null; // упражнения текушей тренировки
+  const currentWorkoutt = useSelector(
+    (state) => state.coursesApp.currentWorkout
+  ); // текущая тренировка пользователя из стейта
+  const [currentWorkout, setCurrentWorkout] = useState(currentWorkoutt); // текущая тренировка пользователя
 
-  const workoutName = workout ? workout[0].name : 'название не получено';
-  const workoutVideo = workout ? workout[0].video : 'видео не найдено';
-  const workoutExercises = workout && workout[0].exercises ? workout[0].exercises : null;
-  // console.log(!!workoutExercises);
-
-  const courses = useSelector((state) => state.coursesApp.allCourses);
-  const currentWorkoutt = useSelector((state) => state.coursesApp.currentWorkout)
-  // console.log(currentWorkoutt)
-  const [currentWorkout, setCurrentWorkout] = useState(currentWorkoutt)
-  console.log(currentWorkout);
-  const course = courses?.filter((data) => data.nameEN.includes(params.courseId));
-  const courseName = course ? course[0].nameRU : 'название не получено';
-  const courseNameEN = course[0]?.nameEN;
-  // console.log(course);
+  //Информация по курсу
+  const courses = useSelector((state) => state.coursesApp.allCourses); // все курсы
+  const course = courses?.filter((data) =>
+    data.nameEN.includes(params.courseId)
+  ); // текущий курс
+  const courseName = course ? course[0].nameRU : 'название не получено'; //название текущего курса на русском
+  const courseNameEN = course ? course[0].nameEN : 'название не получено'; //название текущего курса на английском
 
   const navigateToProgress = () => {
-    navigate('/progress');
-    // console.log(workoutExercises);
+    navigate('/Progress');
+    localStorage.setItem('currentCourse', courseNameEN);
   };
 
   const completeWorkout = (currentWorkout) => {
-    const a = {...currentWorkout}
-    a.done = true
-    setCurrentWorkout(a)
-    submitСhanges(a)
+    const a = { ...currentWorkout };
+    a.done = true;
+    setCurrentWorkout(a);
+    submitСhanges(a);
+  };
+
+  function submitСhanges(a) {
+    const db = getDatabase();
+    const updates = {};
+    updates[`users/${currentId}/courses/${courseNameEN}/workouts/${a._id}`] = a;
+    return update(ref(db), updates);
   }
 
-
-function submitСhanges(a) {
-  const db = getDatabase();
-  const updates = {};
-  updates[`users/${currentId}/courses/${courseNameEN}/workouts/${a._id}`] = a;
-  return update(ref(db), updates);
-}
+  const endWorkaut = () => {
+    if (currentWorkout?.done) {
+      return (
+        <Button
+          // onClick={() => {
+          //   completeWorkout(currentWorkout);
+          // }}
+          className={'button_blue'}
+          children={'Тренировка завершенa'}
+        />
+      );
+    } else {
+      return (
+        <Link to={`/ProgressCheck`}>
+          <Button
+            onClick={() => {
+              completeWorkout(currentWorkout);
+            }}
+            className={'button_blue'}
+            children={'Закончить тренировку'}
+          />
+        </Link>
+      );
+    }
+  };
 
   return (
     <div className={style.container}>
@@ -70,10 +97,16 @@ function submitСhanges(a) {
                     <li key={exercise.name}>{exercise.name}</li>
                   ))}
                 </ul>
-                <Button onClick={navigateToProgress} className={'button_blue'} children={'Заполнить свой прогресс'} />
+                  <Button
+                    onClick={navigateToProgress}
+                    className={'button_blue'}
+                    children={'Заполнить свой прогресс'}
+                  />
               </div>
               <div className={style.progressSection}>
-                <span className={style.nameSection}>Мой прогресс по тренировке</span>
+                <span className={style.nameSection}>
+                  Мой прогресс по тренировке
+                </span>
                 <div className={style.allProgress}>
                   {workoutExercises?.map((exercise) => (
                     <div className={style.rowProgressBar} key={exercise.name}>
@@ -85,33 +118,22 @@ function submitСhanges(a) {
                       </div>
                     </div>
                   ))}
-
-                  {/* <div className={style.rowProgressBar}>
-                    <div>
-                      <p>Наклоны назад</p>
-                    </div>
-                    <div className={style.progressBar2}>
-                      <div className={style.progress2}>50%</div>
-                    </div>
-                  </div>
-
-                  <div className={style.rowProgressBar}>
-                    <div>
-                      <p>Поднятие ног,</p>
-                      <p>согнутых в коленях</p>
-                    </div>
-                    <div className={style.progressBar3}>
-                      <div className={style.progress3}>50%</div>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </>
           ) : (
-            <Button onClick={()=>{completeWorkout(currentWorkout)}} className={'button_blue'} children={'Закончить тренировку'} />
+            // <Button
+            //   onClick={() => {
+            //     completeWorkout(currentWorkout);
+            //   }}
+            //   className={'button_blue'}
+            //   children={'Закончить тренировку'}
+            // />
+            endWorkaut()
           )}
         </section>
       </main>
+      <Outlet />
     </div>
   );
 };
