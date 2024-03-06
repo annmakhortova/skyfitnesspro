@@ -9,6 +9,7 @@ const userSlice = createSlice({
   },
   reducers: {
     setCurrentUser: (state, action) => {
+    console.log(action.payload)
       state.currentUser = action.payload;
     },
     setUserId: (state, action) => {
@@ -16,7 +17,7 @@ const userSlice = createSlice({
       state.userId = action.payload; // This will update the userId in the state
     },
     setFullCurrentUser: (state, action) => { //Весь текущий пользователь с базы, вместе с его курсами
-      // console.log(action.payload)
+      console.log(action.payload)
       state.fullCurrentUser = action.payload;
     },
   },
