@@ -40,7 +40,11 @@ export const NewLogin = () => {
                 </div>
     
                 <div className={style.buttonsContainer}>
-                    <Button type="submit">Сохранить</Button>
+                <Button
+              //onClick={handleChangePassword}
+              children={"Сохранить"}
+              className={"button_blue"}
+            />
                 </div>
             </form>
         </div>

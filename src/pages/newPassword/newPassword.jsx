@@ -24,7 +24,11 @@ export const NewPassword = () => {
             </div>
     
             <div className={style.buttonsContainer}>
-            <Button children={"Сохранить"} />
+            <Button
+              //onClick={handleChangePassword}
+              children={"Сохранить"}
+              className={"button_blue"}
+            />
             </div>
     
         </div>
