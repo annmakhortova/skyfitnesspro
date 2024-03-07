@@ -31,7 +31,8 @@ export const Login = () => {
 
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(setUserId(userInfo.user.uid)); // Use the UID for user session management, not email/password
+      // dispatch(setUserId(userInfo.user.uid));// Use the UID for user session management, not email/password
+      localStorage.setItem('userId', userInfo.user.uid); 
       navigate('/profile');
     } catch (error) {
       setError(error.message); // Set the error state to display the message
