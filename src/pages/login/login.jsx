@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser, setUserId } from '../../store/userSlice';
+import { setUserId } from '../../store/userSlice'; // Assuming you're using this for setting the user session
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 
 export const Login = () => {
@@ -14,25 +14,28 @@ export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // State to keep track of errors
+
+  const validateForm = () => {
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return false;
+    }
+    
+    return true;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    localStorage.setItem('userLogin', email);
-    localStorage.setItem('userPassword', password);
-    dispatch(
-      setCurrentUser({
-        userEmail: email,
-        userPassword: password,
-      })
-    );
+    if (!validateForm()) return; // Stop the login process if validation fails
+
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(setUserId(userInfo.user.uid));
-      localStorage.setItem('userId', userInfo.user.uid);
+      dispatch(setUserId(userInfo.user.uid)); // Use the UID for user session management, not email/password
       navigate('/profile');
     } catch (error) {
+      setError(error.message); // Set the error state to display the message
       console.error(error.message);
-      alert('Login failed: ' + error.message);
     }
   };
 
@@ -54,7 +57,7 @@ export const Login = () => {
         <header>
           <Logo className={style.logo} />
         </header>
-
+        {error && <div className={style.error}>{error}</div>} {/* Display any authentication errors here */}
         <div className={style.inputs}>
           <div className={style.input}>
             <input
@@ -62,7 +65,10 @@ export const Login = () => {
               type='email'
               placeholder='Логин'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError(''); // Reset error when user starts typing
+              }}
             />
           </div>
           <div className={style.input}>
@@ -70,24 +76,19 @@ export const Login = () => {
               type='password'
               placeholder='Пароль'
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError(''); // Reset error when user starts typing
+              }}
             />
           </div>
         </div>
 
         <div className={style.buttonsContainer}>
-          {/* <Button onClick={handleLogin} children={'Войти'} className={styleButton.button_blue} />
-           <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={styleButton.button_white} />         */}
-
           <Button onClick={handleLogin} children={'Войти'} className={'button_blue'} />
           <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={'button_white'} />
-          {/* <button className={style.registerButton} onClick={handleRegisterClick}>
-            Зарегистрироваться
-          </button> */}
         </div>
       </div>
     </div>
   );
 };
-
-//export default LoginSignup
