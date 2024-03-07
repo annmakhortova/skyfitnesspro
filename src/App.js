@@ -1,15 +1,20 @@
+
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { AppRoutes } from "./routes";
 import { useDispatch } from "react-redux";
 import { auth } from "./firebase"; // Make sure this path matches your Firebase auth configuration import
 import { getAllCourses, getAllWorkouts, getCurrentUser, getUsersCourses } from './pages/api';
+
 import { setAllCourses, setAllWorkouts, setUsersCourses } from './store/coursesSlice';
 import { setFullCurrentUser } from './store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
+
   const [currentUser, setCurrentUser] = useState(null);
+  //const currentId = localStorage.getItem('userId');
+
 
   // Listener for Firebase authentication state changes
   useEffect(() => {

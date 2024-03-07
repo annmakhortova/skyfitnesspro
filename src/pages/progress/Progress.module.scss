@@ -23,7 +23,7 @@
   top: -1218px;
   left: -1923px;
   border-radius: 12px;
-  background: #FFF;
+  background: #fff;
 }
 
 .logoBox {
@@ -63,8 +63,8 @@
   padding: 12px 0 16px;
   width: 278px;
   text-align: center;
-  background-color: #FFF;
-  border: 1px solid #D0CECE;
+  background-color: #fff;
+  border: 1px solid #d0cece;
   flex-shrink: 0;
   border-radius: 46px;
   color: #000000;
@@ -77,17 +77,14 @@
   line-height: 24px;
   letter-spacing: -0.05px;
 
-
   &:hover {
-    background: #F4F5F6;
+    background: #f4f5f6;
   }
 
   &:active {
-    background: #D0CECE;
+    background: #d0cece;
   }
 }
-
-
 
 .textForm {
   margin: 30px 43px 20px 41px;
@@ -106,7 +103,9 @@
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  background: #FFF;
+  background: #fff;
+  padding-top: 36px;
+  padding-bottom: 44px;
 }
 
 .headerForm {
@@ -138,12 +137,11 @@
   flex-direction: column;
   align-items: center;
   border-radius: 12px;
-  background: #FFF;
+  background: #fff;
 }
 
 .imgBox {
   margin-top: 11px;
-
 }
 
 .Hand {

@@ -8,26 +8,28 @@ const coursesSlice = createSlice({
 
     usersCourses: null,
     //Это шаблон, он мне будет пока нужен, потом естественно уберу
-    currentWorkout: {
-      _id: 'mrhuag',
-      exercises: [
-        {
-          name: 'Округляем грудную клетку при выдохе (10 повторений)',
-          quantity: 10,
-        },
-        {
-          name: 'Тянем левую руку в правую сторону (20 повторений)',
-          quantity: 20,
-        },
-        {
-          name: 'Тянем правую руку в левую сторону (20 повторений)',
-          quantity: 20,
-        },
-      ],
+    currentWorkout: null,
+    currentCourse: null,
+    // {
+    //   _id: 'mrhuag',
+    //   exercises: [
+    //     {
+    //       name: 'Округляем грудную клетку при выдохе (10 повторений)',
+    //       quantity: 10,
+    //     },
+    //     {
+    //       name: 'Тянем левую руку в правую сторону (20 повторений)',
+    //       quantity: 20,
+    //     },
+    //     {
+    //       name: 'Тянем правую руку в левую сторону (20 повторений)',
+    //       quantity: 20,
+    //     },
+    //   ],
 
-      name: 'Гибкость спины / Йога на каждый день / 5 день / Алексей Казубский',
-      video: 'https://www.youtube.com/embed/MIvcMapie_A',
-    },
+    //   name: 'Гибкость спины / Йога на каждый день / 5 день / Алексей Казубский',
+    //   video: 'https://www.youtube.com/embed/MIvcMapie_A',
+    // },
   },
   reducers: {
     setAllCourses(state, action) {
@@ -42,13 +44,19 @@ const coursesSlice = createSlice({
       state.usersCourses = action.payload;
     },
     setCurrentWorkout(state, action) {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.currentWorkout = action.payload;
+      // console.log(state.currentWorkout);
+    },
+    setCurrentCourse(state, action) {
+      // console.log(action.payload);
+      state.currentCourse = action.payload;
+      // console.log(state.currentWorkout);
     },
   },
 });
 
-export const { setAllCourses, setAllWorkouts, setUsersCourses, setCurrentWorkout } = coursesSlice.actions;
+export const { setAllCourses, setAllWorkouts, setUsersCourses, setCurrentWorkout, setCurrentCourse } = coursesSlice.actions;
 
 // setCurrentWorkout(state, action) {
 //   console.log(action.payload);

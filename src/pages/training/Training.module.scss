@@ -26,7 +26,8 @@
   font-weight: 400;
   font-size: 32px;
   line-height: 40px;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 .videoImgLogo {
   width: 1160px;
@@ -37,11 +38,11 @@
 .resultSection {
   display: flex;
   justify-content: space-between;
+  padding: 40px 0;
 }
 
 .exerciseSection {
   width: 40%;
-  padding: 40px 0;
 }
 
 .progressSection {
@@ -49,14 +50,14 @@
   padding: 40px;
   background-color: #f2f2f2;
   border-radius: 30px;
-  margin-top: 36px;
-  margin-bottom: 35px;
+  // margin-top: 36px;
+  // margin-bottom: 35px;
 }
 
 .progressBar1 {
   border-radius: 50px;
   border: 1px solid #565eef;
-  width: 50%;
+  width: 250px;
   height: 36px;
 }
 
@@ -112,8 +113,9 @@
   height: 50px;
   justify-content: space-between;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 32px;
+  align-items: center;
 }
 
 .nameSection {
@@ -125,6 +127,13 @@
   font-size: 27px;
   line-height: 40px;
   margin-bottom: 30px;
+}
+
+.allProgress {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  margin-top: 40px;
 }
 
 .exerciseTitle {
