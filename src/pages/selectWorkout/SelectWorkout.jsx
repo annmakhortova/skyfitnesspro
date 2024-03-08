@@ -23,7 +23,7 @@ export const SelectWorkout = () => {
   const dispatch = useDispatch();
 
   const handleClick = (el) => {
-    dispatch(setCurrentWorkout(el._id));
+    dispatch(setCurrentWorkout(el));
   };
 
   return (
@@ -34,7 +34,7 @@ export const SelectWorkout = () => {
           {currentWorkoutsArr?.map((el) => {
             return (
               <Link
-              to={`/training/${params.id}/${el._id}`}
+              to={`/${params.id}/training/${el._id}`}
                 className={style[`workout_${el.done}`]}
                 key={el.name}
                 onClick={() => {

@@ -5,10 +5,13 @@ import { Button } from "../../UI/Button/Button";
 import phone from "./phone.png";
 import { WorkoutCardImg } from "./WorkoutCardImg/WorkoutCardImg";
 import { getDatabase, ref, set } from "firebase/database";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Header } from "../../components/header/Header";
+import { getCurrentUser } from "../api";
+import { setFullCurrentUser } from "../../store/userSlice";
 
 export const Workout = () => {
+  const dispatch = useDispatch();
   const currentId = localStorage.getItem("userId");
   const params = useParams();
   const [course, setCourse] = useState();
@@ -50,6 +53,12 @@ export const Workout = () => {
       workouts: courseTemplate.workouts,
     });
   };
+
+  const updateUserDetails = () => {
+    getCurrentUser(currentId).then((currentUser) => {
+      dispatch(setFullCurrentUser(currentUser));
+    });
+  }
 
   return (
     <>
@@ -114,6 +123,9 @@ export const Workout = () => {
                   <Button
                     children={"Перейти к курсу"}
                     className={"button_blue"}
+                    onClick={() => {
+                      updateUserDetails();
+                    }}
                   />
                 </Link>
               ) : (

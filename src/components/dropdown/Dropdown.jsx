@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import style from "./Dropdown.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 
 export function Dropdown() {
   const [dropdownState, setDropdownState] = useState(false);
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const handleDropdownClick = () => setDropdownState(!dropdownState);
+  const navigate = useNavigate();
+
+  function handleSignOut() {
+    // localStorage.removeItem("userLogin");
+    // localStorage.removeItem("userPassword");
+    localStorage.removeItem("userId");
+    navigate("/login");
+  }
 
   return (
     <div className={style.dropdown_box}>
@@ -27,9 +36,9 @@ export function Dropdown() {
             <Link className={style.submenu_item} to="/profile">
               Профиль
             </Link>
-            <Link className={style.submenu_item} to="/login">
+            <button className={style.submenu_item} onClick={handleSignOut}>
               Выйти
-            </Link>
+            </button>
           </div>
         )}
       </div>
