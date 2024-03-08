@@ -23,6 +23,8 @@ export const SelectWorkout = () => {
   const dispatch = useDispatch();
 
   const handleClick = (el) => {
+    console.log(el)
+    localStorage.setItem('currentWorkout', el._id)
     dispatch(setCurrentWorkout(el));
   };
 
