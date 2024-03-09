@@ -4,6 +4,7 @@ import { Logo } from '../../UI/Logo/Logo';
 import style from './NewLogin.module.scss'; // Ensure this matches your filename
 import { useNavigate } from 'react-router-dom';
 import { getAuth, updateEmail } from 'firebase/auth'; // Import Firebase Auth functions
+import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 
 export const NewLogin = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ export const NewLogin = () => {
 
     if (user) {
       try {
-        console.log(user, email)
+        console.log(user, email);
         await updateEmail(user, email); // Update the user's email
         console.log('Email updated successfully');
         navigate('/profile'); // Navigate to profile after successful update
@@ -34,31 +35,32 @@ export const NewLogin = () => {
     }
   };
 
+  const hidePopup = (e, type) => {
+    if (hidePopupFlag(e, type)) navigate(-1)
+  }
+
   return (
-    <div className={style.container}>
-      <header>
-        <Logo className={style.logo} />
-      </header>
+    <div
+      className={style.popup_wrapper}
+      onMouseUp={(e) => hidePopup(e, 'mouse')}
+      onKeyDown={(e) => hidePopup(e, 'kbd')}
+    >
+      <div className={style.container} id='#popup'>
+        <header>
+          <Logo className={style.logo} />
+        </header>
 
-      <form onSubmit={handleSubmit} className={style.inputs}>
-        <header className={style.inputName}>Новый логин (email):</header>
-        <div className={style.input}>
-          <input
-            type='email'
-            placeholder='Email'
-            value={email}
-            onChange={handleInputChange}
-          />
-        </div>
+        <form onSubmit={handleSubmit} className={style.inputs}>
+          <header className={style.inputName}>Новый логин (email):</header>
+          <div className={style.input}>
+            <input autoFocus type='email' placeholder='Email' value={email} onChange={handleInputChange} />
+          </div>
 
-        <div className={style.buttonsContainer}>
-          <Button
-            type='submit'
-            children={'Сохранить'}
-            className={'button_blue'}
-          />
-        </div>
-      </form>
+          <div className={style.buttonsContainer}>
+            <Button type='submit' children={'Сохранить'} className={'button_blue'} />
+          </div>
+        </form>
+      </div>{' '}
     </div>
   );
 };

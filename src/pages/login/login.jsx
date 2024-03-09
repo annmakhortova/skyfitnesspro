@@ -5,12 +5,12 @@ import style from './Login.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
-import { setUserId } from '../../store/userSlice'; // Assuming you're using this for setting the user session
+// import { useDispatch } from 'react-redux';
+// import { setUserId } from '../../store/userSlice'; // Assuming you're using this for setting the user session
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 
 export const Login = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
