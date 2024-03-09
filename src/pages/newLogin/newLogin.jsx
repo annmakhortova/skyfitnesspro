@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../../UI/Button/Button';
 import { Logo } from '../../UI/Logo/Logo';
-import style from './NewLogin.module.scss'; // Ensure this matches your filename
+import style from './NewLogin.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, updateEmail } from 'firebase/auth'; // Import Firebase Auth functions
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
@@ -27,7 +27,7 @@ export const NewLogin = () => {
         navigate('/profile'); // Navigate to profile after successful update
       } catch (error) {
         console.error('Error updating email:', error);
-        // Handle errors here, such as permission denied or email already in use.
+
       }
     } else {
       // Handle case where no user is signed in
