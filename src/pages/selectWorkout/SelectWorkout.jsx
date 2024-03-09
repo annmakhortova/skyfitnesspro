@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWorkout } from "../../store/coursesSlice";
 import { Link, useParams } from "react-router-dom";
 import made from "./made.png";
+import { UpdateUserDetails } from '../../components/userRequest';
+
 
 export const SelectWorkout = () => {
   const params = useParams();
@@ -12,7 +14,7 @@ export const SelectWorkout = () => {
 
   useEffect(() => {
     if (currentUser) {
-      console.log(currentUser);
+      // console.log(currentUser);
       const arr = Object.values(currentUser.courses).find(
         (course) => course.name === params.id
       ).workouts;
@@ -21,7 +23,7 @@ export const SelectWorkout = () => {
   }, [currentUser, params.id]);
 
   const dispatch = useDispatch();
-
+  UpdateUserDetails(dispatch);
   const handleClick = (el) => {
     console.log(el)
     localStorage.setItem('currentWorkout', el._id)

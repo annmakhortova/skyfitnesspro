@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import style from "./Dropdown.module.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import React, { useState } from 'react';
+import style from './Dropdown.module.scss';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getAuth, signOut } from 'firebase/auth';
 
 export function Dropdown() {
   const [dropdownState, setDropdownState] = useState(false);
@@ -11,10 +11,15 @@ export function Dropdown() {
   const navigate = useNavigate();
 
   function handleSignOut() {
-    // localStorage.removeItem("userLogin");
-    // localStorage.removeItem("userPassword");
-    localStorage.removeItem("userId");
-    navigate("/");
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+      })
+      .catch((error) => {
+        alert(error)
+      });
+    localStorage.removeItem('userId');
+    navigate('/');
   }
 
   return (
@@ -22,7 +27,7 @@ export function Dropdown() {
       <div className={style.dropdown_svg}></div>
       <div className={style.container}>
         <button
-          type="button"
+          type='button'
           className={style.header_item}
           onClick={handleDropdownClick}
         >
@@ -30,10 +35,10 @@ export function Dropdown() {
         </button>
         {dropdownState && (
           <div className={style.dropdown}>
-            <Link className={style.submenu_item} to="/">
+            <Link className={style.submenu_item} to='/'>
               На главную
             </Link>
-            <Link className={style.submenu_item} to="/profile">
+            <Link className={style.submenu_item} to='/profile'>
               Профиль
             </Link>
             <button className={style.submenu_item} onClick={handleSignOut}>

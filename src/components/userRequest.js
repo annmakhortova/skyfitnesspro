@@ -1,10 +1,7 @@
-import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../pages/api";
 import { setFullCurrentUser } from "../store/userSlice";
 
-
- export const UpdateUserDetails = () => {
-  const dispatch = useDispatch();
+ export const UpdateUserDetails = (dispatch) => {
 
   const currentId = localStorage.getItem("userId");
   

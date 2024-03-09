@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 import ReactPlayer from "react-player/youtube";
 import { Header } from "../../components/header/Header";
 
+
 import { getDatabase, ref, child, push, update } from "firebase/database";
 import { UpdateUserDetails } from "../../components/userRequest";
 import ProgressExercise from "../../components/progressExercise/ProgressExercise";
 
 export const Training = () => {
-  UpdateUserDetails();
 
   const navigate = useNavigate();
   const currentId = localStorage.getItem("userId"); // id пользователя
