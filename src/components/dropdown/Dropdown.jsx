@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 
 export function Dropdown() {
-  const [dropdownState, setDropdownState] = useState(true);
+  const [dropdownState, setDropdownState] = useState(false);
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const handleDropdownClick = () => setDropdownState(!dropdownState);
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export function Dropdown() {
     localStorage.removeItem("userLogin");
     localStorage.removeItem("userPassword");
     localStorage.removeItem("userId");
-    navigate("/login");
+    navigate("/");
   }
 
   return (
