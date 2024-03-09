@@ -15,7 +15,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   //const currentId = localStorage.getItem('userId');
 
-
+console.log(currentUser)
   // Listener for Firebase authentication state changes
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

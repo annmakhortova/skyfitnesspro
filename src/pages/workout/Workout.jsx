@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import style from "./Workout.module.scss";
-import { Button } from "../../UI/Button/Button";
-import phone from "./phone.png";
-import { WorkoutCardImg } from "./WorkoutCardImg/WorkoutCardImg";
-import { getDatabase, ref, set } from "firebase/database";
-import { useDispatch, useSelector } from "react-redux";
-import { Header } from "../../components/header/Header";
-import { getCurrentUser } from "../api";
-import { setFullCurrentUser } from "../../store/userSlice";
+import React, { useEffect, useState } from 'react';
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import style from './Workout.module.scss';
+import { Button } from '../../UI/Button/Button';
+import phone from './phone.png';
+import { WorkoutCardImg } from './WorkoutCardImg/WorkoutCardImg';
+import { getDatabase, ref, set } from 'firebase/database';
+import { useDispatch, useSelector } from 'react-redux';
+import { Header } from '../../components/header/Header';
+import { getCurrentUser } from '../api';
+import { setFullCurrentUser } from '../../store/userSlice';
 
 export const Workout = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentId = localStorage.getItem("userId");
+  const currentId = localStorage.getItem('userId');
   const params = useParams();
   const [course, setCourse] = useState();
   const [courseTemplate, setСourseTemplate] = useState(); //Шаблон текущего курса
@@ -22,6 +23,12 @@ export const Workout = () => {
   const currentUser = useSelector((state) => state.userApp.fullCurrentUser); //Текущий пользователь с базы
   const courseName = params.id;
 
+  console.log(currentId);
+  const navigateToProgress = () => {
+    console.log(1);
+    // navigate('/Progress');
+    navigate(`/workout/${params.id}/workoutPurchased`);
+  };
   //Проверяю наличие текущего курса среди курсов пользователя
   useEffect(() => {
     if (currentUser) {
@@ -58,7 +65,7 @@ export const Workout = () => {
     getCurrentUser(currentId).then((currentUser) => {
       dispatch(setFullCurrentUser(currentUser));
     });
-  }
+  };
 
   return (
     <>
@@ -85,7 +92,7 @@ export const Workout = () => {
                     >
                       <div className={style.criterion_counter}>
                         <p className={style.criterion_counterText}>
-                          {" "}
+                          {' '}
                           {course.fitting.indexOf(el) + 1}
                         </p>
                       </div>
@@ -118,28 +125,44 @@ export const Workout = () => {
                 поможем с выбором направления и тренера, с которым тренировки
                 принесут здоровье и радость!
               </p>
-              {coursePurchased ? (
-                <Link to={`/profile`}>
+              {currentId ? (
+                <>
+                  {coursePurchased ? (
+                    <Link to={`/profile`}>
+                      <Button
+                        children={'Перейти к курсу'}
+                        className={'button_blue'}
+                        onClick={() => {
+                          updateUserDetails();
+                        }}
+                      />
+                    </Link>
+                  ) : (
+                    <Button
+                      children={'Записаться на тренировку'}
+                      onClick={() => {
+                        signUpForTraining(courseName);
+                        navigateToProgress();
+                      }}
+                      className={'button_blue'}
+                    />
+                  )}
+                </>
+              ) : (
+                <Link to={`/login`}>
                   <Button
-                    children={"Перейти к курсу"}
-                    className={"button_blue"}
+                    children={'Авторизируйтесь перед покупкой'}
+                    className={'button_blue'}
                     onClick={() => {
-                      updateUserDetails();
+                      // updateUserDetails();
                     }}
                   />
                 </Link>
-              ) : (
-                <Button
-                  children={"Записаться на тренировку"}
-                  onClick={() => {
-                    signUpForTraining(courseName);
-                  }}
-                  className={"button_blue"}
-                />
               )}
-              <img src={phone} alt="" className={style.feedback_img} />
+              <img src={phone} alt='' className={style.feedback_img} />
             </section>
           </main>
+          <Outlet />
         </div>
       )}
     </>
