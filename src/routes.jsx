@@ -16,9 +16,6 @@ import { WorkoutPurchased } from './pages/workout/WorkoutPurchased';
 export const AppRoutes = ({ user }) => {
   return (
     <Routes>
-      {/* <Route path='/' element={<Main />} />
-      <Route path='signup' element={<LoginSignup />} />
-      <Route path='login' element={<Login />} /> */}
 
       <Route path='/' element={<Main />}>
         <Route path='login' element={<Login />} />
@@ -34,16 +31,11 @@ export const AppRoutes = ({ user }) => {
           <Route path='newLogin' element={<NewLogin />} />
           <Route path='newPassword' element={<NewPassword />} />
         </Route>
-      </Route>
-
-      <Route path='/selectworkout/:id' element={<SelectWorkout />} />
-
-      {/* <Route path=":courseId/training/:id" element={<Training />} /> */}
-      {/* <Route path="/Progress" element={<Progress />} /> */}
-
-      <Route path=':courseId/training/:id/*' element={<Training />}>
-        <Route path='Progress' element={<Progress />} />
-        <Route path='ProgressCheck' element={<ProgressCheck />} />
+        <Route path='/selectworkout/:id' element={<SelectWorkout />} />
+        <Route path=':courseId/training/:id/*' element={<Training />}>
+          <Route path='Progress' element={<Progress />} />
+          <Route path='ProgressCheck' element={<ProgressCheck />} />
+        </Route>
       </Route>
 
       {/* Other routes as needed */}
