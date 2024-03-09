@@ -35,7 +35,8 @@ export const Training = () => {
   const courseNameEN = course ? course[0].nameEN : 'название не получено'; //название текущего курса на английском
 
   const navigateToProgress = () => {
-    navigate('/Progress');
+    // navigate('/Progress');
+    navigate(`/${courseId}/training/${id}/progress`);
     localStorage.setItem('currentCourse', courseNameEN);
   };
 
