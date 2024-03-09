@@ -1,22 +1,12 @@
 import style from "./progressExercise.module.scss";
 
 export const ProgressExercises = ({ exercises, userId }) => {
-  console.log(exercises);
   const getDone = ({ needed, exercise }) => {
-    if (!exercise?.progress) {
+    if (!exercise?.made) {
       return 0;
     }
 
-    const progressUser = exercise?.progress[userId];
-
-    if (!progressUser) {
-      return 0;
-    }
-
-    const progressIds = Object.keys(progressUser);
-    const lastProgressId = progressIds[progressIds.length - 1];
-    const done = progressUser[lastProgressId];
-
+    const done = exercise.made;
     let result = Math.round((done / needed) * 100);
     if (result > 100) {
       result = 100;
