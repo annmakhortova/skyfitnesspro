@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
 import { getDatabase, ref, child, push, update } from 'firebase/database';
+import { ProgressCheck } from './ProgressCheck';
 
 export const Progress = () => {
   const navigate = useNavigate();
@@ -19,12 +20,12 @@ export const Progress = () => {
     ? Object.values(currentUserCourse[0].workouts).filter((el) => el._id === currentW)
     : null;
   const emptyExercises = exercisesList ? exercisesList[0].exercises : null;
-  const [userProgress, setuserProgress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
+  const [userProgress, setUserProgress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
 
   //Помещаем в прогресс пустые значения
   useEffect(() => {
     if (userProgress === null) {
-      setuserProgress(emptyExercises);
+      setUserProgress(emptyExercises);
     }
   }, [userProgress, emptyExercises]);
 
@@ -52,7 +53,7 @@ export const Progress = () => {
       }
     });
     console.log(newuserProgress);
-    setuserProgress(newuserProgress);
+    setUserProgress(newuserProgress);
   };
 
   //Меняем флаги, если количество сделаных повторений равно или больше нужного
@@ -76,6 +77,8 @@ export const Progress = () => {
       sendProgress(numberOfRepetitionsDone);
       allTrainingCompleted(numberOfRepetitionsDone);
     }
+    console.log('ProgressCheck');
+    return ( <ProgressCheck />)
   };
 
   //Отправляем новый прогресс в базу
@@ -113,7 +116,7 @@ export const Progress = () => {
     firstInputEl[0]?.focus();
   };
   useEffect(() => onFocusFirstInput(), []);
-
+ 
   return (
     <>
       {exercisesList && (
