@@ -10,24 +10,25 @@ import { LoginSignup } from './pages/registration/registration';
 import { Login } from './pages/login/login';
 import { SelectWorkout } from './pages/selectWorkout/SelectWorkout';
 import { NewPassword } from './pages/newPassword/newPassword';
+import { ProtectedRoute } from './components/ProtectedRoute'; // Assuming this is the correct path
 
-export const AppRoutes = () => {
+export const AppRoutes = ({ user }) => {
   return (
     <Routes>
-      <Route path='/' element={<Main />}>
-        <Route path='signup' element={<LoginSignup />} />
-        <Route path='login' element={<Login />} />
-      </Route>
-
+      <Route path="/" element={<Main />} />
+      <Route path="signup" element={<LoginSignup />} />
+      <Route path="login" element={<Login />} />
       <Route path="/workout/:id" element={<Workout />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
+        <Route path="/profile" element={<Profile />} />
+      </Route>
       <Route path="/newLogin" element={<NewLogin />} />
       <Route path="/newPassword" element={<NewPassword />} />
-      <Route path="/training/:id/:id" element={<Training />} />
+      <Route path=":courseId/training/:id" element={<Training />} />
       <Route path="/selectworkout/:id" element={<SelectWorkout />} />
       <Route path="/Progress" element={<Progress />} />
       <Route path="/ProgressCheck" element={<ProgressCheck />} />
-
+      {/* Other routes as needed */}
     </Routes>
   );
 };

@@ -11,8 +11,8 @@ export function Dropdown() {
   const navigate = useNavigate();
 
   function handleSignOut() {
-    localStorage.removeItem("userLogin");
-    localStorage.removeItem("userPassword");
+    // localStorage.removeItem("userLogin");
+    // localStorage.removeItem("userPassword");
     localStorage.removeItem("userId");
     navigate("/");
   }

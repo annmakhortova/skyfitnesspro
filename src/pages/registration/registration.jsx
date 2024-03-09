@@ -34,10 +34,10 @@ export const LoginSignup = () => {
       writeUserData(userId, email);
 
       // Dispatch Redux action to store the user's ID
-      dispatch(setUserId(userId));
+      // dispatch(setUserId(userId));
       localStorage.setItem('userId', userId);
       // can store the entire user object or just the email in your Redux store
-      dispatch(setCurrentUser({ userId, email }));
+      // dispatch(setCurrentUser({ userId, email }));
 
       navigate('/login'); // Redirect after successful registration
     } catch (error) {

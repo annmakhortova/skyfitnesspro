@@ -1,52 +1,64 @@
-import React, { useState } from "react";
-import { Button } from "../../UI/Button/Button";
-import { Logo } from "../../UI/Logo/Logo";
-import style from "./NewLogin.module.scss";
-// import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Button } from '../../UI/Button/Button';
+import { Logo } from '../../UI/Logo/Logo';
+import style from './NewLogin.module.scss'; // Ensure this matches your filename
+import { useNavigate } from 'react-router-dom';
+import { getAuth, updateEmail } from 'firebase/auth'; // Import Firebase Auth functions
 
 export const NewLogin = () => {
-    const [login, setLogin] = useState("");
-    // useNavigate hook for navigation
-    const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const auth = getAuth(); // Initialize Firebase Auth
+  console.log(auth);
+  const handleInputChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-    const handleInputChange = (event) => {
-        setLogin(event.target.value);
-    };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const user = auth.currentUser; // Get the current user
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log("Creating new login with:", login);
-        // After login creation logic
+    if (user) {
+      try {
+        console.log(user, email)
+        await updateEmail(user, email); // Update the user's email
+        console.log('Email updated successfully');
+        navigate('/profile'); // Navigate to profile after successful update
+      } catch (error) {
+        console.error('Error updating email:', error);
+        // Handle errors here, such as permission denied or email already in use.
+      }
+    } else {
+      // Handle case where no user is signed in
+      console.log('No user is signed in to update email.');
+    }
+  };
 
-        navigate('/profile'); 
-    };
+  return (
+    <div className={style.container}>
+      <header>
+        <Logo className={style.logo} />
+      </header>
 
-    return (
-        <div className={style.container}>
-            <header>
-                <Logo className={style.logo} />
-            </header>
-    
-            <form onSubmit={handleSubmit} className={style.inputs}>
-                <header className={style.inputName}>Новый логин:</header>
-                <div className={style.input}>
-                    <input
-                        type="text"
-                        placeholder="Логин"
-                        value={login}
-                        onChange={handleInputChange}
-                    />
-                </div>
-    
-                <div className={style.buttonsContainer}>
-                    <Button type="submit">Сохранить</Button>
-                </div>
-            </form>
+      <form onSubmit={handleSubmit} className={style.inputs}>
+        <header className={style.inputName}>Новый логин (email):</header>
+        <div className={style.input}>
+          <input
+            type='email'
+            placeholder='Email'
+            value={email}
+            onChange={handleInputChange}
+          />
         </div>
-    );
+
+        <div className={style.buttonsContainer}>
+          <Button
+            type='submit'
+            children={'Сохранить'}
+            className={'button_blue'}
+          />
+        </div>
+      </form>
+    </div>
+  );
 };
-
-
-//export default LoginSignup
-
