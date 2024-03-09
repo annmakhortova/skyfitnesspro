@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
-import style from './Training.module.scss';
-import { Button } from '../../UI/Button/Button';
-import { useSelector } from 'react-redux';
-import ReactPlayer from 'react-player/youtube';
-import { Header } from '../../components/header/Header';
-
+import React, { useState } from "react";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import style from "./Training.module.scss";
+import { Logo } from "../../UI/Logo/Logo";
+import { Button } from "../../UI/Button/Button";
+import { useSelector } from "react-redux";
+import ReactPlayer from "react-player/youtube";
+import { Header } from "../../components/header/Header";
+import ProgressExercise from "../../components/progressExercise/ProgressExercise";
 import { getDatabase, ref, child, push, update } from 'firebase/database';
 import { UpdateUserDetails } from '../../components/userRequest';
 
@@ -88,49 +89,24 @@ export const Training = () => {
         {/* <ReactPlayer url={workoutVideo} width='100%' height='720px' /> */}
 
         <section className={style.resultSection}>
-          {workoutExercises ? (
-            <>
-              <div className={style.exerciseSection}>
-                <span className={style.exerciseTitle}>Упражнения</span>
-                <ul className={style.exerciseList}>
-                  {workoutExercises?.map((exercise) => (
-                    <li key={exercise.name}>{exercise.name}</li>
-                  ))}
-                </ul>
-                  <Button
-                    onClick={navigateToProgress}
-                    className={'button_blue'}
-                    children={'Заполнить свой прогресс'}
-                  />
-              </div>
-              <div className={style.progressSection}>
-                <span className={style.nameSection}>
-                  Мой прогресс по тренировке
-                </span>
-                <div className={style.allProgress}>
-                  {workoutExercises?.map((exercise) => (
-                    <div className={style.rowProgressBar} key={exercise.name}>
-                      <p>{exercise.name}</p>
-                      <div>
-                        <div className={style.progressBar1}>
-                          <div className={style.progress1}>50%</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : (
-            // <Button
-            //   onClick={() => {
-            //     completeWorkout(currentWorkout);
-            //   }}
-            //   className={'button_blue'}
-            //   children={'Закончить тренировку'}
-            // />
-            endWorkaut()
-          )}
+          <div className={style.exerciseSection}>
+            <span className={style.exerciseTitle}>Упражнения</span>
+            <ul className={style.exerciseList}>
+              {workoutExercises?.map((exercise) => (
+                <li key={exercise.name}>{exercise.name}</li>
+              ))}
+            </ul>
+            <Button
+              onClick={navigateToProgress}
+              className={"button_blue"}
+              children={"Заполнить свой прогресс"}
+            />
+          </div>
+          {/* Пока без юзера */}
+          <ProgressExercise
+            exercises={workoutExercisesForProgress}
+            userId={1}
+          />
         </section>
       </main>
       <Outlet />
