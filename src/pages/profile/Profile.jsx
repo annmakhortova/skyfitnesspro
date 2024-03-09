@@ -78,7 +78,7 @@ export const Profile = () => {
               userCourses.map((course) => (
                 <div className={style.course_item} key={course}>
                   <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
-                  <Link className={style.button_link} to={`/selectWorkout/${course}`}>Перейти</Link>
+                  <Link className={style.button_link} to={`/selectWorkout/${course}`} onClick={()=>localStorage.setItem('currentCourse', course)}>Перейти</Link>
                 </div>
               ))
             ) : (

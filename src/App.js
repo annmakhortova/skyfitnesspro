@@ -53,6 +53,12 @@ function App() {
       dispatch(setUsersCourses(Object.values(usersCourses)));
     });
   }, [dispatch]);
+  
+  useEffect(() => {
+    getUsersCourses().then((usersCourses) => {
+      dispatch(setUsersCourses(Object.values(usersCourses)));
+    });
+  }, [dispatch]);
 
   // Получаем текущего пользователя
   useEffect(() => {

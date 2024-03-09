@@ -2,31 +2,48 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../../UI/Button/Button';
 import styles from './Progress.module.scss';
 import { useSelector } from 'react-redux';
-// import { getCurrentUsers } from '../api';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
 import { getDatabase, ref, child, push, update } from 'firebase/database';
-import { UpdateUserDetails } from '../../components/userRequest';
-
 
 export const Progress = () => {
   const navigate = useNavigate();
   const currentId = localStorage.getItem('userId'); // id пользователя
-  const currentCourse = localStorage.getItem('currentCourse')
+  const currentCourse = localStorage.getItem('currentCourse'); //Название текущего курса
+  const currentW = localStorage.getItem('currentWorkout'); //ID текущей тренировки
 
-  const currentWorkout = useSelector(
-    (state) => state.coursesApp.currentWorkout
-  );
-  const exe = currentWorkout?.exercises;
-  const [inputValues, setInputValues] = useState(exe);
+  const usersCourses = useSelector((state) => state.coursesApp.usersCourses); //Шаблоны курсов
+  //Находим список упражнений
+  const currentUserCourse = usersCourses
+    ? usersCourses.filter((el) => el.name === currentCourse)
+    : null;
+  const exercisesList = currentUserCourse
+    ? Object.values(currentUserCourse[0].workouts).filter(
+        (el) => el._id === currentW
+      )
+    : null;
+  const emptyExercises = exercisesList ? exercisesList[0].exercises : null;
+  const [userPrigress, setUserPrigress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
 
-  console.log(inputValues);
+  //Помещаем в прогресс пустые значения
+  useEffect(() => {
+    if (userPrigress === null) {
+      setUserPrigress(emptyExercises);
+    }
+  }, [userPrigress, emptyExercises]);
+
+  //Обрабатываем ввод пользователя
   const handleInputChange = (e, elKey) => {
-    const ma = inputValues.map((ex) => {
+    console.log(elKey);
+    console.log(exercisesList[0]);
+    const newUserPrigress = userPrigress.map((ex) => {
       if (ex.name === elKey.name) {
         if (Number(e.target.value) > ex.quantity) {
-          alert('Вы ввели слишком большое число')
-          return ex
+          alert('Вы ввели слишком большое число');
+          let a = { ...ex };
+          a.made = Number(e.target.value);
+          console.log(a);
+          return a;
         } else {
           let a = { ...ex };
           a.made = Number(e.target.value);
@@ -34,20 +51,66 @@ export const Progress = () => {
           return a;
         }
       } else {
+        console.log(ex);
         return ex;
       }
     });
-    console.log(1);
-    setInputValues(ma);
+    console.log(newUserPrigress);
+    setUserPrigress(newUserPrigress);
   };
 
-  const sendProgress = () => {
+  //Меняем флаги, если колличество сделаных повторений равно или больше нужного
+  const progressCheck = (userPrigress) => {
+    let fieldValidation = true; //Флаг на проверку превышения колличества повторений
+    const numberOfRepetitionsDone = userPrigress.map((el) => {
+      if (el.made > el.quantity) {
+        alert('Вы ввели слишком большое число');
+        fieldValidation = false;
+      }
+      if (el.made === el.quantity) {
+        el.done = true;
+        return el;
+      } else {
+        console.log(el);
+        return el;
+      }
+    });
+    if (fieldValidation) {
+      //Проверяем, не превышено какое либо колличество повторений
+      sendProgress(numberOfRepetitionsDone);
+      allTrainingCompleted(numberOfRepetitionsDone)
+    }
+  };
+
+  //Отправляем новый прогресс в базу
+  const sendProgress = (numberOfRepetitionsDone) => {
+    console.log(numberOfRepetitionsDone);
     const db = getDatabase();
     const updates = {};
-    updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentWorkout._id}/exercises`] = inputValues;
+    updates[
+      `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`
+    ] = numberOfRepetitionsDone;
     return update(ref(db), updates);
-    console.log(inputValues)
-  }
+  };
+
+  //Проверка на выполнение всех упражнений в тренировке
+  const allTrainingCompleted = (numberOfRepetitionsDone) => {
+    let everythingIsDone = true
+    for (let exercis of numberOfRepetitionsDone) {
+      if(exercis.done === false) {
+        everythingIsDone = false
+      }
+    }
+    if (everythingIsDone) {
+      console.log(numberOfRepetitionsDone);
+      const db = getDatabase();
+      const updates = {};
+      updates[
+        `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`
+      ] = true;
+      return update(ref(db), updates);
+    }
+  };
 
   const hidePopup = (e, type) => {
     if (hidePopupFlag(e, type)) navigate(-1);
@@ -57,13 +120,11 @@ export const Progress = () => {
     const firstInputEl = document.getElementsByTagName('input');
     firstInputEl[0]?.focus();
   };
-  //   console.log( currentWorkout);
-  // console.log(inputValues)
   useEffect(() => onFocusFirstInput(), []);
 
   return (
     <>
-      {currentWorkout && (
+      {exercisesList && (
         <div
           className={styles.popup_wrapper}
           onMouseUp={(e) => hidePopup(e, 'mouse')}
@@ -71,7 +132,7 @@ export const Progress = () => {
         >
           <div className={styles.progressForm} id='#popup'>
             <div className={styles.headerForm}>Мой прогресс</div>
-            {currentWorkout.exercises.map((el, index) => {
+            {exercisesList[0].exercises.map((el, index) => {
               return (
                 <div key={index}>
                   <div className={styles.textForm}>
@@ -91,7 +152,13 @@ export const Progress = () => {
               );
             })}
             <div className={styles.buttonBox}>
-              <Button className={'button_blue'} children={'Отправить'} onClick={sendProgress}/>
+              <Button
+                className={'button_blue'}
+                children={'Отправить'}
+                onClick={() => {
+                  progressCheck(userPrigress);
+                }}
+              />
             </div>
           </div>
         </div>
