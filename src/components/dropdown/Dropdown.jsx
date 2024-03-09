@@ -14,7 +14,7 @@ export function Dropdown() {
     // localStorage.removeItem("userLogin");
     // localStorage.removeItem("userPassword");
     localStorage.removeItem("userId");
-    navigate("/login");
+    navigate("/");
   }
 
   return (
