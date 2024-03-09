@@ -27,7 +27,6 @@ export const Profile = () => {
       });
     }
   }, [fullCurrentUser, currentId, dispatch]);
-
   // These functions are defined in the body of the component but outside the useEffect hook.
   const handleChangeLogin = () => {
     navigate('newLogin'); // Example route, replace with your actual path

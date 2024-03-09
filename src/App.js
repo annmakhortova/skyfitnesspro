@@ -11,11 +11,11 @@ import { setFullCurrentUser } from './store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
-
-  const [currentUser, setCurrentUser] = useState(null);
+  const currentId = localStorage.getItem("userId");
+  const [currentUser, setCurrentUser] = useState(currentId);
   //const currentId = localStorage.getItem('userId');
 
-
+console.log(currentUser)
   // Listener for Firebase authentication state changes
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
