@@ -77,8 +77,7 @@ export const Progress = () => {
       sendProgress(numberOfRepetitionsDone);
       allTrainingCompleted(numberOfRepetitionsDone);
     }
-    console.log('ProgressCheck');
-    return ( <ProgressCheck />)
+    console.log('сюда вставить ProgressCheck');
   };
 
   //Отправляем новый прогресс в базу
