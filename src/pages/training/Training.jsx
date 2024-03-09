@@ -14,7 +14,7 @@ export const Training = () => {
 
   const navigate = useNavigate();
   const currentId = localStorage.getItem('userId'); // id пользователя
-  const [{ courseId, id }] = useParams(); // Получение значения параметров `id` `courseId` из URL
+  const { courseId, id } = useParams(); // Получение значения параметров `id` `courseId` из URL
   const workouts = useSelector((state) => state.coursesApp.allWorkouts); //все тренировки
   const workout = workouts?.filter((data) => data._id.includes(id)); // текущая тренировка
   const workoutName = workout ? workout[0].name : 'название не получено'; // название текущей тренировки
