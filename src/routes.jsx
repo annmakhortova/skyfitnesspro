@@ -15,26 +15,30 @@ import { ProtectedRoute } from './components/ProtectedRoute'; // Assuming this i
 export const AppRoutes = ({ user }) => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      {/* <Route path="/" element={<Main />} />
       <Route path="signup" element={<LoginSignup />} />
-      <Route path="login" element={<Login />} />
-      <Route path="/workout/:id" element={<Workout />} />
-      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-        <Route path="/profile" element={<Profile />} />
+      <Route path="login" element={<Login />} /> */}
+      <Route path='/' element={<Main />}>
+        <Route path='login' element={<Login />} />
+        <Route path='signup' element={<LoginSignup />} />
       </Route>
-      <Route path="/newLogin" element={<NewLogin />} />
-      <Route path="/newPassword" element={<NewPassword />} />
-      
-      <Route path="/selectworkout/:id" element={<SelectWorkout />} />
-      
+      <Route path='/workout/:id' element={<Workout />} />
+      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
+        <Route path='/profile' element={<Profile />} />
+      </Route>
+      <Route path='/newLogin' element={<NewLogin />} />
+      <Route path='/newPassword' element={<NewPassword />} />
+
+      <Route path='/selectworkout/:id' element={<SelectWorkout />} />
+
       {/* <Route path=":courseId/training/:id" element={<Training />} /> */}
       {/* <Route path="/Progress" element={<Progress />} /> */}
-      
+
       <Route path=':courseId/training/:id/*' element={<Training />}>
         <Route path='Progress' element={<Progress />} />
-        <Route path="ProgressCheck" element={<ProgressCheck />} />
+        <Route path='ProgressCheck' element={<ProgressCheck />} />
       </Route>
-      
+
       {/* Other routes as needed */}
     </Routes>
   );
