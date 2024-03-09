@@ -116,7 +116,7 @@ export const Progress = () => {
     firstInputEl[0]?.focus();
   };
   useEffect(() => onFocusFirstInput(), []);
-
+ 
   return (
     <>
       {exercisesList && (
