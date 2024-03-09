@@ -14,9 +14,9 @@ export const Training = () => {
 
   const navigate = useNavigate();
   const currentId = localStorage.getItem('userId'); // id пользователя
-  const params = useParams(); // Получение значения параметров `id` `courseId` из URL
+  const { courseId, id } = useParams(); // Получение значения параметров `id` `courseId` из URL
   const workouts = useSelector((state) => state.coursesApp.allWorkouts); //все тренировки
-  const workout = workouts?.filter((data) => data._id.includes(params.id)); // текущая тренировка
+  const workout = workouts?.filter((data) => data._id.includes(id)); // текущая тренировка
   const workoutName = workout ? workout[0].name : 'название не получено'; // название текущей тренировки
   const workoutVideo = workout ? workout[0].video : 'видео не найдено'; //видео текущей тренировки
   const workoutExercises =
@@ -29,13 +29,14 @@ export const Training = () => {
   //Информация по курсу
   const courses = useSelector((state) => state.coursesApp.allCourses); // все курсы
   const course = courses?.filter((data) =>
-    data.nameEN.includes(params.courseId)
+    data.nameEN.includes(courseId)
   ); // текущий курс
   const courseName = course ? course[0].nameRU : 'название не получено'; //название текущего курса на русском
   const courseNameEN = course ? course[0].nameEN : 'название не получено'; //название текущего курса на английском
 
   const navigateToProgress = () => {
-    navigate('/Progress');
+    // navigate('/Progress');
+    navigate(`/${courseId}/training/${id}/progress`);
     localStorage.setItem('currentCourse', courseNameEN);
   };
 
@@ -53,7 +54,7 @@ export const Training = () => {
     return update(ref(db), updates);
   }
 
-  const endWorkaut = () => {
+  const endWorkout = () => {
     if (currentWorkout?.done) {
       return (
         <Button
@@ -122,7 +123,7 @@ export const Training = () => {
               </div>
             </>
           ) : (
-            endWorkaut()
+            endWorkout()
           )}
         </section>
       </main>

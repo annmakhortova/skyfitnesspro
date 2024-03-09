@@ -14,29 +14,25 @@ export const Progress = () => {
 
   const usersCourses = useSelector((state) => state.coursesApp.usersCourses); //Шаблоны курсов
   //Находим список упражнений
-  const currentUserCourse = usersCourses
-    ? usersCourses.filter((el) => el.name === currentCourse)
-    : null;
+  const currentUserCourse = usersCourses ? usersCourses.filter((el) => el.name === currentCourse) : null;
   const exercisesList = currentUserCourse
-    ? Object.values(currentUserCourse[0].workouts).filter(
-        (el) => el._id === currentW
-      )
+    ? Object.values(currentUserCourse[0].workouts).filter((el) => el._id === currentW)
     : null;
   const emptyExercises = exercisesList ? exercisesList[0].exercises : null;
-  const [userPrigress, setUserPrigress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
+  const [userProgress, setuserProgress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
 
   //Помещаем в прогресс пустые значения
   useEffect(() => {
-    if (userPrigress === null) {
-      setUserPrigress(emptyExercises);
+    if (userProgress === null) {
+      setuserProgress(emptyExercises);
     }
-  }, [userPrigress, emptyExercises]);
+  }, [userProgress, emptyExercises]);
 
   //Обрабатываем ввод пользователя
   const handleInputChange = (e, elKey) => {
     console.log(elKey);
     console.log(exercisesList[0]);
-    const newUserPrigress = userPrigress.map((ex) => {
+    const newuserProgress = userProgress.map((ex) => {
       if (ex.name === elKey.name) {
         if (Number(e.target.value) > ex.quantity) {
           alert('Вы ввели слишком большое число');
@@ -55,14 +51,14 @@ export const Progress = () => {
         return ex;
       }
     });
-    console.log(newUserPrigress);
-    setUserPrigress(newUserPrigress);
+    console.log(newuserProgress);
+    setuserProgress(newuserProgress);
   };
 
-  //Меняем флаги, если колличество сделаных повторений равно или больше нужного
-  const progressCheck = (userPrigress) => {
-    let fieldValidation = true; //Флаг на проверку превышения колличества повторений
-    const numberOfRepetitionsDone = userPrigress.map((el) => {
+  //Меняем флаги, если количество сделаных повторений равно или больше нужного
+  const progressCheck = (userProgress) => {
+    let fieldValidation = true; //Флаг на проверку превышения количества повторений
+    const numberOfRepetitionsDone = userProgress.map((el) => {
       if (el.made > el.quantity) {
         alert('Вы ввели слишком большое число');
         fieldValidation = false;
@@ -76,9 +72,9 @@ export const Progress = () => {
       }
     });
     if (fieldValidation) {
-      //Проверяем, не превышено какое либо колличество повторений
+      //Проверяем, не превышено какое либо количество повторений
       sendProgress(numberOfRepetitionsDone);
-      allTrainingCompleted(numberOfRepetitionsDone)
+      allTrainingCompleted(numberOfRepetitionsDone);
     }
   };
 
@@ -87,27 +83,23 @@ export const Progress = () => {
     console.log(numberOfRepetitionsDone);
     const db = getDatabase();
     const updates = {};
-    updates[
-      `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`
-    ] = numberOfRepetitionsDone;
+    updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`] = numberOfRepetitionsDone;
     return update(ref(db), updates);
   };
 
   //Проверка на выполнение всех упражнений в тренировке
   const allTrainingCompleted = (numberOfRepetitionsDone) => {
-    let everythingIsDone = true
+    let everythingIsDone = true;
     for (let exercis of numberOfRepetitionsDone) {
-      if(exercis.done === false) {
-        everythingIsDone = false
+      if (exercis.done === false) {
+        everythingIsDone = false;
       }
     }
     if (everythingIsDone) {
       console.log(numberOfRepetitionsDone);
       const db = getDatabase();
       const updates = {};
-      updates[
-        `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`
-      ] = true;
+      updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`] = true;
       return update(ref(db), updates);
     }
   };
@@ -156,7 +148,7 @@ export const Progress = () => {
                 className={'button_blue'}
                 children={'Отправить'}
                 onClick={() => {
-                  progressCheck(userPrigress);
+                  progressCheck(userProgress);
                 }}
               />
             </div>
