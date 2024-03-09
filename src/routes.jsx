@@ -15,6 +15,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'; // Assuming this i
 export const AppRoutes = ({ user }) => {
   return (
     <Routes>
+
       {/* <Route path='/' element={<Main />} />
       <Route path='signup' element={<LoginSignup />} />
       <Route path='login' element={<Login />} /> */}
@@ -32,6 +33,7 @@ export const AppRoutes = ({ user }) => {
           <Route path='newPassword' element={<NewPassword />} />
         </Route>
       </Route>
+
 
       <Route path='/selectworkout/:id' element={<SelectWorkout />} />
 
