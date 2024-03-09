@@ -30,11 +30,11 @@ export const Profile = () => {
 
   // These functions are defined in the body of the component but outside the useEffect hook.
   const handleChangeLogin = () => {
-    navigate('/newLogin'); // Example route, replace with your actual path
+    navigate('newLogin'); // Example route, replace with your actual path
   };
 
   const handleChangePassword = () => {
-    navigate('/newPassword'); // Example route, replace with your actual path
+    navigate('newPassword'); // Example route, replace with your actual path
   };
 
   return (
