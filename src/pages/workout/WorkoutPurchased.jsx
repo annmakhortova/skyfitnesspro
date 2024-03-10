@@ -11,18 +11,18 @@ export const WorkoutPurchased = () => {
      navigate(-1);
   };
 
-  const onFocusImg = () => {
-    const imgEl = document.getElementsByTagName('img');
-    console.log(imgEl);
-    imgEl[0]?.focus();
-  };
-  useEffect(() => onFocusImg(), []);
+  // const onFocusImg = () => {
+  //   const imgEl = document.getElementsByTagName('img');
+  //   console.log(imgEl);
+  //   imgEl[0]?.focus();
+  // };
+  // useEffect(() => onFocusImg(), []);
 
   return (
     <div
       className={styles.popup_wrapper}
       onClick={() => hidePopup()}
-      onKeyDown={() => hidePopup()}
+      // onKeyDown={() => hidePopup()}
     >
       <div className={styles.progressForm} id='#popup'>
         <div className={styles.page}>
