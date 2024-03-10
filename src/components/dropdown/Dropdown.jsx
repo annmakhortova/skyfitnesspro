@@ -13,10 +13,9 @@ export function Dropdown() {
   function handleSignOut() {
     const auth = getAuth();
     signOut(auth)
-      .then(() => {
-      })
+      .then(() => {})
       .catch((error) => {
-        alert(error)
+        alert(error);
       });
     localStorage.removeItem('userId');
     navigate('/');

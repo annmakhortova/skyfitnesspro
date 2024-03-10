@@ -5,12 +5,9 @@ import style from './Login.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-// import { useDispatch } from 'react-redux';
-// import { setUserId } from '../../store/userSlice'; // Assuming you're using this for setting the user session
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 
 export const Login = () => {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +18,7 @@ export const Login = () => {
       setError('Please enter both email and password.');
       return false;
     }
-    
+
     return true;
   };
 
@@ -31,8 +28,7 @@ export const Login = () => {
 
     try {
       const userInfo = await signInWithEmailAndPassword(auth, email, password);
-      // dispatch(setUserId(userInfo.user.uid));// Use the UID for user session management, not email/password
-      localStorage.setItem('userId', userInfo.user.uid); 
+      localStorage.setItem('userId', userInfo.user.uid);
       navigate('/profile');
     } catch (error) {
       setError(error.message); // Set the error state to display the message
@@ -45,8 +41,8 @@ export const Login = () => {
   };
 
   const hidePopup = (e, type) => {
-    if (hidePopupFlag(e, type)) navigate('/')
-  }
+    if (hidePopupFlag(e, type)) navigate('/');
+  };
 
   return (
     <div
@@ -58,7 +54,8 @@ export const Login = () => {
         <header>
           <Logo className={style.logo} />
         </header>
-        {error && <div className={style.error}>{error}</div>} {/* Display any authentication errors here */}
+        {error && <div className={style.error}>{error}</div>}{' '}
+        {/* Display any authentication errors here */}
         <div className={style.inputs}>
           <div className={style.input}>
             <input
@@ -84,10 +81,17 @@ export const Login = () => {
             />
           </div>
         </div>
-
         <div className={style.buttonsContainer}>
-          <Button onClick={handleLogin} children={'Войти'} className={'button_blue'} />
-          <Button onClick={handleRegisterClick} children={'Зарегистрироваться'} className={'button_white'} />
+          <Button
+            onClick={handleLogin}
+            children={'Войти'}
+            className={'button_blue'}
+          />
+          <Button
+            onClick={handleRegisterClick}
+            children={'Зарегистрироваться'}
+            className={'button_white'}
+          />
         </div>
       </div>
     </div>

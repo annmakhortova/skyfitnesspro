@@ -38,7 +38,6 @@
   &::-webkit-scrollbar {
     width: 5px;
     height: 0px;
-    // left: -100px;
   }
   &::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.05);
@@ -60,7 +59,7 @@
     padding: 11px 27px 11px 27px;
     padding-left: 27px;
     padding-right: 27px;
-    text-decoration: none; 
+    text-decoration: none;
   }
   &_true {
     display: flex;
@@ -74,8 +73,8 @@
     padding-left: 27px;
     padding-right: 27px;
     position: relative;
-    text-decoration: none; 
-  }  
+    text-decoration: none;
+  }
   &Text {
     &_false {
       font-family: StratosSkyeng;
@@ -89,7 +88,7 @@
       overflow: hidden;
       color: #000000;
     }
-    &_true{
+    &_true {
       color: #06b16e;
       font-family: StratosSkyeng;
       font-size: 20px;
@@ -99,8 +98,7 @@
       width: 250px;
       white-space: nowrap;
       text-overflow: ellipsis;
-      overflow: hidden; 
-      
+      overflow: hidden;
     }
   }
   &_img {
