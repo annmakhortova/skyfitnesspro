@@ -1,25 +1,28 @@
 import React, { useEffect } from 'react';
 import styles from '../progress/Progress.module.scss';
 import Hand from '../progress/Hand.png';
-import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
+// import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
 
 export const WorkoutPurchased = () => {
   const navigate = useNavigate();
-  const hidePopup = (e, type) => {
-    if (hidePopupFlag(e, type)) navigate(-1);
+  
+  const hidePopup = () => {
+     navigate(-1);
   };
 
-  const onFocusFirstInput = () => {
-    const firstInputEl = document.getElementsByTagName('input');
-    firstInputEl[0]?.focus();
-  };
-  useEffect(() => onFocusFirstInput(), []);
+  // const onFocusImg = () => {
+  //   const imgEl = document.getElementsByTagName('img');
+  //   console.log(imgEl);
+  //   imgEl[0]?.focus();
+  // };
+  // useEffect(() => onFocusImg(), []);
+
   return (
     <div
       className={styles.popup_wrapper}
-      onMouseUp={(e) => hidePopup(e, 'mouse')}
-      onKeyDown={(e) => hidePopup(e, 'kbd')}
+      onClick={() => hidePopup()}
+      // onKeyDown={() => hidePopup()}
     >
       <div className={styles.progressForm} id='#popup'>
         <div className={styles.page}>
