@@ -26,7 +26,9 @@ export const NewPassword = () => {
         navigate('/profile'); // Redirect the user to their profile page or login page
       } catch (error) {
         console.error('Error updating password:', error);
-        alert("Failed to update password. Make sure you're logged in recently.");
+        alert(
+          "Failed to update password. Make sure you're logged in recently."
+        );
       }
     }
   };
@@ -73,7 +75,11 @@ export const NewPassword = () => {
         </div>
 
         <div className={style.buttonsContainer}>
-          <Button onClick={handleChangePassword} children={'Сохранить'} className={'button_blue'} />
+          <Button
+            onClick={handleChangePassword}
+            children={'Сохранить'}
+            className={'button_blue'}
+          />
         </div>
       </div>
     </div>

@@ -26,7 +26,6 @@ export const Workout = () => {
   console.log(currentId);
   const navigateToProgress = () => {
     console.log(1);
-    // navigate('/Progress');
     navigate(`/workout/${params.id}/workoutPurchased`);
   };
   //Проверяю наличие текущего курса среди курсов пользователя
@@ -34,7 +33,6 @@ export const Workout = () => {
     if (currentUser) {
       if (currentUser.courses) {
         const userCourses = Object.keys(currentUser.courses);
-        // console.log(userCourses);
         if (userCourses.includes(courseName)) {
           setCoursePurchased(true);
         }
@@ -72,10 +70,6 @@ export const Workout = () => {
       {course && (
         <div className={style.container}>
           <Header />
-          {/* <header className={style.header}>
-            <Logo className={style.logo} />
-            <Dropdown className={style.header_select} title={currentUser?.email} />
-          </header> */}
           <main>
             <section className={style.workoutCard}>
               <h1 className={style.workoutCard_title}>{course.nameRU}</h1>
@@ -153,9 +147,6 @@ export const Workout = () => {
                   <Button
                     children={'Авторизируйтесь перед покупкой'}
                     className={'button_blue'}
-                    onClick={() => {
-                      // updateUserDetails();
-                    }}
                   />
                 </Link>
               )}

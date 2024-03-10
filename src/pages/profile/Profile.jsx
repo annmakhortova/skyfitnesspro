@@ -6,14 +6,12 @@ import { getCurrentUser } from '../api';
 import { setFullCurrentUser } from '../../store/userSlice';
 import { Header } from '../../components/header/Header';
 import { Link, Outlet, useNavigate } from 'react-router-dom'; // Import useNavigate here
-// import { getAuth } from "firebase/auth";
 
 export const Profile = () => {
   const dispatch = useDispatch();
   const currentId = localStorage.getItem('userId');
   const fullCurrentUser = useSelector((state) => state.userApp.fullCurrentUser);
   const [userCourses, setUserCourses] = useState([]);
-  // const auth = getAuth();
   const navigate = useNavigate(); // useNavigate called at the top level
 
   useEffect(() => {
@@ -47,15 +45,27 @@ export const Profile = () => {
             <h1 className={style.profile_heading}>Мой профиль</h1>
             {fullCurrentUser ? (
               <>
-                <p className={style.profile_text}>Логин: {fullCurrentUser.email}</p>
+                <p className={style.profile_text}>
+                  Логин: {fullCurrentUser.email}
+                </p>
               </>
             ) : (
-              <p className={style.profile_text}>Пожалуйста, войдите в систему.</p>
+              <p className={style.profile_text}>
+                Пожалуйста, войдите в систему.
+              </p>
             )}
           </div>
           <div className={style.profile_button}>
-            <Button onClick={handleChangeLogin} children={'Редактировать логин'} className={'button_blue'} />
-            <Button onClick={handleChangePassword} children={'Редактировать пароль'} className={'button_blue'} />
+            <Button
+              onClick={handleChangeLogin}
+              children={'Редактировать логин'}
+              className={'button_blue'}
+            />
+            <Button
+              onClick={handleChangePassword}
+              children={'Редактировать пароль'}
+              className={'button_blue'}
+            />
           </div>
         </div>
         <div className={style.course}>
@@ -64,11 +74,17 @@ export const Profile = () => {
             {userCourses.length > 0 ? (
               userCourses.map((course) => (
                 <div className={style.course_item} key={course}>
-                  <img className={style.course_item_img} src={`./img/png/${course}.png`} alt={course} />
+                  <img
+                    className={style.course_item_img}
+                    src={`./img/png/${course}.png`}
+                    alt={course}
+                  />
                   <Link
                     className={style.button_link}
                     to={`/selectWorkout/${course}`}
-                    onClick={() => localStorage.setItem('currentCourse', course)}
+                    onClick={() =>
+                      localStorage.setItem('currentCourse', course)
+                    }
                   >
                     Перейти
                   </Link>
