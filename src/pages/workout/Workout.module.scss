@@ -3,14 +3,6 @@
   padding-right: calc(50% - 580px);
 }
 
-// .header{
-//   display: flex;
-//   justify-content: space-between;
-// }
-// .logo {
-//   margin-top: 30px;
-//   margin-bottom: 75px;
-// }
 .section_title {
   font-family: StratosSkyeng;
   font-weight: 400;
@@ -32,7 +24,7 @@
   &Card {
     position: relative;
     height: 310px;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     border-radius: 30px;
     &_title {
       position: absolute;

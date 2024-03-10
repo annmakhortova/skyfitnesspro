@@ -16,7 +16,6 @@ import { WorkoutPurchased } from './pages/workout/WorkoutPurchased';
 export const AppRoutes = ({ user }) => {
   return (
     <Routes>
-
       <Route path='/' element={<Main />}>
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<LoginSignup />} />

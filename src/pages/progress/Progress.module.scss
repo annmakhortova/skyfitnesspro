@@ -1,7 +1,6 @@
 .popup_wrapper {
   display: flex;
   justify-content: center;
-  // height: 100vh;
   align-items: center;
 
   position: fixed;
@@ -37,7 +36,6 @@
 }
 
 .inputForm {
-  //width: 278px;
   border: 0;
   outline: 0;
   border-bottom: 1px solid #d0cece;
@@ -49,7 +47,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  /* 133.333% */
   letter-spacing: -0.05px;
 }
 
