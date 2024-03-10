@@ -11,11 +11,12 @@ export const WorkoutPurchased = () => {
      navigate(-1);
   };
 
-  // const onFocusFirstInput = () => {
-  //   const firstInputEl = document.getElementsByTagName('imp');
-  //   firstInputEl[0]?.focus();
-  // };
-  // useEffect(() => onFocusFirstInput(), []);
+  const onFocusImg = () => {
+    const imgEl = document.getElementsByTagName('img');
+    console.log(imgEl);
+    imgEl[0]?.focus();
+  };
+  useEffect(() => onFocusImg(), []);
 
   return (
     <div
@@ -28,7 +29,7 @@ export const WorkoutPurchased = () => {
           <div className={styles.progressCheckForm}>
             <div className={styles.headerProgress}>Вы купили курс!</div>
             <div className={styles.imgBox}>
-              <img autoFocus className={styles.Hand} src={Hand} alt='Hand' />
+              <img className={styles.Hand} src={Hand} alt='Hand' />
             </div>
           </div>
         </div>
