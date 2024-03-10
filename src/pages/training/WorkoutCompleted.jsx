@@ -1,21 +1,26 @@
 import React from 'react';
-import styles from './Progress.module.scss';
-import Hand from './Hand.png';
+import styles from '../progress/Progress.module.scss';
+import Hand from '../progress/Hand.png';
+// import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
 
-export const ProgressCheck = () => {
+export const WorkoutCompleted = () => {
   const navigate = useNavigate();
-
+  
   const hidePopup = () => {
-    navigate(-2);
+     navigate(-1);
   };
 
   return (
-    <div className={styles.popup_wrapper} onClick={() => hidePopup()} onKeyDown={() => hidePopup()}>
+    <div
+      className={styles.popup_wrapper}
+      onClick={() => hidePopup()}
+      onKeyDown={() => hidePopup()}
+    >
       <div className={styles.progressForm} id='#popup'>
         <div className={styles.page}>
           <div className={styles.progressCheckForm}>
-            <div className={styles.headerProgress}>Ваш прогресс засчитан!</div>
+            <div className={styles.headerProgress}>Тренировка пройдена!</div>
             <div className={styles.imgBox}>
               <img className={styles.Hand} src={Hand} alt='Hand' />
               <input autoFocus style={{opacity: 0}}/>

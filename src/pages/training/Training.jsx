@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import style from './Training.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { useSelector } from 'react-redux';
@@ -16,11 +16,8 @@ export const Training = () => {
   const workout = workouts?.filter((data) => data._id.includes(id)); // текущая тренировка
   const workoutName = workout ? workout[0].name : 'название не получено'; // название текущей тренировки
   const workoutVideo = workout ? workout[0].video : 'видео не найдено'; //видео текущей тренировки
-  const workoutExercises =
-    workout && workout[0].exercises ? workout[0].exercises : null; // упражнения текушей тренировки
-  const currentWorkoutt = useSelector(
-    (state) => state.coursesApp.currentWorkout
-  ); // текущая тренировка пользователя из стейта
+  const workoutExercises = workout && workout[0].exercises ? workout[0].exercises : null; // упражнения текушей тренировки
+  const currentWorkoutt = useSelector((state) => state.coursesApp.currentWorkout); // текущая тренировка пользователя из стейта
   const [currentWorkout, setCurrentWorkout] = useState(currentWorkoutt); // текущая тренировка пользователя
   //Информация по курсу
   const courses = useSelector((state) => state.coursesApp.allCourses); // все курсы
@@ -29,7 +26,7 @@ export const Training = () => {
   const courseNameEN = course ? course[0].nameEN : 'название не получено'; //название текущего курса на английском
 
   const navigateToProgress = () => {
-    navigate(`/${courseId}/training/${id}/progress`);
+    navigate(`/${courseId}/training/${id}/Progress`);
     localStorage.setItem('currentCourse', courseNameEN);
   };
 
@@ -49,20 +46,17 @@ export const Training = () => {
 
   const endWorkout = () => {
     if (currentWorkout?.done) {
-      return (
-        <Button className={'button_blue'} children={'Тренировка завершенa'} />
-      );
+      return <Button className={'button_blue'} children={'Тренировка завершенa'} />;
     } else {
       return (
-        <Link to={`/ProgressCheck`}>
           <Button
             onClick={() => {
               completeWorkout(currentWorkout);
+              navigate(`/${courseId}/training/${id}/workoutCompleted`);
             }}
             className={'button_blue'}
             children={'Закончить тренировку'}
           />
-        </Link>
       );
     }
   };
@@ -85,20 +79,13 @@ export const Training = () => {
                     <li key={exercise.name}>{exercise.name}</li>
                   ))}
                 </ul>
-                <Button
-                  onClick={navigateToProgress}
-                  className={'button_blue'}
-                  children={'Заполнить свой прогресс'}
-                />
+                <Button onClick={navigateToProgress} className={'button_blue'} children={'Заполнить свой прогресс'} />
               </div>
             </>
           ) : (
             endWorkout()
           )}
-          <ProgressExercise
-            exercises={currentWorkout?.exercises}
-            currentId={currentId}
-          />
+          <ProgressExercise exercises={currentWorkout?.exercises} currentId={currentId} />
         </section>
       </main>
       <Outlet />
