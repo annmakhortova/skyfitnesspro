@@ -11,7 +11,8 @@ import { Login } from './pages/login/login';
 import { SelectWorkout } from './pages/selectWorkout/SelectWorkout';
 import { NewPassword } from './pages/newPassword/newPassword';
 import { ProtectedRoute } from './components/ProtectedRoute'; // Assuming this is the correct path
-import { WorkoutPurchased } from './pages/workout/WorkoutPurchased';
+import { CoursePurchased } from './pages/workout/coursePurchased';
+import { WorkoutCompleted } from './pages/training/WorkoutCompleted';
 
 export const AppRoutes = ({ user }) => {
   return (
@@ -22,7 +23,7 @@ export const AppRoutes = ({ user }) => {
       </Route>
 
       <Route path='/workout/:id' element={<Workout />}>
-        <Route path='workoutPurchased' element={<WorkoutPurchased />} />
+        <Route path='coursePurchased' element={<CoursePurchased />} />
       </Route>
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
@@ -31,7 +32,9 @@ export const AppRoutes = ({ user }) => {
           <Route path='newPassword' element={<NewPassword />} />
         </Route>
         <Route path='/selectworkout/:id' element={<SelectWorkout />} />
+        
         <Route path=':courseId/training/:id/*' element={<Training />}>
+          <Route path='workoutCompleted' element={<WorkoutCompleted />} />
           <Route path='Progress' element={<Progress />} />
           <Route path='ProgressCheck' element={<ProgressCheck />} />
         </Route>

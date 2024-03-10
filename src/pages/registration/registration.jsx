@@ -6,8 +6,8 @@ import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { getDatabase, ref, set } from 'firebase/database';
-import { useDispatch } from 'react-redux';
-import { setCurrentUser, setUserId } from '../../store/userSlice'; // Adjust if necessary
+// import { useDispatch } from 'react-redux';
+// import { setCurrentUser, setUserId } from '../../store/userSlice'; // Adjust if necessary
 
 import { Button } from '../../UI/Button/Button';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
@@ -17,7 +17,7 @@ export const LoginSignup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
