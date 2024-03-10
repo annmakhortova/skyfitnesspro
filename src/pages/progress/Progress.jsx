@@ -3,10 +3,11 @@ import { Button } from '../../UI/Button/Button';
 import styles from './Progress.module.scss';
 import { useSelector } from 'react-redux';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDatabase, ref, update } from 'firebase/database';
 
 export const Progress = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const currentId = localStorage.getItem('userId'); // id пользователя
   const currentCourse = localStorage.getItem('currentCourse'); //Название текущего курса
@@ -14,13 +15,9 @@ export const Progress = () => {
 
   const usersCourses = useSelector((state) => state.coursesApp.usersCourses); //Шаблоны курсов
   //Находим список упражнений
-  const currentUserCourse = usersCourses
-    ? usersCourses.filter((el) => el.name === currentCourse)
-    : null;
+  const currentUserCourse = usersCourses ? usersCourses.filter((el) => el.name === currentCourse) : null;
   const exercisesList = currentUserCourse
-    ? Object.values(currentUserCourse[0].workouts).filter(
-        (el) => el._id === currentW
-      )
+    ? Object.values(currentUserCourse[0].workouts).filter((el) => el._id === currentW)
     : null;
   const emptyExercises = exercisesList ? exercisesList[0].exercises : null;
   const [userProgress, setUserProgress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
@@ -80,7 +77,7 @@ export const Progress = () => {
       sendProgress(numberOfRepetitionsDone);
       allTrainingCompleted(numberOfRepetitionsDone);
     }
-    console.log('сюда вставить ProgressCheck');
+    navigate(`/${params.courseId}/training/${params.id}/ProgressCheck`); //Отрисовываем "Ваш прогресс засчитан"
   };
 
   //Отправляем новый прогресс в базу
@@ -88,9 +85,7 @@ export const Progress = () => {
     console.log(numberOfRepetitionsDone);
     const db = getDatabase();
     const updates = {};
-    updates[
-      `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`
-    ] = numberOfRepetitionsDone;
+    updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`] = numberOfRepetitionsDone;
     return update(ref(db), updates);
   };
 
@@ -106,17 +101,17 @@ export const Progress = () => {
       console.log(numberOfRepetitionsDone);
       const db = getDatabase();
       const updates = {};
-      updates[
-        `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`
-      ] = true;
+      updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`] = true;
       return update(ref(db), updates);
     }
   };
 
+  //Скрываем попап ввода прогресса
   const hidePopup = (e, type) => {
     if (hidePopupFlag(e, type)) navigate(-1);
   };
 
+  //делаем фокус на 1 поле инпута для удобства пользователя и корректной работы Esc
   const onFocusFirstInput = () => {
     const firstInputEl = document.getElementsByTagName('input');
     firstInputEl[0]?.focus();

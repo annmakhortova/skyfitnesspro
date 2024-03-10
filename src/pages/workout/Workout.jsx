@@ -23,11 +23,6 @@ export const Workout = () => {
   const currentUser = useSelector((state) => state.userApp.fullCurrentUser); //Текущий пользователь с базы
   const courseName = params.id;
 
-  console.log(currentId);
-  const navigateToProgress = () => {
-    console.log(1);
-    navigate(`/workout/${params.id}/workoutPurchased`);
-  };
   //Проверяю наличие текущего курса среди курсов пользователя
   useEffect(() => {
     if (currentUser) {
@@ -133,10 +128,11 @@ export const Workout = () => {
                     </Link>
                   ) : (
                     <Button
-                      children={'Записаться на тренировку'}
+                      children={'Приобрести курс'}
                       onClick={() => {
                         signUpForTraining(courseName);
-                        navigateToProgress();
+                        // navigateToProgress();
+                        navigate(`/workout/${params.id}/coursePurchased`);
                       }}
                       className={'button_blue'}
                     />

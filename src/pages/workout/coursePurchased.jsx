@@ -1,28 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from '../progress/Progress.module.scss';
 import Hand from '../progress/Hand.png';
 // import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
 
-export const WorkoutPurchased = () => {
+export const CoursePurchased = () => {
   const navigate = useNavigate();
   
   const hidePopup = () => {
      navigate(-1);
   };
 
-  // const onFocusImg = () => {
-  //   const imgEl = document.getElementsByTagName('img');
-  //   console.log(imgEl);
-  //   imgEl[0]?.focus();
-  // };
-  // useEffect(() => onFocusImg(), []);
-
   return (
     <div
       className={styles.popup_wrapper}
       onClick={() => hidePopup()}
-      // onKeyDown={() => hidePopup()}
+      onKeyDown={() => hidePopup()}
     >
       <div className={styles.progressForm} id='#popup'>
         <div className={styles.page}>
@@ -30,6 +23,7 @@ export const WorkoutPurchased = () => {
             <div className={styles.headerProgress}>Вы купили курс!</div>
             <div className={styles.imgBox}>
               <img className={styles.Hand} src={Hand} alt='Hand' />
+              <input autoFocus style={{opacity: 0}}/>
             </div>
           </div>
         </div>
