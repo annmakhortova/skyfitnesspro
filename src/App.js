@@ -1,21 +1,28 @@
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import { AppRoutes } from './routes';
+import { useDispatch } from 'react-redux';
+import { auth } from './firebase'; // Make sure this path matches your Firebase auth configuration import
+import {
+  getAllCourses,
+  getAllWorkouts,
+  getCurrentUser,
+  getUsersCourses,
+} from './pages/api';
 
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import { AppRoutes } from "./routes";
-import { useDispatch } from "react-redux";
-import { auth } from "./firebase"; // Make sure this path matches your Firebase auth configuration import
-import { getAllCourses, getAllWorkouts, getCurrentUser, getUsersCourses } from './pages/api';
-
-import { setAllCourses, setAllWorkouts, setUsersCourses } from './store/coursesSlice';
+import {
+  setAllCourses,
+  setAllWorkouts,
+  setUsersCourses,
+} from './store/coursesSlice';
 import { setFullCurrentUser } from './store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
-  const currentId = localStorage.getItem("userId");
+  const currentId = localStorage.getItem('userId');
   const [currentUser, setCurrentUser] = useState(currentId);
-  //const currentId = localStorage.getItem('userId');
 
-console.log(currentUser)
+  console.log(currentUser);
   // Listener for Firebase authentication state changes
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -53,7 +60,7 @@ console.log(currentUser)
       dispatch(setUsersCourses(Object.values(usersCourses)));
     });
   }, [dispatch]);
-  
+
   useEffect(() => {
     getUsersCourses().then((usersCourses) => {
       dispatch(setUsersCourses(Object.values(usersCourses)));

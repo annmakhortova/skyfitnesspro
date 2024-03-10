@@ -4,8 +4,7 @@ import styles from './Progress.module.scss';
 import { useSelector } from 'react-redux';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 import { useNavigate } from 'react-router-dom';
-import { getDatabase, ref, child, push, update } from 'firebase/database';
-import { ProgressCheck } from './ProgressCheck';
+import { getDatabase, ref, update } from 'firebase/database';
 
 export const Progress = () => {
   const navigate = useNavigate();
@@ -15,9 +14,13 @@ export const Progress = () => {
 
   const usersCourses = useSelector((state) => state.coursesApp.usersCourses); //Шаблоны курсов
   //Находим список упражнений
-  const currentUserCourse = usersCourses ? usersCourses.filter((el) => el.name === currentCourse) : null;
+  const currentUserCourse = usersCourses
+    ? usersCourses.filter((el) => el.name === currentCourse)
+    : null;
   const exercisesList = currentUserCourse
-    ? Object.values(currentUserCourse[0].workouts).filter((el) => el._id === currentW)
+    ? Object.values(currentUserCourse[0].workouts).filter(
+        (el) => el._id === currentW
+      )
     : null;
   const emptyExercises = exercisesList ? exercisesList[0].exercises : null;
   const [userProgress, setUserProgress] = useState(emptyExercises); // прогресс пользователя, сначала тот, что приходит с базы, пустой
@@ -85,7 +88,9 @@ export const Progress = () => {
     console.log(numberOfRepetitionsDone);
     const db = getDatabase();
     const updates = {};
-    updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`] = numberOfRepetitionsDone;
+    updates[
+      `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/exercises`
+    ] = numberOfRepetitionsDone;
     return update(ref(db), updates);
   };
 
@@ -101,7 +106,9 @@ export const Progress = () => {
       console.log(numberOfRepetitionsDone);
       const db = getDatabase();
       const updates = {};
-      updates[`users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`] = true;
+      updates[
+        `users/${currentId}/courses/${currentCourse}/workouts/${currentW}/done`
+      ] = true;
       return update(ref(db), updates);
     }
   };
@@ -115,7 +122,7 @@ export const Progress = () => {
     firstInputEl[0]?.focus();
   };
   useEffect(() => onFocusFirstInput(), []);
- 
+
   return (
     <>
       {exercisesList && (

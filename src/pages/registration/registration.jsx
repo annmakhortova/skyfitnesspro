@@ -27,7 +27,11 @@ export const LoginSignup = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const userId = userCredential.user.uid;
 
       // Write additional user data to the database
@@ -56,8 +60,8 @@ export const LoginSignup = () => {
   }
 
   const hidePopup = (e, type) => {
-    if (hidePopupFlag(e, type)) navigate('/')
-  }
+    if (hidePopupFlag(e, type)) navigate('/');
+  };
 
   return (
     <div
@@ -72,7 +76,13 @@ export const LoginSignup = () => {
 
         <div className={style.inputs}>
           <div className={style.input}>
-            <input autoFocus type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              autoFocus
+              type='email'
+              placeholder='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className={style.input}>
             <input
@@ -91,13 +101,12 @@ export const LoginSignup = () => {
             />
           </div>
         </div>
-
         <div className={style.buttonsContainer}>
-          {/* <button className={style.registerButton} onClick={handleRegistration}>
-            Зарегистрироваться
-          </button> */}
-
-          <Button onClick={handleRegistration} children={'Зарегистрироваться'} className={'button_white'} />
+          <Button
+            onClick={handleRegistration}
+            children={'Зарегистрироваться'}
+            className={'button_white'}
+          />
         </div>
       </div>
     </div>

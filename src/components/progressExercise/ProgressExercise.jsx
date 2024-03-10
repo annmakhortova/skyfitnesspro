@@ -1,4 +1,4 @@
-import style from "./progressExercise.module.scss";
+import style from './progressExercise.module.scss';
 
 export const ProgressExercises = ({ exercises, userId }) => {
   const getDone = ({ needed, exercise }) => {
@@ -15,11 +15,11 @@ export const ProgressExercises = ({ exercises, userId }) => {
   };
 
   const colors = [
-    { fill: "#565EEF", bcg: "#EDECFF" },
-    { fill: "#FF6D00", bcg: "#FFF2E0" },
-    { fill: "#9A48F1", bcg: "#F9EBFF" },
-    { fill: "#00C90D", bcg: "#e6fae7" },
-    { fill: "#E40045", bcg: "#fce6ec" },
+    { fill: '#565EEF', bcg: '#EDECFF' },
+    { fill: '#FF6D00', bcg: '#FFF2E0' },
+    { fill: '#9A48F1', bcg: '#F9EBFF' },
+    { fill: '#00C90D', bcg: '#e6fae7' },
+    { fill: '#E40045', bcg: '#fce6ec' },
   ];
 
   return (
@@ -35,7 +35,7 @@ export const ProgressExercises = ({ exercises, userId }) => {
           return (
             <div className={style.listItem} key={index + 1}>
               <div className={style.nameExercise}>
-                {exercise.name.split("(")[0]}
+                {exercise.name.split('(')[0]}
               </div>
               <div
                 className={style.progressBar}
@@ -54,7 +54,7 @@ export const ProgressExercises = ({ exercises, userId }) => {
                 <div
                   className={style.percentDone}
                   style={{
-                    color: percent > 0 ? "#fff" : "#000",
+                    color: percent > 0 ? '#fff' : '#000',
                     left: `${percent}px`,
                   }}
                 >
