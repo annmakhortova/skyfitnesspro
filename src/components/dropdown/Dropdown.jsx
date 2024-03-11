@@ -14,6 +14,7 @@ export function Dropdown() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  
   function handleSignOut() {
     const auth = getAuth();
     signOut(auth)
