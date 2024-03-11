@@ -48,7 +48,7 @@ export const Progress = () => {
           return a;
         }
       } else {
-        console.log(ex);
+        // console.log(ex);
         return ex;
       }
     });
