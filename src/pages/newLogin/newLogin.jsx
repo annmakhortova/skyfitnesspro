@@ -36,8 +36,8 @@ export const NewLogin = () => {
   };
 
   const hidePopup = (e, type) => {
-    if (hidePopupFlag(e, type)) navigate(-1)
-  }
+    if (hidePopupFlag(e, type)) navigate(-1);
+  };
 
   return (
     <div
@@ -53,11 +53,21 @@ export const NewLogin = () => {
         <form onSubmit={handleSubmit} className={style.inputs}>
           <header className={style.inputName}>Новый логин (email):</header>
           <div className={style.input}>
-            <input autoFocus type='email' placeholder='Email' value={email} onChange={handleInputChange} />
+            <input
+              autoFocus
+              type='email'
+              placeholder='Email'
+              value={email}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className={style.buttonsContainer}>
-            <Button type='submit' children={'Сохранить'} className={'button_blue'} />
+            <Button
+              type='submit'
+              children={'Сохранить'}
+              className={'button_blue'}
+            />
           </div>
         </form>
       </div>{' '}

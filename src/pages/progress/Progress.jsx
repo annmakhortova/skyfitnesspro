@@ -3,11 +3,11 @@ import { Button } from '../../UI/Button/Button';
 import styles from './Progress.module.scss';
 import { useSelector } from 'react-redux';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
-import { useNavigate } from 'react-router-dom';
-import { getDatabase, ref, child, push, update } from 'firebase/database';
-import { ProgressCheck } from './ProgressCheck';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getDatabase, ref, update } from 'firebase/database';
 
 export const Progress = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const currentId = localStorage.getItem('userId'); // id пользователя
   const currentCourse = localStorage.getItem('currentCourse'); //Название текущего курса
@@ -41,6 +41,12 @@ export const Progress = () => {
           a.made = Number(e.target.value);
           console.log(a);
           return a;
+        } else if (Number(e.target.value) < 0) {
+          alert('Количество выполненных упражнений не может быть отрицательным');
+          let a = { ...ex };
+          a.made = Number(e.target.value);
+          console.log(a);
+          return a;
         } else {
           let a = { ...ex };
           a.made = Number(e.target.value);
@@ -48,7 +54,7 @@ export const Progress = () => {
           return a;
         }
       } else {
-        console.log(ex);
+        // console.log(ex);
         return ex;
       }
     });
@@ -64,6 +70,10 @@ export const Progress = () => {
         alert('Вы ввели слишком большое число');
         fieldValidation = false;
       }
+      if (el.made < 0) {
+        alert('Количество выполненных упражнений не может быть отрицательным');
+        fieldValidation = false;
+      }
       if (el.made === el.quantity) {
         el.done = true;
         return el;
@@ -76,8 +86,8 @@ export const Progress = () => {
       //Проверяем, не превышено какое либо количество повторений
       sendProgress(numberOfRepetitionsDone);
       allTrainingCompleted(numberOfRepetitionsDone);
+      navigate(`/${params.courseId}/training/${params.id}/ProgressCheck`); //Отрисовываем "Ваш прогресс засчитан"
     }
-    console.log('сюда вставить ProgressCheck');
   };
 
   //Отправляем новый прогресс в базу
@@ -106,16 +116,18 @@ export const Progress = () => {
     }
   };
 
+  //Скрываем попап ввода прогресса
   const hidePopup = (e, type) => {
     if (hidePopupFlag(e, type)) navigate(-1);
   };
 
+  //делаем фокус на 1 поле инпута для удобства пользователя и корректной работы Esc
   const onFocusFirstInput = () => {
     const firstInputEl = document.getElementsByTagName('input');
     firstInputEl[0]?.focus();
   };
   useEffect(() => onFocusFirstInput(), []);
- 
+
   return (
     <>
       {exercisesList && (
@@ -139,6 +151,7 @@ export const Progress = () => {
                       name='quantity'
                       placeholder='Введите значение'
                       onChange={(e) => handleInputChange(e, el)}
+                      // min={0}
                       max={el.quantity}
                     ></input>
                   </div>

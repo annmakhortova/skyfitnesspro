@@ -1,4 +1,5 @@
-const BASE_URL = 'https://fitness-pro-9efbb-default-rtdb.europe-west1.firebasedatabase.app';
+const BASE_URL =
+  'https://fitness-pro-9efbb-default-rtdb.europe-west1.firebasedatabase.app';
 
 //Запрос на все курсы
 export async function getAllCourses() {
@@ -28,7 +29,6 @@ export async function getAllWorkouts() {
 
 //Запрос на текущего пользователя
 export async function getCurrentUser(currentId) {
-  // console.log(currentId)
   const response = await fetch(BASE_URL + `/users/${currentId}.json`, {
     method: 'GET',
   });
@@ -36,7 +36,6 @@ export async function getCurrentUser(currentId) {
     throw new Error('Ошибка сервера');
   }
   const newData = await response.json();
-  // console.log('Запрос на текущего пользователя', newData);
   return newData;
 }
 
@@ -49,19 +48,6 @@ export async function getUsersCourses() {
     throw new Error('Ошибка сервера');
   }
   const newData = await response.json();
-  // console.log('Запрос на шаблоны всех курсов для пользователей', newData);
 
   return newData;
 }
-
-// export async function getCurrentUsers() {
-//   const response = await fetch(BASE_URL + "/users/GyanmgaAa8btlzVBmnx2QeEq4pI3.json", {
-//     method: "GET",
-//   });
-//   if (!response.ok) {
-//     throw new Error("Ошибка сервера");
-//   }
-//   const newData = await response.json();
-
-//   return newData;
-// }

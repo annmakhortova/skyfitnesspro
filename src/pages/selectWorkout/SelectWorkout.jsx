@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import style from "./SelectWorkout.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentWorkout } from "../../store/coursesSlice";
-import { Link, useParams } from "react-router-dom";
-import made from "./made.png";
+import React, { useEffect, useState } from 'react';
+import style from './SelectWorkout.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentWorkout } from '../../store/coursesSlice';
+import { Link, useParams } from 'react-router-dom';
+import made from './made.png';
 import { UpdateUserDetails } from '../../components/userRequest';
-
 
 export const SelectWorkout = () => {
   const params = useParams();
@@ -14,7 +13,6 @@ export const SelectWorkout = () => {
 
   useEffect(() => {
     if (currentUser) {
-      // console.log(currentUser);
       const arr = Object.values(currentUser.courses).find(
         (course) => course.name === params.id
       ).workouts;
@@ -24,9 +22,10 @@ export const SelectWorkout = () => {
 
   const dispatch = useDispatch();
   UpdateUserDetails(dispatch);
+  
   const handleClick = (el) => {
-    console.log(el)
-    localStorage.setItem('currentWorkout', el._id)
+    console.log(el);
+    localStorage.setItem('currentWorkout', el._id);
     dispatch(setCurrentWorkout(el));
   };
 
@@ -38,7 +37,7 @@ export const SelectWorkout = () => {
           {currentWorkoutsArr?.map((el) => {
             return (
               <Link
-              to={`/${params.id}/training/${el._id}`}
+                to={`/${params.id}/training/${el._id}`}
                 className={style[`workout_${el.done}`]}
                 key={el.name}
                 onClick={() => {
@@ -46,7 +45,13 @@ export const SelectWorkout = () => {
                 }}
               >
                 <p className={style[`workoutText_${el.done}`]}>{el.name}</p>
-                {el.done && <img className={style.workoutMade_img} src={made} alt="made" />}
+                {el.done && (
+                  <img
+                    className={style.workoutMade_img}
+                    src={made}
+                    alt='made'
+                  />
+                )}
               </Link>
             );
           })}
