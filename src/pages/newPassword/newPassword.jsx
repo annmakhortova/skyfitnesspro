@@ -26,7 +26,7 @@ export const NewPassword = () => {
 
     const user = auth.currentUser;
     if (user) {
-      // Re-authenticate the user with the old password first
+      
       const credential = EmailAuthProvider.credential(user.email, oldPassword);
       try {
         await reauthenticateWithCredential(user, credential);
