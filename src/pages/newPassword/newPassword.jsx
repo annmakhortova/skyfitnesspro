@@ -3,32 +3,39 @@ import { Button } from '../../UI/Button/Button';
 import { Logo } from '../../UI/Logo/Logo';
 import style from './NewPassword.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, updatePassword } from 'firebase/auth';
+import { getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from 'firebase/auth';
 import { hidePopupFlag } from '../../components/hidePopup/hidePopupFlag';
 
 export const NewPassword = () => {
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const auth = getAuth();
 
   const handleChangePassword = async () => {
-    if (password !== confirmPassword) {
-      alert('Passwords do not match.');
+    if (!oldPassword.trim() || !password.trim() || !confirmPassword.trim()) {
+      alert('Passwords cannot be blank or just spaces.');
       return;
     }
-    // Assuming the user is already signed in
+
+    if (password !== confirmPassword) {
+      alert('New passwords do not match.');
+      return;
+    }
+
     const user = auth.currentUser;
     if (user) {
+      // Re-authenticate the user with the old password first
+      const credential = EmailAuthProvider.credential(user.email, oldPassword);
       try {
+        await reauthenticateWithCredential(user, credential);
         await updatePassword(user, password);
         alert('Password updated successfully.');
-        navigate('/profile'); // Redirect the user to their profile page or login page
+        navigate('/profile');
       } catch (error) {
         console.error('Error updating password:', error);
-        alert(
-          "Failed to update password. Make sure you're logged in recently."
-        );
+        alert("Failed to update password. Make sure the old password is correct and you're logged in recently.");
       }
     }
   };
@@ -37,11 +44,10 @@ export const NewPassword = () => {
     if (hidePopupFlag(e, type)) navigate(-1);
   };
 
-  const onFocusFirstInput = () => {
-    const firstInputEl = document.getElementsByTagName('input');
-    firstInputEl[0]?.focus();
-  };
-  useEffect(() => onFocusFirstInput(), []);
+  useEffect(() => {
+    const firstInputEl = document.getElementsByTagName('input')[0];
+    firstInputEl?.focus();
+  }, []);
 
   return (
     <div
@@ -55,11 +61,20 @@ export const NewPassword = () => {
         </header>
 
         <div className={style.inputs}>
+          <header className={style.inputName}>Старый пароль:</header>
+          <div className={style.input}>
+            <input
+              type='password'
+              placeholder='Старый пароль'
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+          </div>
           <header className={style.inputName}>Новый пароль:</header>
           <div className={style.input}>
             <input
               type='password'
-              placeholder='Пароль'
+              placeholder='Новый пароль'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -67,7 +82,7 @@ export const NewPassword = () => {
           <div className={style.input}>
             <input
               type='password'
-              placeholder='Повторите пароль'
+              placeholder='Повторите новый пароль'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
